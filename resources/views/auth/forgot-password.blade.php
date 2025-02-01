@@ -1,25 +1,28 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <form class="login100-form" method="POST" action="{{ route('password.email') }}">
+    @csrf
+    <span class="login100-form-title p-b-43">Forget password</span>
+        
+    <p>Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
+
+    <x-auth-session-status class="mb-4" :status="session('status')" style="color-green"/>
+
+       <!-- Email Field with Validation Error in data-validate -->
+       <div class="wrap-input100 validate-input @error('email') alert-validate @enderror" 
+         @error('email') data-validate="{{ $message }}" @enderror>
+        <input class="input100" type="email" name="email" value="{{ old('email') }}">
+        <span class="focus-input100"></span>
+        <span class="label-input100">Email</span>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="container-login100-form-btn">
+        <button type="submit" class="login100-form-btn">Email Password Reset Link</button>
+    </div>
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+    
+    <div class="container-login100-form-btn p-t-10">
+        <button type="button" class="login100-form-btn" onclick="window.location.href='{{ route('login') }}'">Back to login</button>
+    </div>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
+</form>
 </x-guest-layout>
