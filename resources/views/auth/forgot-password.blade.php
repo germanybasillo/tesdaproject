@@ -4,8 +4,8 @@
     <span class="login100-form-title p-b-43">Forget password</span>
         
     <p>Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
-
-    <x-auth-session-status class="mb-4" :status="session('status')" style="color-green"/>
+    
+    <x-auth-session-status class="mb-4 alert alert-success" :status="session('status')"/>
 
        <!-- Email Field with Validation Error in data-validate -->
        <div class="wrap-input100 validate-input @error('email') alert-validate @enderror" 
