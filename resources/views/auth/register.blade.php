@@ -9,7 +9,7 @@
          @error('name') data-validate="{{ $message }}" @enderror>
         <input class="input100" type="name" name="name" value="{{ old('name') }}">
         <span class="focus-input100"></span>
-        <span class="label-input100">Email</span>
+        <span class="label-input100">Name of Institution</span>
     </div>
 
     <!-- Email Field with Validation Error in data-validate -->

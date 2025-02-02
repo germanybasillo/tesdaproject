@@ -1,39 +1,41 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
+    <form class="login100-form" method="POST" action="{{ route('password.store') }}">
         @csrf
 
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <!-- Email Field with Validation Error in data-validate -->
+    <div class="wrap-input100 validate-input @error('email') alert-validate @enderror" 
+         @error('email') data-validate="{{ $message }}" @enderror>
+        <input class="input100" type="email" name="email" value="{{ old('email', request('email')) }}">
+        <span class="focus-input100"></span>
+        <span class="label-input100">Email</span>
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+         <!-- Email Field with Validation Error in data-validate -->
+      <div class="wrap-input100 validate-input @error('password') alert-validate @enderror" 
+         @error('password') data-validate="{{ $message }}" @enderror>
+        <input class="input100" type="password" name="password" value="{{ old('password') }}">
+        <span class="focus-input100"></span>
+        <span class="label-input100">Password</span>
+    </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+  <!-- Email Field with Validation Error in data-validate -->
+  <div class="wrap-input100 validate-input @error('password_confirmation') alert-validate @enderror" 
+         @error('password_confirmation') data-validate="{{ $message }}" @enderror>
+        <input class="input100" type="password" name="password_confirmation" value="{{ old('password_confirmation') }}">
+        <span class="focus-input100"></span>
+        <span class="label-input100">Confirm Password</span>
+    </div>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+    <div class="container-login100-form-btn">
+        <button type="submit" class="login100-form-btn">Reset Password</button>
+    </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
+    <div class="container-login100-form-btn p-t-10">
+    <button type="button" class="login100-form-btn" onclick="window.location.href='{{ route('login') }}'">Back to Login</button>
+</div>
     </form>
 </x-guest-layout>
