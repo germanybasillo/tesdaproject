@@ -27,7 +27,6 @@
    'resources/LoginRegisterStyle/vendor/countdowntime/countdowntime.js',
    'resources/LoginRegisterStyle/js/main.js',
    'resources/LoginRegisterStyle/register/script.js',
-
 ])
 
     </head>
