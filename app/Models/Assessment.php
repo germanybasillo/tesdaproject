@@ -8,4 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Assessment extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'assessment_date',
+        'qualification',
+        'no_of_pax',
+	'training_status',
+        'type_of_scholar',
+	'status',
+	'update_awareness',
+        'eltt',
+        'rfftp',
+        'oropfafns',
+        'sopcctvr',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
