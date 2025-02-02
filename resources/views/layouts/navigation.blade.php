@@ -29,16 +29,19 @@
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-blue-400 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                         
                         
-        
-    @if (Auth::user()->role === 'admin')
-    <div class="text-white font-bold">
-        <!-- Admin Logo -->
-        {{ Auth::user()->name }}
-    @else
-        <!-- User Logo -->
-        <img src="{{ asset(Auth::user()->logo) }}" alt="User Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-    @endif
-</div>
+                        <img src="{{ asset(Auth::user()->logo) }}" alt="User Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+    
+                         <!-- @if (Auth::user()->role === 'admin')
+                         <div class="text-white font-bold">
+     
+                         {{ Auth::user()->name }}
+
+                         <img src="{{ asset(Auth::user()->logo) }}" alt="User Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                      @else
+       
+                      <img src="{{ asset(Auth::user()->logo) }}" alt="User Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                         @endif
+                    </div> -->
 
 
                             <div class="ms-1">

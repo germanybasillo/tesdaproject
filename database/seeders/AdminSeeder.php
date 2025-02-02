@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
                 'email' => 'tesda@gmail.com',
                 'password' => Hash::make('admin@123'), // Change this to a secure password
                 'role' => 'admin', // Ensure you have a 'role' column in users table
-                'logo' => 'images/logo.png',
+                'logo' => 'images/logo/logo.png',
             ]
         );
     }
