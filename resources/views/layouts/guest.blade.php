@@ -4,9 +4,7 @@
 	<title>{{config('app.name')}}</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/resources/logo.png"/>
-<!--===============================================================================================-->
+    
 
 @vite([
    'resources/LoginRegisterStyle/vendor/bootstrap/css/bootstrap.min.css',
@@ -29,6 +27,7 @@
    'resources/LoginRegisterStyle/vendor/countdowntime/countdowntime.js',
    'resources/LoginRegisterStyle/js/main.js',
    'resources/LoginRegisterStyle/register/script.js',
+
 ])
 
     </head>
