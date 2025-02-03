@@ -64,7 +64,7 @@
                 object-fit: cover;
                 display: none;">
     </label>
-    <input type="file" name="logo" id="logo-upload" accept="application/image/jpg,image/png,image/jpeg" style="display: none;">
+    <input type="file" name="logo" id="logo-upload" accept="image/*" style="display: none;">
 </div>
 
     <div class="container-login100-form-btn">

@@ -32,4 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/assessments/create', [AssessmentController::class, 'create'])->name('assessments.create');
+    Route::post('/assessments/store', [AssessmentController::class, 'store'])->name('assessments.store');
+    Route::get('/assessments/{assessment}/edit', [AssessmentController::class, 'edit'])->name('assessments.edit');
+    Route::put('/assessments/{assessment}', [AssessmentController::class, 'update'])->name('assessments.update');
+});
+
 require __DIR__.'/auth.php';
