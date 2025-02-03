@@ -44,8 +44,23 @@ document.getElementById('next_button').addEventListener('click', function () {
 });
 
 // Toggle Scholarship Dropdown Based on Training Status
-document.getElementById('training_status').addEventListener('change', function () {
-    const scholarshipDiv = document.getElementById('scholarship_div');
+document.getElementById('training_status1').addEventListener('change', function () {
+    const scholarshipDiv = document.getElementById('scholarship_div1');
+    scholarshipDiv.style.display = this.value === 'scholar' ? 'block' : 'none';
+});
+
+document.getElementById('training_status2').addEventListener('change', function () {
+    const scholarshipDiv = document.getElementById('scholarship_div2');
+    scholarshipDiv.style.display = this.value === 'scholar' ? 'block' : 'none';
+});
+
+document.getElementById('training_status3').addEventListener('change', function () {
+    const scholarshipDiv = document.getElementById('scholarship_div3');
+    scholarshipDiv.style.display = this.value === 'scholar' ? 'block' : 'none';
+});
+
+document.getElementById('training_status4').addEventListener('change', function () {
+    const scholarshipDiv = document.getElementById('scholarship_div4');
     scholarshipDiv.style.display = this.value === 'scholar' ? 'block' : 'none';
 });
 

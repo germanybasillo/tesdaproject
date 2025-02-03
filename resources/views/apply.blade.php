@@ -44,7 +44,7 @@
                                     <label for="qualification" class="block text-sm font-medium mb-2">
                                         Qualification:
                                     </label>
-                                    <select id="qualification" name="qualification" required 
+                                    <select id="qualification" name="qualification1" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your qualification</option>
                                         <option value="FBS NC II">FBS NC II</option>
@@ -58,7 +58,7 @@
                                     <label for="no_of_pax" class="block text-sm font-medium mb-2">
                                         Number of Pax:
                                     </label>
-                                    <select id="no_of_pax" name="no_of_pax" required 
+                                    <select id="no_of_pax" name="no_of_pax1" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your number of tax</option>
                                         @for ($i = 1; $i <= 10; $i++)
@@ -71,7 +71,7 @@
     <label for="training_status" class="block text-sm font-medium mb-2">
         Training Status:
     </label>
-    <select id="training_status" name="training_status" required 
+    <select id="training_status1" name="training_status1" required 
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
         onchange="toggleDocumentField()">
         <option value="" disabled selected>Select your training status</option>
@@ -80,11 +80,11 @@
     </select>
 </div>
 
-                                <div id="scholarship_div" style="display: none;">
+                                <div id="scholarship_div1" style="display: none;">
                                     <label for="scholarship" class="block text-sm font-medium mb-2">
                                         Scholarship Type:
                                     </label>
-				    <select id="scholarship" name="type_of_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+				    <select id="scholarship" name="type_of_scholar1" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your scholarship type</option>
                                         <option value="ttsp">TTSP</option>
                                         <option value="cfsp">CFSP</option>
@@ -103,7 +103,7 @@
                                     <label for="qualification" class="block text-sm font-medium mb-2">
                                         Qualification:
                                     </label>
-                                    <select id="qualification" name="qualification" required 
+                                    <select id="qualification" name="qualification2" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your qualification</option>
                                         <option value="FBS NC II">FBS NC II</option>
@@ -117,7 +117,7 @@
                                     <label for="no_of_pax" class="block text-sm font-medium mb-2">
                                         Number of Pax:
                                     </label>
-                                    <select id="no_of_pax" name="no_of_pax" required 
+                                    <select id="no_of_pax" name="no_of_pax2" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your number of tax</option>
                                         @for ($i = 1; $i <= 10; $i++)
@@ -130,7 +130,7 @@
     <label for="training_status" class="block text-sm font-medium mb-2">
         Training Status:
     </label>
-    <select id="training_status" name="training_status" required 
+    <select id="training_status2" name="training_status2" required 
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
         onchange="toggleDocumentField()">
         <option value="" disabled selected>Select your training status</option>
@@ -139,11 +139,11 @@
     </select>
 </div>
 
-                                <div id="scholarship_div" style="display: none;">
+                                <div id="scholarship_div2" style="display: none;">
                                     <label for="scholarship" class="block text-sm font-medium mb-2">
                                         Scholarship Type:
                                     </label>
-				    <select id="scholarship" name="type_of_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+				    <select id="scholarship" name="type_of_scholar2" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your scholarship type</option>
                                         <option value="ttsp">TTSP</option>
                                         <option value="cfsp">CFSP</option>
@@ -162,7 +162,7 @@
                                     <label for="qualification" class="block text-sm font-medium mb-2">
                                         Qualification:
                                     </label>
-                                    <select id="qualification" name="qualification" required 
+                                    <select id="qualification" name="qualification3" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your qualification</option>
                                         <option value="FBS NC II">FBS NC II</option>
@@ -176,7 +176,7 @@
                                     <label for="no_of_pax" class="block text-sm font-medium mb-2">
                                         Number of Pax:
                                     </label>
-                                    <select id="no_of_pax" name="no_of_pax" required 
+                                    <select id="no_of_pax" name="no_of_pax3" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your number of tax</option>
                                         @for ($i = 1; $i <= 10; $i++)
@@ -189,7 +189,7 @@
     <label for="training_status" class="block text-sm font-medium mb-2">
         Training Status:
     </label>
-    <select id="training_status" name="training_status" required 
+    <select id="training_status3" name="training_status3" required 
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
         onchange="toggleDocumentField()">
         <option value="" disabled selected>Select your training status</option>
@@ -198,11 +198,11 @@
     </select>
 </div>
 
-                                <div id="scholarship_div" style="display: none;">
+                                <div id="scholarship_div3" style="display: none;">
                                     <label for="scholarship" class="block text-sm font-medium mb-2">
                                         Scholarship Type:
                                     </label>
-				    <select id="scholarship" name="type_of_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+				    <select id="scholarship" name="type_of_scholar3" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your scholarship type</option>
                                         <option value="ttsp">TTSP</option>
                                         <option value="cfsp">CFSP</option>
@@ -221,7 +221,7 @@
                                     <label for="qualification" class="block text-sm font-medium mb-2">
                                         Qualification:
                                     </label>
-                                    <select id="qualification" name="qualification" required 
+                                    <select id="qualification" name="qualification4" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your qualification</option>
                                         <option value="FBS NC II">FBS NC II</option>
@@ -235,7 +235,7 @@
                                     <label for="no_of_pax" class="block text-sm font-medium mb-2">
                                         Number of Pax:
                                     </label>
-                                    <select id="no_of_pax" name="no_of_pax" required 
+                                    <select id="no_of_pax" name="no_of_pax4" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your number of tax</option>
                                         @for ($i = 1; $i <= 10; $i++)
@@ -248,7 +248,7 @@
     <label for="training_status" class="block text-sm font-medium mb-2">
         Training Status:
     </label>
-    <select id="training_status" name="training_status" required 
+    <select id="training_status4" name="training_status4" required 
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
         onchange="toggleDocumentField()">
         <option value="" disabled selected>Select your training status</option>
@@ -257,11 +257,11 @@
     </select>
 </div>
 
-                                <div id="scholarship_div" style="display: none;">
+                                <div id="scholarship_div4" style="display: none;">
                                     <label for="scholarship" class="block text-sm font-medium mb-2">
                                         Scholarship Type:
                                     </label>
-				    <select id="scholarship" name="type_of_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+				    <select id="scholarship" name="type_of_scholar4" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
                                         <option value="" disabled selected>Select your scholarship type</option>
                                         <option value="ttsp">TTSP</option>
                                         <option value="cfsp">CFSP</option>
