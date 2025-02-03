@@ -40,13 +40,18 @@ class AssessmentController extends Controller
             'type_of_scholar' => 'nullable|string|max:255',
             'eltt' => 'required|mimes:pdf',
             'rfftp' => 'required|mimes:pdf',
-            'oropfafns' => 'required|mimes:pdf',
+            'oropfafns' => 'nullable|mimes:pdf',
             'sopcctvr' => 'required|mimes:pdf',
         ]);
 
         // If training status is non-scholar, set type_of_scholar to 'NA'
 if ($request->training_status == 'non-scholar') {
     $request->merge(['type_of_scholar' => 'N/A']);
+}
+
+ // If training status is scholar and no file uploaded, set 'N/A'
+if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
+    $request->merge(['oropfafns' => 'N/A']);
 }
 
         // Create a new Assessment instance
@@ -131,6 +136,11 @@ if ($request->training_status == 'non-scholar') {
 if ($request->training_status == 'non-scholar') {
     $request->merge(['type_of_scholar' => 'N/A']);
 }
+
+ // If training status is scholar, set oropfafns to 'NA'
+ if ($request->training_status == 'scholar') {
+    $request->merge(['oropfafns' => 'N/A']);
+ }
 
         $assessment = Assessment::findOrFail($id);
 

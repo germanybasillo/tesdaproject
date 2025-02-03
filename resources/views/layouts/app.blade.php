@@ -56,5 +56,27 @@ function goBackToStep1() {
     }
 </script>
 
+<script>
+    // Document Preview for Uploaded PDF
+function previewDocument(event, containerId, iframeId) {
+    const file = event.target.files[0];
+    const previewContainer = document.getElementById(containerId);
+    const previewIframe = document.getElementById(iframeId);
+
+    if (file) {
+        if (file.type === 'application/pdf') {
+            const fileURL = URL.createObjectURL(file);
+            previewIframe.src = fileURL;
+            previewContainer.style.display = 'block';
+        } else {
+            alert('Please upload a valid PDF document.');
+            previewContainer.style.display = 'none';
+        }
+    } else {
+        previewContainer.style.display = 'none';
+    }
+}
+</script>
+
     </body>
 </html>

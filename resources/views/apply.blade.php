@@ -17,10 +17,8 @@
                       
 
               <form action="{{ route('assessments.store') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
-    @csrf
-
-
-
+                @csrf
+                
 				<div id="step1">
 
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -144,7 +142,7 @@
 <!-- Request Form For Test Package -->
 <div class="mt-4">
     <x-input-label for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument" class="block mt-1 w-full" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'rfftpPreviewContainer', 'rfftpPreview')" required/>
+    <x-text-input id="rfftpDocument" class="block mt-1 w-full" type="file" name="rfftp" accept="application/pdf" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'rfftpPreviewContainer', 'rfftpPreview')" required/>
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -156,7 +154,7 @@
 <!-- Official Receipt of Payment for Assessment for Non-Scholar -->
 <div id="oropfafnsContainer" class="mt-4" style="display: none;">
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full" type="file" name="oropfafns"
+    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full" accept="application/pdf" type="file" name="oropfafns"
         placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}"
         autocomplete="oropfafns" onchange="previewDocument(event, 'oropfafnsPreviewContainer', 'oropfafnsPreview')" />
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
@@ -171,7 +169,7 @@
 <!-- Submission of Previous CCTV Recordings -->
 <div class="mt-4">
     <x-input-label for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'sopcctvrPreviewContainer', 'sopcctvrPreview')" required/>
+    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full" accept="application/pdf" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'sopcctvrPreviewContainer', 'sopcctvrPreview')" required/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->

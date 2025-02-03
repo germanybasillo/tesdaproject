@@ -20,7 +20,6 @@ return new class extends Migration
 		$table->enum('training_status', ['scholar','non-scholar'])->default('scholar');
 		$table->enum('status', ['pending', 'approved'])->default('pending');
 		$table->string('type_of_scholar');
-		$table->timestamp('update_awareness')->nullable();
 		$table->string('eltt');
 		$table->string('rfftp');
 		$table->string('oropfafns');

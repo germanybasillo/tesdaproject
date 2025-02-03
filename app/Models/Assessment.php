@@ -17,7 +17,6 @@ class Assessment extends Model
 	'training_status',
         'type_of_scholar',
 	'status',
-	'update_awareness',
         'eltt',
         'rfftp',
         'oropfafns',
