@@ -22,7 +22,7 @@ return new class extends Migration
 		$table->string('type_of_scholar');
 		$table->string('eltt');
 		$table->string('rfftp');
-		$table->string('oropfafns');
+		$table->string('oropfafns')->nullable();
 		$table->string('sopcctvr');
             $table->timestamps();
         });
