@@ -12,41 +12,20 @@ class Assessment extends Model
     protected $fillable = [
         'user_id',
         'assessment_date',
-        'qualification1',
-        'qualification2',
-        'qualification3',
-        'qualification4',
-        'no_of_pax1',
-        'no_of_pax2',
-        'no_of_pax3',
-        'no_of_pax4',
-	'training_status1',
-    'training_status2',
-    'training_status3',
-    'training_status4',
-        'type_of_scholar1',
-        'type_of_scholar2',
-        'type_of_scholar3',
-        'type_of_scholar4',
+        'qualification',
+        'no_of_pax',
+	'training_status',
+        'type_of_scholar',
 	'status',
-        'eltt1',
-        'eltt2',
-        'eltt3',
-        'eltt4',
-        'rfftp1',
-        'rfftp2',
-        'rfftp3',
-        'rfftp4',
-        'oropfafns1',
-        'oropfafns2',
-        'oropfafns3',
-        'oropfafns4',
-        'sopcctvr1',
-        'sopcctvr2',
-        'sopcctvr3',
-        'sopcctvr4',
+        'eltt',
+        'rfftp',
+        'oropfafns',
+        'sopcctvr',
     ];
 
+    /**
+     * Get the user who created the assessment.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
