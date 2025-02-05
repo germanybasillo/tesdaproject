@@ -8,10 +8,10 @@
 
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="blue-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="py-12 flex items-center justify-center min-h-screen">
                 <div class="w-1/2 sm:px-6 lg:px-8">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-8 text-gray-900 dark:text-gray-100">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
                             <style>
@@ -43,15 +43,104 @@
         id="assessment_date" 
         name="assessment_date" 
         required 
-        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black"
     >
 </div>
+
+<!-- <div>
+    <label for="select" class="block text-sm font-medium mb-2">Qualification Selected You Have</label>
+    <select id="qualificationCount" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+        <option value="" disabled selected>Maximum of this number below</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+</div> -->
+                                
+
+                                <!-- Container for dynamic qualification fields -->
+<!-- <div id="qualificationContainer"></div>
+
+<script>
+document.getElementById("qualificationCount").addEventListener("change", function() {
+    let count = parseInt(this.value); 
+    let container = document.getElementById("qualificationContainer");
+    container.innerHTML = ""; // Clear previous selections
+
+    for (let i = 1; i <= count; i++) {
+        let qualificationBlock = `
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-2">Qualification ${i}:</label>
+                <select name="qualification[]" required class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                    <option value="" disabled selected>Select your qualification</option>
+                    <option value="FBS NC II">FBS NC II</option>
+                    <option value="CSS NC II">CSS NC II</option>
+                    <option value="Cook NC II">Cook NC II</option>
+                    <option value="Driving NC II">Driving NC II</option>
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label class="block text-sm font-medium mb-2">Number of Pax:</label>
+                <select name="no_of_pax[]" required class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                    <option value="" disabled selected>Select your number of pax</option>
+                    ${Array.from({ length: 10 }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label class="block text-sm font-medium mb-2">Training Status:</label>
+                <select class="training_status w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                    <option value="" disabled selected>Select your training status</option>
+                    <option value="scholar">Scholar</option>
+                    <option value="non-scholar">Non-Scholar</option>
+                </select>
+            </div>
+
+            <div class="scholarship_div mt-2 hidden">
+                <label class="block text-sm font-medium mb-2">Scholarship Type:</label>
+                <select name="scholarship[]" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+                    <option value="" disabled selected>Select your scholarship type</option>
+                    <option value="ttsp">TTSP</option>
+                    <option value="cfsp">CFSP</option>
+                    <option value="uaqtea">UAQTEA</option>
+                    <option value="twsp">TWSP</option>
+                </select>
+            </div>
+        `;
+        container.innerHTML += qualificationBlock;
+    }
+
+    // Handle scholarship visibility
+    document.querySelectorAll('.training_status').forEach((select) => {
+        select.addEventListener("change", function () {
+            let scholarshipDiv = this.closest('div').nextElementSibling;
+            if (this.value === "scholar") {
+                scholarshipDiv.classList.remove("hidden");
+            } else {
+                scholarshipDiv.classList.add("hidden");
+            }
+        });
+    });
+});
+</script> -->
+
+
+
+
+
+
+
+
+
+
                                                                  <div>
                                     <label for="qualification" class="block text-sm font-medium mb-2">
                                         Qualification:
                                     </label>
                                     <select id="qualification" name="qualification" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
                                         <option value="" disabled selected>Select your qualification</option>
                                         <option value="FBS NC II">FBS NC II</option>
                                         <option value="CSS NC II">CSS NC II</option>
@@ -65,7 +154,7 @@
                                         Number of Pax:
                                     </label>
                                     <select id="no_of_pax" name="no_of_pax" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                                         <option value="" disabled selected>Select your number of tax</option>
                                         @for ($i = 1; $i <= 10; $i++)
                                             <option value="{{ $i }}">{{ $i }}</option>
@@ -78,7 +167,7 @@
                                         Training Status:
                                     </label>
                                     <select id="training_status" name="training_status" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                                         <option value="" disabled selected>Select your training status</option>
                                         <option value="scholar">Scholar</option>
                                         <option value="non-scholar">Non-Scholar</option>
@@ -89,7 +178,7 @@
                                     <label for="scholarship" class="block text-sm font-medium mb-2">
                                         Scholarship Type:
                                     </label>
-				    <select id="scholarship" name="type_of_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+				    <select id="scholarship" name="type_of_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                                         <option value="" disabled selected>Select your scholarship type</option>
                                         <option value="ttsp">TTSP</option>
                                         <option value="cfsp">CFSP</option>
@@ -137,8 +226,8 @@
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-    <x-input-label for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument" class="block mt-1 w-full" type="file" name="eltt" placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" autocomplete="eltt" onchange="previewDocument(event, 'elttPreviewContainer', 'elttPreview')" required/>
+    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+    <x-text-input id="elttDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt" placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" autocomplete="eltt" onchange="previewDocument(event, 'elttPreviewContainer', 'elttPreview')" required/>
     <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -149,8 +238,8 @@
 
 <!-- Request Form For Test Package -->
 <div class="mt-4">
-    <x-input-label for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument" class="block mt-1 w-full" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'rfftpPreviewContainer', 'rfftpPreview')" required/>
+    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'rfftpPreviewContainer', 'rfftpPreview')" required/>
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -160,9 +249,9 @@
 </div>
 
 <!-- Official Receipt of Payment for Assessment for Non-Scholar -->
-<div class="mt-4" style="display: none;" id="orInputContainer">
+<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer">
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'oropfafnsPreviewContainer', 'oropfafnsPreview')"/>
+    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'oropfafnsPreviewContainer', 'oropfafnsPreview')"/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -174,8 +263,8 @@
 
 <!-- Submission of Previous CCTV Recordings -->
 <div class="mt-4">
-    <x-input-label for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'sopcctvrPreviewContainer', 'sopcctvrPreview')" required/>
+    <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'sopcctvrPreviewContainer', 'sopcctvrPreview')" required/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -252,7 +341,7 @@ function previewDocument(event, containerId, iframeId) {
 }
 </script>
 
-                            <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 document.getElementById('next_button').addEventListener('click', function () {
     const assessmentDate = document.getElementById('assessment_date').value;

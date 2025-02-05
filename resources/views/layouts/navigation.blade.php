@@ -16,9 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('apply')" :active="request()->routeIs('apply')" class="text-white hover:text-blue-100">
-                        {{ __('Request Assessments') }}
-                    </x-nav-link>
+
+                    @if(auth()->user() && auth()->user()->role !== 'admin')
+         <x-nav-link :href="route('apply')" :active="request()->routeIs('apply')" class="text-white hover:text-blue-100">
+        {{ __('Request Assessments') }}
+        </x-nav-link>
+        @endif
+
                 </div>
             </div>
 
