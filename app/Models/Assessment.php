@@ -13,14 +13,22 @@ class Assessment extends Model
         'user_id',
         'assessment_date',
         'qualification',
+        'qualification2',
         'no_of_pax',
+        'no_of_pax2',
 	'training_status',
+    'training_status2',
         'type_of_scholar',
+        'type_of_scholar2',
 	'status',
         'eltt',
+        'eltt2',
         'rfftp',
+        'rfftp2',
         'oropfafns',
+        'oropfafns2',
         'sopcctvr',
+        'sopcctvr2',
     ];
 
     /**
