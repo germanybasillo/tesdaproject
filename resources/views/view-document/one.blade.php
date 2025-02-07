@@ -91,11 +91,38 @@
             </td>
         </tr>
         <tr>
-            <th class="title">Attached File</th>
-            <td><a href="#" class="view-file">View File</a></td>
-        </tr>
+    <th class="title">Attached File</th>
+    <td>
+    @if (!empty($assessment->eltt) && file_exists(public_path($assessment->eltt)))
+            <a href="{{ asset($assessment->eltt) }}" target="_blank" class="view-file">View PDF ELTT</a><br>
+        @else
+ 
+        @endif
+
+    @if (!empty($assessment->rfftp) && file_exists(public_path($assessment->rfftp)))
+            <a href="{{ asset($assessment->rfftp) }}" target="_blank" class="view-file">View PDF RFFTP</a><br>
+        @else
+ 
+        @endif
+
+    @if (!empty($assessment->oropfafns) && file_exists(public_path($assessment->oropfafns)))
+            <a href="{{ asset($assessment->oropfafns) }}" target="_blank" class="view-file">View PDF OROPFAFNS</a><br>
+        @else
+  
+        @endif
+  
+    @if (!empty($assessment->sopcctvr) && file_exists(public_path($assessment->sopcctvr)))
+            <a href="{{ asset($assessment->sopcctvr) }}" target="_blank" class="view-file">View PDF SOPCCTVR</a><br>
+        @else
+      
+        @endif
+    </td>
+</tr>
+
     </table><br>
     @endif
+
+    
 
                 </div>
             </div>

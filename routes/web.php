@@ -35,20 +35,32 @@ Route::get('/one/{id}', function ($id) {
 })->middleware(['auth', 'verified']);
 
 
-Route::get('/two', function () {
-    $assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
-    return view('view-document.two', compact('assessments'));
-    })->middleware(['auth', 'verified']);
+Route::get('/two/{id}', function ($id) {
+    // Retrieve the specific assessment for the authenticated user
+    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
 
-Route::get('/three', function () {
-    $assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
-    return view('view-document.three', compact('assessments'));
-        })->middleware(['auth', 'verified']);
 
-        Route::get('/four', function () {
-            $assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
-    return view('view-document.four', compact('assessments'));
-            })->middleware(['auth', 'verified']);      
+        return view('view-document.two', compact('assessment')); // Pass a single assessment to the view
+  
+})->middleware(['auth', 'verified']);
+
+Route::get('/three/{id}', function ($id) {
+    // Retrieve the specific assessment for the authenticated user
+    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+
+
+        return view('view-document.three', compact('assessment')); // Pass a single assessment to the view
+  
+})->middleware(['auth', 'verified']);
+
+Route::get('/four/{id}', function ($id) {
+    // Retrieve the specific assessment for the authenticated user
+    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+
+
+        return view('view-document.four', compact('assessment')); // Pass a single assessment to the view
+  
+})->middleware(['auth', 'verified']);
 
 Route::get('/apply', function () {
     return view('apply');
