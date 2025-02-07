@@ -80,11 +80,12 @@
             <th class="title">Comment About His PDF</th>
             <td /*class="description"*/>
             @foreach($comments as $comment)
-            {{ $comment->comment }}
+            <p style="color:red">{{ $comment->comment }}</p>
+            <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
             @endforeach
             <form action="{{ route('comments.store') }}" method="POST">
             @csrf
-            <div style="display: flex; width: 80%; align-items: center;">
+            <div style="display: flex; width: 100%; align-items: center;">
     <input name="comment" style="flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;" placeholder="Write a comment..." required>
     <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">Submit</button>
     </div>
