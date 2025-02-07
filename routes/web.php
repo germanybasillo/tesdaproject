@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssessmentController; 
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Assessment;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,13 +16,39 @@ use App\Http\Controllers\AssessmentController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->middleware(['auth', 'verified']);
+Route::get('/', function () {
+    return view('welcome');
+})->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+	$assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
+return view('dashboard', compact('assessments'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/one/{id}', function ($id) {
+    // Retrieve the specific assessment for the authenticated user
+    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+
+
+        return view('view-document.one', compact('assessment')); // Pass a single assessment to the view
+  
+})->middleware(['auth', 'verified']);
+
+
+Route::get('/two', function () {
+    $assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
+    return view('view-document.two', compact('assessments'));
+    })->middleware(['auth', 'verified']);
+
+Route::get('/three', function () {
+    $assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
+    return view('view-document.three', compact('assessments'));
+        })->middleware(['auth', 'verified']);
+
+        Route::get('/four', function () {
+            $assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
+    return view('view-document.four', compact('assessments'));
+            })->middleware(['auth', 'verified']);      
 
 Route::get('/apply', function () {
     return view('apply');
