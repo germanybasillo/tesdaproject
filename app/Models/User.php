@@ -50,4 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
     return $this->role !== 'admin'; // Admins don't need verification
 }
 
+public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
+
+
 }

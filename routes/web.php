@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssessmentController; 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Assessment;
+use App\Http\Controllers\CommentController;
+use App\Models\Comment;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,9 +30,10 @@ return view('dashboard', compact('assessments'));
 Route::get('/one/{id}', function ($id) {
     // Retrieve the specific assessment for the authenticated user
     $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+    $comments = Comment::latest()->get();
 
 
-        return view('view-document.one', compact('assessment')); // Pass a single assessment to the view
+        return view('view-document.one', compact('assessment','comments')); // Pass a single assessment to the view
   
 })->middleware(['auth', 'verified']);
 
@@ -38,29 +41,35 @@ Route::get('/one/{id}', function ($id) {
 Route::get('/two/{id}', function ($id) {
     // Retrieve the specific assessment for the authenticated user
     $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+    $comments = Comment::latest()->get();
 
-
-        return view('view-document.two', compact('assessment')); // Pass a single assessment to the view
+        return view('view-document.two', compact('assessment','comments')); // Pass a single assessment to the view
   
 })->middleware(['auth', 'verified']);
 
 Route::get('/three/{id}', function ($id) {
     // Retrieve the specific assessment for the authenticated user
     $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+    $comments = Comment::latest()->get();
 
-
-        return view('view-document.three', compact('assessment')); // Pass a single assessment to the view
+        return view('view-document.three', compact('assessment','comments')); // Pass a single assessment to the view
   
 })->middleware(['auth', 'verified']);
 
 Route::get('/four/{id}', function ($id) {
     // Retrieve the specific assessment for the authenticated user
     $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+    $comments = Comment::latest()->get();
 
-
-        return view('view-document.four', compact('assessment')); // Pass a single assessment to the view
+        return view('view-document.four', compact('assessment','comments')); // Pass a single assessment to the view
   
 })->middleware(['auth', 'verified']);
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+});
+
 
 Route::get('/apply', function () {
     return view('apply');
