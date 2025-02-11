@@ -83,8 +83,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/assessments/create', [AssessmentController::class, 'create'])->name('assessments.create');
-    Route::post('/assessments/store', [AssessmentController::class, 'store'])->name('assessments.store');
-    Route::post('/assessments/storeTwo', [AssessmentController::class, 'storeTwo'])->name('assessments.storeTwo');
+    Route::post('/assessments/one', [AssessmentController::class, 'one'])->name('assessments.one');
+    Route::post('/assessments/two', [AssessmentController::class, 'two'])->name('assessments.two');
+    Route::post('/assessments/three', [AssessmentController::class, 'three'])->name('assessments.three');
+    Route::post('/assessments/four', [AssessmentController::class, 'four'])->name('assessments.four');
     Route::get('/assessments/{assessment}/edit', [AssessmentController::class, 'edit'])->name('assessments.edit');
     Route::put('/assessments/{assessment}', [AssessmentController::class, 'update'])->name('assessments.update');
 });
