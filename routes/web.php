@@ -101,7 +101,7 @@ Route::middleware(['auth'])->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin.restrict'])->group(function () {
     Route::get('/one', [Qualification::class, 'one'])->name('qualification.one');
     Route::get('/two', [Qualification::class, 'two'])->name('qualification.two');
     Route::get('/three', [Qualification::class, 'three'])->name('qualification.three');

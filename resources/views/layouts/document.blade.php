@@ -53,6 +53,16 @@
         </script>
     @endif
 
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Access Denied',
+            text: 'You are not allowed to access this page!',
+            confirmButtonText: 'Go Back'
+        }).then(() => {
+            window.history.back();
+        });
+    </script>
 
     </body>
 </html>
