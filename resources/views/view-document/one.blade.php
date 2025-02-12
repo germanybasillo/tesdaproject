@@ -58,7 +58,8 @@
         </tr>
         <tr>
             <th class="title">Date Submitted</th>
-            <td>{{ $assessment->created_at->format('M d, Y - h:i A') }}   </td>
+            <td>{{ $assessment->created_at->timezone('Asia/Manila')->format('M d, Y - h:i A') }}</td>
+
         </tr>
         <tr>
             <th class="title">Last Update</th>

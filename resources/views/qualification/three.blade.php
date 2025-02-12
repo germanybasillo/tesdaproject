@@ -1,4 +1,18 @@
-
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight"><i class="fas fa-calendar-alt mr-2"></i>
+            {{ __('Apply Assessment Schedule') }}
+        </h2>
+    </x-slot>
+    
+    <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="blue-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="py-12 flex items-center justify-center min-h-screen">
+                <div class="w-1/2 sm:px-6 lg:px-8">
+                    <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-8 text-gray-900 dark:text-gray-100 text-center">
+                            <h2 class="text-xl font-bold mb-4">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
                             <style>
                                 .holiday {
@@ -531,14 +545,14 @@ function previewDocument(event, containerId, iframeId) {
 document.getElementById('next_button').addEventListener('click', function () {
     const assessmentDate = document.getElementById('assessment_date').value;
     const qualification = document.getElementById('qualification').value;
-    const qualification2 = document.getElementById('qualification2').value;
-    const qualification3 = document.getElementById('qualification3').value;
+    // const qualification2 = document.getElementById('qualification2').value;
+    // const qualification3 = document.getElementById('qualification3').value;
     const noOfPax = document.getElementById('no_of_pax').value;
-    const noOfPax2= document.getElementById('no_of_pax2').value;
-    const noOfPax3 = document.getElementById('no_of_pax3').value;
+    // const noOfPax2= document.getElementById('no_of_pax2').value;
+    // const noOfPax3 = document.getElementById('no_of_pax3').value;
     const trainingStatus = document.getElementById('training_status').value;
-    const trainingStatus2 = document.getElementById('training_status2').value;
-    const trainingStatus3 = document.getElementById('training_status3').value;
+    // const trainingStatus2 = document.getElementById('training_status2').value;
+    // const trainingStatus3 = document.getElementById('training_status3').value;
 
     // Basic Validation
     if (!assessmentDate || !qualification || !noOfPax || !trainingStatus) {
@@ -546,31 +560,31 @@ document.getElementById('next_button').addEventListener('click', function () {
         return;
     }
 
-    if (!assessmentDate || !qualification2 || !noOfPax2 || !trainingStatus2) {
-        alert('Please fill all the required fields in Step 2.');
-        return;
-    }
+    // if (!assessmentDate || !qualification2 || !noOfPax2 || !trainingStatus2) {
+    //     alert('Please fill all the required fields in Step 2.');
+    //     return;
+    // }
 
-    if (!assessmentDate || !qualification3 || !noOfPax3 || !trainingStatus3) {
-        alert('Please fill all the required fields in Step 3.');
-        return;
-    }
+    // if (!assessmentDate || !qualification3 || !noOfPax3 || !trainingStatus3) {
+    //     alert('Please fill all the required fields in Step 3.');
+    //     return;
+    // }
 
-    if (trainingStatus2 === 'scholar') {
-        const scholarshipType2 = document.getElementById('scholarship2').value;
-        if (!scholarshipType2) {
-            alert('Please select a scholarship type.');
-            return;
-        }
-    }
+    // if (trainingStatus2 === 'scholar') {
+    //     const scholarshipType2 = document.getElementById('scholarship2').value;
+    //     if (!scholarshipType2) {
+    //         alert('Please select a scholarship type.');
+    //         return;
+    //     }
+    // }
 
-    if (trainingStatus3 === 'scholar') {
-        const scholarshipType3 = document.getElementById('scholarship3').value;
-        if (!scholarshipType3) {
-            alert('Please select a scholarship type.');
-            return;
-        }
-    }
+    // if (trainingStatus3 === 'scholar') {
+    //     const scholarshipType3 = document.getElementById('scholarship3').value;
+    //     if (!scholarshipType3) {
+    //         alert('Please select a scholarship type.');
+    //         return;
+    //     }
+    // }
     
 
     // Scholar-specific validation
@@ -582,23 +596,23 @@ document.getElementById('next_button').addEventListener('click', function () {
         }
     }
 
-        // Scholar-specific validation
-        if (trainingStatus2 === 'scholar') {
-        const scholarshipType2 = document.getElementById('scholarship2').value;
-        if (!scholarshipType2) {
-            alert('Please select a scholarship type.');
-            return;
-        }
-    }
+    //     // Scholar-specific validation
+    //     if (trainingStatus2 === 'scholar') {
+    //     const scholarshipType2 = document.getElementById('scholarship2').value;
+    //     if (!scholarshipType2) {
+    //         alert('Please select a scholarship type.');
+    //         return;
+    //     }
+    // }
 
-        // Scholar-specific validation
-        if (trainingStatus3 === 'scholar') {
-        const scholarshipType3 = document.getElementById('scholarship3').value;
-        if (!scholarshipType3) {
-            alert('Please select a scholarship type.');
-            return;
-        }
-    }
+    //     // Scholar-specific validation
+    //     if (trainingStatus3 === 'scholar') {
+    //     const scholarshipType3 = document.getElementById('scholarship3').value;
+    //     if (!scholarshipType3) {
+    //         alert('Please select a scholarship type.');
+    //         return;
+    //     }
+    // }
 
 
 
@@ -630,3 +644,11 @@ document.getElementById('next_button').addEventListener('click', function () {
                                     }
                                 });
                             </script>
+     </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</x-app-layout>

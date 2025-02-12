@@ -6,6 +6,7 @@ use App\Http\Controllers\AssessmentController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Assessment;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Qualification;
 use App\Models\Comment;
 
 /*
@@ -93,3 +94,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware('auth')->group(function () {
+    Route::get('/one', [Qualification::class, 'one'])->name('qualification.one');
+    Route::get('/two', [Qualification::class, 'two'])->name('qualification.two');
+    Route::get('/three', [Qualification::class, 'three'])->name('qualification.three');
+    Route::get('/four', [Qualification::class, 'four'])->name('qualification.four');
+});
