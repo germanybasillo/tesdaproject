@@ -31,79 +31,83 @@ class AssessmentController extends Controller
      */
    
 
-    public function one(Request $request)
-    {
-        try {
-            $request->validate([
-                'assessment_date' => 'required|date|after_or_equal:today',
-                'qualification' => 'required|string|max:255',
-                'no_of_pax' => 'required|integer',
-                'training_status' => 'required|in:scholar,non-scholar',
-                'type_of_scholar' => 'nullable|string|max:255',
-                'eltt' => 'required|mimes:pdf',
-                'rfftp' => 'required|mimes:pdf',
-                'oropfafns' => 'nullable|mimes:pdf',
-                'sopcctvr' => 'required|mimes:pdf',
-            ]);
-    
-            if ($request->training_status == 'non-scholar') {
-                $request->merge(['type_of_scholar' => 'N/A']);
-            }
-    
-            if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
-                $request->merge(['oropfafns' => 'N/A']);
-            }
-    
-            $assessment = new Assessment();
-            $assessment->user_id = Auth::id();
-            $assessment->assessment_date = $request->assessment_date;
-            $assessment->qualification = $request->qualification;
-            $assessment->no_of_pax = $request->no_of_pax;
-            $assessment->training_status = $request->training_status;
-            $assessment->type_of_scholar = $request->type_of_scholar;
-            $assessment->status = 'pending';
-    
-            // Handle file uploads
-            if ($request->hasFile('eltt')) {
-                $file = $request->file('eltt');
-                $filename = time() . '_eltt.' . $file->getClientOriginalExtension();
-                $file->move(public_path('eltts'), $filename);
-                $assessment->eltt = 'eltts/' . $filename;
-            }
-    
-            if ($request->hasFile('rfftp')) {
-                $file = $request->file('rfftp');
-                $filename = time() . '_rfftp.' . $file->getClientOriginalExtension();
-                $file->move(public_path('rfftp'), $filename);
-                $assessment->rfftp = 'rfftp/' . $filename;
-            }
-    
-            if ($request->hasFile('oropfafns')) {
-                $file = $request->file('oropfafns');
-                $filename = time() . '_oropfafns.' . $file->getClientOriginalExtension();
-                $file->move(public_path('oropfafns'), $filename);
-                $assessment->oropfafns = 'oropfafns/' . $filename;
-            }
-    
-            if ($request->hasFile('sopcctvr')) {
-                $file = $request->file('sopcctvr');
-                $filename = time() . '_sopcctvr.' . $file->getClientOriginalExtension();
-                $file->move(public_path('sopcctvr'), $filename);
-                $assessment->sopcctvr = 'sopcctvr/' . $filename;
-            }
-    
-            $assessment->save();
-    
-            return redirect()->route('dashboard')->with('success', 'Assessment created successfully!');
-        } catch (\Exception $e) {
-            Log::error('Error in assessment creation: ' . $e->getMessage(), [
-                'trace' => $e->getTraceAsString()
-            ]);
-    
-            return back()->withErrors(['error' => 'Something went wrong. Check Laravel logs for details.'])
-                         ->withInput();
-        }
-    }
+     public function one(Request $request)
+     {
+  
+ 
+         $request->validate([
+             'assessment_date' => 'required|date|after_or_equal:today',
+             'qualification' => 'required|string|max:255',
+             'no_of_pax' => 'required|integer',
+             'training_status' => 'required|in:scholar,non-scholar',
+             'type_of_scholar' => 'nullable|string|max:255',
+             'eltt' => 'required|mimes:pdf',
+             'rfftp' => 'required|mimes:pdf',
+             'oropfafns' => 'nullable|mimes:pdf',
+             'sopcctvr' => 'required|mimes:pdf',
+         ]);
+ 
+         // If training status is non-scholar, set type_of_scholar to 'NA'
+ if ($request->training_status == 'non-scholar') {
+     $request->merge(['type_of_scholar' => 'N/A']);
+ }
+ 
+
+ if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
+     $request->merge(['oropfafns' => 'N/A']);
+ }
+ 
+ 
+         // Create a new Assessment instance
+         $assessment = new Assessment();
+         $assessment->user_id = Auth::id();
+         $assessment->assessment_date = $request->assessment_date;
+         $assessment->qualification = $request->qualification;
+         $assessment->no_of_pax = $request->no_of_pax;
+         $assessment->training_status = $request->training_status;
+         $assessment->type_of_scholar = $request->type_of_scholar;
+          $assessment->status = 'pending';
+     
+ 
+         // Handle file uploads
+         if ($request->hasFile('eltt')) {
+             $file = $request->file('eltt');
+             $filename = time() . '_eltt.' . $file->getClientOriginalExtension();
+             $file->move(public_path('eltts'), $filename);
+             $assessment->eltt = 'eltts/' . $filename;
+         }
+
+ 
+ 
+         if ($request->hasFile('rfftp')) {
+             $file = $request->file('rfftp');
+             $filename = time() . '_rfftp.' . $file->getClientOriginalExtension();
+             $file->move(public_path('rfftp'), $filename);
+             $assessment->rfftp = 'rfftp/' . $filename;
+         }
+ 
+         
+ 
+         if ($request->hasFile('oropfafns')) {
+             $file = $request->file('oropfafns');
+             $filename = time() . '_oropfafns.' . $file->getClientOriginalExtension();
+             $file->move(public_path('oropfafns'), $filename);
+             $assessment->oropfafns = 'oropfafns/' . $filename;
+         }
+ 
+ 
+         if ($request->hasFile('sopcctvr')) {
+             $file = $request->file('sopcctvr');
+             $filename = time() . '_sopcctvr.' . $file->getClientOriginalExtension();
+             $file->move(public_path('sopcctvr'), $filename);
+             $assessment->sopcctvr = 'sopcctvr/' . $filename;
+         }
+ 
+ 
+         $assessment->save();
+ 
+         return redirect()->route('dashboard')->with('success', 'Assessment created successfully!');
+     }
     
 
     public function two(Request $request)

@@ -13,7 +13,7 @@
                 <div class="w-1/2 sm:px-6 lg:px-8">
                     <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-8 text-gray-900 dark:text-gray-100">
-                        @include('qualification.one')
+                         @include('qualification.four')
                         </div>
                     </div>
                 </div>
