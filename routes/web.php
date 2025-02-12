@@ -21,49 +21,125 @@ use App\Models\Comment;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth', 'verified']);
 
-Route::get('/dashboard', function () {
-	$assessments = Assessment::where('user_id', Auth::id())->get(); // Retrieve assessments for the authenticated user
-return view('dashboard', compact('assessments'));
+    $user = Auth::user();
+
+    // Admins see all assessments, regular users see only their own
+    if ($user->role === 'admin') {
+        $assessments = Assessment::all();
+    } else {
+        $assessments = Assessment::where('user_id', $user->id)->get();
+    }
+
+    return view('dashboard', compact('assessments'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/dashboard', function () {
+    $user = Auth::user();
+
+    // Admins see all assessments, regular users see only their own
+    if ($user->role === 'admin') {
+        $assessments = Assessment::all();
+    } else {
+        $assessments = Assessment::where('user_id', $user->id)->get();
+    }
+
+    return view('dashboard', compact('assessments'));
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
 Route::get('/one/{id}', function ($id) {
-    // Retrieve the specific assessment for the authenticated user
-    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+    // Get the authenticated user
+    $user = Auth::user();
+
+    // Check if the user is an admin
+    if ($user->role === 'admin') {
+        // Admin can access any assessment
+        $assessment = Assessment::find($id);
+    } else {
+        // Normal users can only access their own assessment
+        $assessment = Assessment::where('user_id', $user->id)->where('id', $id)->first();
+    }
+
+    if (!$assessment) {
+        abort(403, 'Unauthorized access'); // Prevent unauthorized access
+    }
+
+    // Fetch comments
     $comments = Comment::latest()->get();
 
-
-        return view('view-document.one', compact('assessment','comments')); // Pass a single assessment to the view
-  
+    return view('view-document.one', compact('assessment', 'comments'));
 })->middleware(['auth', 'verified']);
 
 
 Route::get('/two/{id}', function ($id) {
-    // Retrieve the specific assessment for the authenticated user
-    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+    // Get the authenticated user
+    $user = Auth::user();
+
+    // Check if the user is an admin
+    if ($user->role === 'admin') {
+        // Admin can access any assessment
+        $assessment = Assessment::find($id);
+    } else {
+        // Normal users can only access their own assessment
+        $assessment = Assessment::where('user_id', $user->id)->where('id', $id)->first();
+    }
+
+    if (!$assessment) {
+        abort(403, 'Unauthorized access'); // Prevent unauthorized access
+    }
+
+    // Fetch comments
     $comments = Comment::latest()->get();
 
-        return view('view-document.two', compact('assessment','comments')); // Pass a single assessment to the view
-  
+    return view('view-document.one', compact('assessment', 'comments'));
 })->middleware(['auth', 'verified']);
 
 Route::get('/three/{id}', function ($id) {
-    // Retrieve the specific assessment for the authenticated user
-    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
-    $comments = Comment::latest()->get();
+     // Get the authenticated user
+     $user = Auth::user();
 
-        return view('view-document.three', compact('assessment','comments')); // Pass a single assessment to the view
+     // Check if the user is an admin
+     if ($user->role === 'admin') {
+         // Admin can access any assessment
+         $assessment = Assessment::find($id);
+     } else {
+         // Normal users can only access their own assessment
+         $assessment = Assessment::where('user_id', $user->id)->where('id', $id)->first();
+     }
+ 
+     if (!$assessment) {
+         abort(403, 'Unauthorized access'); // Prevent unauthorized access
+     }
+ 
+     // Fetch comments
+     $comments = Comment::latest()->get();
+ 
+     return view('view-document.one', compact('assessment', 'comments'));
   
 })->middleware(['auth', 'verified']);
 
 Route::get('/four/{id}', function ($id) {
-    // Retrieve the specific assessment for the authenticated user
-    $assessment = Assessment::where('user_id', Auth::id())->where('id', $id)->first();
+    // Get the authenticated user
+    $user = Auth::user();
+
+    // Check if the user is an admin
+    if ($user->role === 'admin') {
+        // Admin can access any assessment
+        $assessment = Assessment::find($id);
+    } else {
+        // Normal users can only access their own assessment
+        $assessment = Assessment::where('user_id', $user->id)->where('id', $id)->first();
+    }
+
+    if (!$assessment) {
+        abort(403, 'Unauthorized access'); // Prevent unauthorized access
+    }
+
+    // Fetch comments
     $comments = Comment::latest()->get();
 
-        return view('view-document.four', compact('assessment','comments')); // Pass a single assessment to the view
+    return view('view-document.one', compact('assessment', 'comments'));
   
 })->middleware(['auth', 'verified']);
 
@@ -77,11 +153,6 @@ Route::get('/apply', function () {
     return view('apply');
 })->middleware(['auth', 'verified'])->name('apply');
 
-
-Route::get('/list_view', function () {
-    $assessments = Assessment::all(); // Fetch all assessments
-    return view('list_view', compact('assessments'));
-})->middleware(['auth', 'verified'])->name('list_view');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

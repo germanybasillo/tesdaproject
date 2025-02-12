@@ -75,13 +75,16 @@
             <th style="background-color: {{ $assessment->status === 'pending' ? 'red' : '#6c7ae0' }}; color: white;">
                 Status: {{ $assessment->status }}
             </th>
+            <th>Submitted by: {{$assessment->user->name}} ({{$assessment->user->email}})</th>
         </tr>
         <tr>
             <th>Qualification</th>
             <th>Number of Pax</th>
             <th>Training Status</th>
             <th>Type of Scholar</th>
+            @if (Auth::user()->role === 'admin')
             <th>Action</th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -91,11 +94,13 @@
             <td>{{$assessment->no_of_pax}}</td>
             <td>{{$assessment->training_status}}</td>
             <td>{{$assessment->type_of_scholar}}</td>
+            @if (Auth::user()->role === 'admin')
             <td class="button">
                 <a href="{{ url('/one/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
                     <i class="fa fa-eye"></i> View
                 </a>
             </td>
+            @endif
         </tr>
         @endif
 
@@ -105,11 +110,13 @@
             <td>{{$assessment->no_of_pax2}}</td>
             <td>{{$assessment->training_status2}}</td>
             <td>{{$assessment->type_of_scholar2}}</td>
+            @if (Auth::user()->role === 'admin')
             <td class="button">
                 <a href="{{ url('/two/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
                     <i class="fa fa-eye"></i> View
                 </a>
             </td>
+            @endif
         </tr>
         @endif
 
@@ -119,11 +126,13 @@
             <td>{{$assessment->no_of_pax3}}</td>
             <td>{{$assessment->training_status3}}</td>
             <td>{{$assessment->type_of_scholar3}}</td>
+            @if (Auth::user()->role === 'admin')
             <td class="button">
                 <a href="{{ url('/three/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
                     <i class="fa fa-eye"></i> View
                 </a>
             </td>
+            @endif
         </tr>
         @endif
 
@@ -133,11 +142,13 @@
             <td>{{$assessment->no_of_pax4}}</td>
             <td>{{$assessment->training_status4}}</td>
             <td>{{$assessment->type_of_scholar4}}</td>
+            @if (Auth::user()->role === 'admin')
             <td class="button">
                 <a href="{{ url('/four/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
                     <i class="fa fa-eye"></i> View
                 </a>
             </td>
+            @endif
         </tr>
         @endif
     </tbody>

@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"> -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
     
@@ -45,7 +45,7 @@
 @if ($assessment)
     <table>
         <tr>
-            <th class="title">ID</th>
+            <th class="title">No</th>
             <td>{{$assessment->id}}</td>
         </tr>
         <tr>
