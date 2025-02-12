@@ -15,7 +15,8 @@ class RestrictAdminAccess
                 'qualification.one',
                 'qualification.two',
                 'qualification.three',
-                'qualification.four'
+                'qualification.four',
+                 'apply',
             ])) {
                 return response()->view('restricted');
             }

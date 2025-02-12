@@ -21,18 +21,9 @@ use App\Models\Comment;
 */
 
 Route::get('/', function () {
-
-    $user = Auth::user();
-
-    // Admins see all assessments, regular users see only their own
-    if ($user->role === 'admin') {
         $assessments = Assessment::all();
-    } else {
-        $assessments = Assessment::where('user_id', $user->id)->get();
-    }
-
-    return view('dashboard', compact('assessments'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('list_view', compact('assessments'));
+})->middleware(['auth', 'verified'])->name('list_view');
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
@@ -177,4 +168,7 @@ Route::middleware(['auth', 'admin.restrict'])->group(function () {
     Route::get('/two', [Qualification::class, 'two'])->name('qualification.two');
     Route::get('/three', [Qualification::class, 'three'])->name('qualification.three');
     Route::get('/four', [Qualification::class, 'four'])->name('qualification.four');
+    Route::get('/apply', function () {
+        return view('apply');
+    })->name('apply');
 });
