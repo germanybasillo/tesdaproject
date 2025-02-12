@@ -63,7 +63,7 @@
         </tr>
         <tr>
             <th class="title">Last Update</th>
-            <td>2/6/2025</td>
+            <td>{{ \Carbon\Carbon::parse($assessment->updated_at)->timezone('Asia/Manila')->format('F j, Y g:i A') }}</td>
         </tr>
         <tr>
             <th class="title">Submitted by</th>
