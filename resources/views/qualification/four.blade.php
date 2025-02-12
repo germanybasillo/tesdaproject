@@ -673,14 +673,63 @@ function previewDocument(event, containerId, iframeId) {
 document.getElementById('next_button').addEventListener('click', function () {
     const assessmentDate = document.getElementById('assessment_date').value;
     const qualification = document.getElementById('qualification').value;
+    const qualification2 = document.getElementById('qualification2').value;
+    const qualification3 = document.getElementById('qualification3').value;
+    const qualification4 = document.getElementById('qualification4').value;
     const noOfPax = document.getElementById('no_of_pax').value;
+    const noOfPax2= document.getElementById('no_of_pax2').value;
+    const noOfPax3 = document.getElementById('no_of_pax3').value;
+    const noOfPax4 = document.getElementById('no_of_pax4').value;
     const trainingStatus = document.getElementById('training_status').value;
+    const trainingStatus2 = document.getElementById('training_status2').value;
+    const trainingStatus3 = document.getElementById('training_status3').value;
+    const trainingStatus4 = document.getElementById('training_status4').value;
 
     // Basic Validation
     if (!assessmentDate || !qualification || !noOfPax || !trainingStatus) {
         alert('Please fill all the required fields in Step 1.');
         return;
     }
+
+    if (!assessmentDate || !qualification2 || !noOfPax2 || !trainingStatus2) {
+        alert('Please fill all the required fields in Step 2.');
+        return;
+    }
+
+    if (!assessmentDate || !qualification3 || !noOfPax3 || !trainingStatus3) {
+        alert('Please fill all the required fields in Step 3.');
+        return;
+    }
+
+    if (!assessmentDate || !qualification4 || !noOfPax4 || !trainingStatus4) {
+        alert('Please fill all the required fields in Step 4.');
+        return;
+    }
+
+    if (trainingStatus2 === 'scholar') {
+        const scholarshipType2 = document.getElementById('scholarship2').value;
+        if (!scholarshipType2) {
+            alert('Please select a scholarship type.');
+            return;
+        }
+    }
+
+    if (trainingStatus3 === 'scholar') {
+        const scholarshipType3 = document.getElementById('scholarship3').value;
+        if (!scholarshipType3) {
+            alert('Please select a scholarship type.');
+            return;
+        }
+    }
+
+    if (trainingStatus4 === 'scholar') {
+        const scholarshipType4 = document.getElementById('scholarship4').value;
+        if (!scholarshipType4) {
+            alert('Please select a scholarship type.');
+            return;
+        }
+    }
+    
 
     // Scholar-specific validation
     if (trainingStatus === 'scholar') {
@@ -690,6 +739,34 @@ document.getElementById('next_button').addEventListener('click', function () {
             return;
         }
     }
+
+        // Scholar-specific validation
+        if (trainingStatus2 === 'scholar') {
+        const scholarshipType2 = document.getElementById('scholarship2').value;
+        if (!scholarshipType2) {
+            alert('Please select a scholarship type.');
+            return;
+        }
+    }
+
+        // Scholar-specific validation
+        if (trainingStatus3 === 'scholar') {
+        const scholarshipType3 = document.getElementById('scholarship3').value;
+        if (!scholarshipType3) {
+            alert('Please select a scholarship type.');
+            return;
+        }
+    }
+
+        // Scholar-specific validation
+        if (trainingStatus4 === 'scholar') {
+        const scholarshipType4 = document.getElementById('scholarship4').value;
+        if (!scholarshipType4) {
+            alert('Please select a scholarship type.');
+            return;
+        }
+    }
+
 
     // Hide Step 1 and Show Step 2
     document.getElementById('step1').style.display = 'none';

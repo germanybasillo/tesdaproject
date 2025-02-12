@@ -54,9 +54,9 @@
             color: #808080;
         }
 
-        tr:nth-child(even) td {
+        /* tr:nth-child(even) td {
             background: #f8f6ff;
-        }
+        } */
         .button{
             background-color:blue;
             color:white;
@@ -71,89 +71,81 @@
     <thead>
         <tr>
             <th>No: {{$assessment->id}}</th>
-            <!-- <th>Name of Institution: {{$assessment->user->name}}</th> -->
             <th>Assessment of Date: {{$assessment->assessment_date}}</th>
             <th style="background-color: {{ $assessment->status === 'pending' ? 'red' : '#6c7ae0' }}; color: white;">
-    Status: {{ $assessment->status }}
-</th>
+                Status: {{ $assessment->status }}
+            </th>
         </tr>
         <tr>
-            <th>Qualification 1</th>
+            <th>Qualification</th>
             <th>Number of Pax</th>
-            <th>Traning Status</th>
+            <th>Training Status</th>
             <th>Type of Scholar</th>
+            <th>Action</th>
         </tr>
+    </thead>
+    <tbody>
+        @if($assessment->qualification !== 'N/A')
         <tr>
             <td>{{$assessment->qualification}}</td>
             <td>{{$assessment->no_of_pax}}</td>
             <td>{{$assessment->training_status}}</td>
             <td>{{$assessment->type_of_scholar}}</td>
             <td class="button">
-    <a href="{{ url('/one/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
-        <i class="fa fa-eye"></i> View
-    </a>
-</td>
+                <a href="{{ url('/one/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
+                    <i class="fa fa-eye"></i> View
+                </a>
             </td>
-    </tr>
-        <tr>
-            <th>Qualification 2</th>
-            <th>Number of Pax</th>
-            <th>Traning Status</th>
-            <th>Type of Scholar</th>
-            </tr>
         </tr>
+        @endif
+
+        @if($assessment->qualification2 !== 'N/A')
         <tr>
-        <td>{{$assessment->qualification2}}</td>
+            <td>{{$assessment->qualification2}}</td>
             <td>{{$assessment->no_of_pax2}}</td>
             <td>{{$assessment->training_status2}}</td>
             <td>{{$assessment->type_of_scholar2}}</td>
             <td class="button">
-    <a href="{{ url('/two/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
-        <i class="fa fa-eye"></i> View
-    </a>
-</td>
+                <a href="{{ url('/two/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
+                    <i class="fa fa-eye"></i> View
+                </a>
+            </td>
         </tr>
-        <tr>
-            <th>Qualification 3</th>
-            <th>Number of Pax</th>
-            <th>Traning Status</th>
-            <th>Type of Scholar</th>
-            </tr>
-        </tr>
+        @endif
+
+        @if($assessment->qualification3 !== 'N/A')
         <tr>
             <td>{{$assessment->qualification3}}</td>
             <td>{{$assessment->no_of_pax3}}</td>
             <td>{{$assessment->training_status3}}</td>
             <td>{{$assessment->type_of_scholar3}}</td>
             <td class="button">
-    <a href="{{ url('/three/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
-        <i class="fa fa-eye"></i> View
-    </a>
-</td>
+                <a href="{{ url('/three/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
+                    <i class="fa fa-eye"></i> View
+                </a>
+            </td>
         </tr>
+        @endif
+
+        @if($assessment->qualification4 !== 'N/A')
         <tr>
-            <th>Qualification 4</th>
-            <th>Number of Pax</th>
-            <th>Traning Status</th>
-            <th>Type of Scholar</th>
-            </tr>
-        </tr>
-        <tr>
-        <td>{{$assessment->qualification4}}</td>
+            <td>{{$assessment->qualification4}}</td>
             <td>{{$assessment->no_of_pax4}}</td>
             <td>{{$assessment->training_status4}}</td>
             <td>{{$assessment->type_of_scholar4}}</td>
             <td class="button">
-    <a href="{{ url('/four/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
-        <i class="fa fa-eye"></i> View
-    </a>
-</td>
+                <a href="{{ url('/four/' . $assessment->id) }}" target="_blank" data-id="{{ $assessment->id }}">
+                    <i class="fa fa-eye"></i> View
+                </a>
+            </td>
         </tr>
-    </thead>
-    <tbody>
+        @endif
     </tbody>
 </table>
 @endforeach
+        
+
+
                 </div>
             </div>
         </div>

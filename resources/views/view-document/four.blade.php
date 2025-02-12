@@ -77,18 +77,20 @@
             <td class="status">{{$assessment->status}}</td>
         </tr>
         <tr>
-            <th class="title">Description</th>
-            <td class="description">
-                Good day Ma'am/Sir,<br><br>
-                I would like to request the correction of our trainee's "Classification of Clients".<br><br>
-                Name: MAGIROSE MARSULA FLORES<br>
-                ULI: FMM-84-848-11023-001<br>
-                FROM: OTHERS<br>
-                TO: GOVERNMENT EMPLOYEE<br><br>
-                Thank you very much.<br><br>
-                Attached is her LGU-ID for your reference.<br>
-                Hoping for your kind consideration in this matter.
-            </td>
+            <th class="title">Comment About His PDF</th>
+            <td /*class="description"*/>
+            @foreach($comments as $comment)
+            <p style="color:red">{{ $comment->comment }}</p>
+            <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+            @endforeach
+            <form action="{{ route('comments.store') }}" method="POST">
+            @csrf
+            <div style="display: flex; width: 100%; align-items: center;">
+    <input name="comment" style="flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;" placeholder="Write a comment..." required>
+    <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">Submit</button>
+    </div>
+        </form>
+        </td>
         </tr>
         <tr>
     <th class="title">Attached File</th>
