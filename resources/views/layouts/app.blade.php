@@ -36,5 +36,20 @@
             </main>
         </div>
 
+ <!-- SweetAlert2 Popup -->
+ @if(session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Access Denied',
+                    text: "{{ session('error') }}",
+                });
+            });
+        </script>
+    @endif
+
+
     </body>
 </html>
