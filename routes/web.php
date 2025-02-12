@@ -77,6 +77,12 @@ Route::get('/apply', function () {
     return view('apply');
 })->middleware(['auth', 'verified'])->name('apply');
 
+
+Route::get('/list_view', function () {
+    $assessments = Assessment::all(); // Fetch all assessments
+    return view('list_view', compact('assessments'));
+})->middleware(['auth', 'verified'])->name('list_view');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

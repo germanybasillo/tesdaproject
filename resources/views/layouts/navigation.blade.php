@@ -12,6 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
+                    <x-nav-link :href="route('list_view')" :active="request()->routeIs('list_view')" class="text-white hover:text-blue-100">
+                        {{ __('View_All_Request') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-blue-100">
                         {{ __('Dashboard') }}
                     </x-nav-link>
