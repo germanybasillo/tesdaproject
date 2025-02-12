@@ -77,6 +77,24 @@
             </th>
             @if (Auth::user()->role === 'admin')
             <th>Submitted by: {{$assessment->user->name}} ({{$assessment->user->email}})</th>
+          <th> <form action="{{ route('assessments.update', $assessment->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <label>
+                            <input type="checkbox" name="status" value="approved" 
+                                {{ $assessment->status == 'approved' ? 'checked' : '' }}
+                                onchange="this.form.submit()">
+                            Approved
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="status" value="returned" 
+                                {{ $assessment->status == 'returned' ? 'checked' : '' }}
+                                onchange="this.form.submit()">
+                            Returned
+                        </label>
+                    </form></th>
             @endif
         </tr>
         <tr>

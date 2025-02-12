@@ -27,7 +27,7 @@ return new class extends Migration
         $table->enum('training_status2', ['scholar', 'non-scholar', 'N/A'])->default('N/A')->nullable();
         $table->enum('training_status3', ['scholar', 'non-scholar', 'N/A'])->default('N/A')->nullable();
         $table->enum('training_status4', ['scholar', 'non-scholar', 'N/A'])->default('N/A')->nullable();
-		$table->enum('status', ['pending', 'approved'])->default('pending');
+		$table->enum('status', ['pending', 'approved', 'returned'])->default('pending');
 		$table->string('type_of_scholar');
         $table->string('type_of_scholar2')->default('N/A')->nullable();
         $table->string('type_of_scholar3')->default('N/A')->nullable();

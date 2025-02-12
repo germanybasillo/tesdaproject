@@ -6,6 +6,8 @@ use App\Models\Assessment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Mail\StatusUpdated;
+use Illuminate\Support\Facades\Mail;
 
 class AssessmentController extends Controller
 {
@@ -645,65 +647,15 @@ if ($request->training_status4 == 'scholar' && !$request->hasFile('oropfafns4'))
     public function update(Request $request, $id)
     {
         $request->validate([
-            'assessment_date' => 'required|date|after_or_equal:today',
-            'qualification' => 'required|string|max:255',
-            'no_of_pax' => 'required|integer',
-            'training_status' => 'required|in:scholar,non-scholar',
-            'type_of_scholar' => 'nullable|string|max:255',
-            'eltt' => 'required|mimes:pdf',
-            'rfftp' => 'required|mimes:pdf',
-            'oropfafns' => 'nullable|mimes:pdf',
-            'sopcctvr' => 'required|mimes:pdf',
+            'status' => 'required|string|in:pending,approved,returned',
         ]);
 
-                // If training status is non-scholar, set type_of_scholar to 'NA'
-if ($request->training_status == 'non-scholar') {
-    $request->merge(['type_of_scholar' => 'N/A']);
-}
-
-
-if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
-    $request->merge(['oropfafns' => 'N/A']);
-}
-
         $assessment = Assessment::findOrFail($id);
-
-        $assessment->assessment_date = $request->assessment_date;
-        $assessment->qualification = $request->qualification;
-        $assessment->no_of_pax = $request->no_of_pax;
-        $assessment->training_status = $request->training_status;
-        $assessment->type_of_scholar = $request->type_of_scholar;
-
-        // Handle file uploads
-        if ($request->hasFile('eltt')) {
-            $file = $request->file('eltt');
-            $filename = time() . '_eltt.' . $file->getClientOriginalExtension();
-            $file->move(public_path('eltts'), $filename);
-            $assessment->eltt = 'eltts/' . $filename;
-        }
-
-        if ($request->hasFile('rfftp')) {
-            $file = $request->file('rfftp');
-            $filename = time() . '_rfftp.' . $file->getClientOriginalExtension();
-            $file->move(public_path('rfftp'), $filename);
-            $assessment->rfftp = 'rfftp/' . $filename;
-        }
-
-        if ($request->hasFile('oropfafns')) {
-            $file = $request->file('oropfafns');
-            $filename = time() . '_oropfafns.' . $file->getClientOriginalExtension();
-            $file->move(public_path('oropfafns'), $filename);
-            $assessment->oropfafns = 'oropfafns/' . $filename;
-        }
-
-        if ($request->hasFile('sopcctvr')) {
-            $file = $request->file('sopcctvr');
-            $filename = time() . '_sopcctvr.' . $file->getClientOriginalExtension();
-            $file->move(public_path('sopcctvr'), $filename);
-            $assessment->sopcctvr = 'sopcctvr/' . $filename;
-        }
-
+        $assessment->status = $request->status;
         $assessment->save();
+
+        // Send email notification
+    Mail::to('germanybasillo@gmail.com')->send(new StatusUpdated($assessment));
 
         return redirect()->route('dashboard')->with('success', 'Assessment updated successfully!');
     }

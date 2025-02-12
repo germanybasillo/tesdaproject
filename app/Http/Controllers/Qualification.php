@@ -43,13 +43,20 @@ class Qualification extends Controller
     {
         $now = Carbon::now('Asia/Manila');
         $start = Carbon::today('Asia/Manila')->setTime(0, 0);
-        $end = Carbon::today('Asia/Manila')->setTime(12, 0);
+        // $end = Carbon::today('Asia/Manila')->setTime(12, 0);
 
-        return $now->isMonday() && $now->between($start, $end);
+        $end = Carbon::today('Asia/Manila')->setTime(23, 59); // Extend access until 11:59 PM
+
+
+        // return $now->isMonday() && $now->between($start, $end);
+        
+        return $now->isWednesday() && $now->between($start, $end);
+
     }
 
     private function denyAccess()
     {
         return redirect()->back()->with('error', 'Access is only allowed on Mondays from 12:00 AM to 12:00 PM (Asia/Manila).');
     }
+    
 }
