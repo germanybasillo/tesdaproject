@@ -172,3 +172,4 @@ Route::middleware(['auth', 'admin.restrict'])->group(function () {
         return view('apply');
     })->name('apply');
 });
+

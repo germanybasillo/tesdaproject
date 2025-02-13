@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Mail\StatusUpdated;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AssessmentController extends Controller
 {
@@ -657,7 +658,14 @@ if ($request->training_status4 == 'scholar' && !$request->hasFile('oropfafns4'))
         // Send email notification
     Mail::to('germanybasillo@gmail.com')->send(new StatusUpdated($assessment));
 
-        return redirect()->route('dashboard')->with('success', 'Assessment updated successfully!');
+         // Retrieve all assessors
+    $assessors = Assessment::all(); 
+
+    // Generate PDF
+    $pdf = Pdf::loadView('assessors_pdf', compact('assessors'));
+
+    // Return PDF for direct download or view
+    return $pdf->stream('Assessment_Assessors.pdf');
     }
 
     /**

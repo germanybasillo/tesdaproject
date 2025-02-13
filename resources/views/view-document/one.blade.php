@@ -84,6 +84,7 @@
             <p style="color:red">{{ $comment->comment }}</p>
             <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
             @endforeach
+            @if (Auth::user()->role === 'admin')
             <form action="{{ route('comments.store') }}" method="POST">
             @csrf
             <div style="display: flex; width: 100%; align-items: center;">
@@ -91,6 +92,7 @@
     <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">Submit</button>
     </div>
         </form>
+        @endif
         </td>
         </tr>
         <tr>

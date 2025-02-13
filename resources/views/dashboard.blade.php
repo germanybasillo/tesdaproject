@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div>
         <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"> -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -77,7 +77,7 @@
             </th>
             @if (Auth::user()->role === 'admin')
             <th>Submitted by: {{$assessment->user->name}} ({{$assessment->user->email}})</th>
-          <th> <form action="{{ route('assessments.update', $assessment->id) }}" method="POST">
+          <th>Status Update: <form action="{{ route('assessments.update', $assessment->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -87,7 +87,7 @@
                                 onchange="this.form.submit()">
                             Approved
                         </label>
-
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <label>
                             <input type="checkbox" name="status" value="returned" 
                                 {{ $assessment->status == 'returned' ? 'checked' : '' }}

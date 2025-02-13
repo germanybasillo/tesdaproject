@@ -2,6 +2,19 @@
 
 <form class="login100-form" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
     @csrf
+
+    <style>
+  .image-container {
+    display: flex;
+  
+    align-items: center; /* Align images in the middle */
+  }
+</style>
+
+<div class="image-container">
+  <img src="tesdabg.gif" alt="My GIF" width="300">
+  <img src="bagongpili.png" alt="My GIF" width="300" style="margin-left: -50px;">
+</div>
     <span class="login100-form-title p-b-43">Create an Account</span>
 
       <!-- Name Field with Validation Error in data-validate -->
