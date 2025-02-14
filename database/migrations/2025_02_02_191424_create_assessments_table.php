@@ -35,7 +35,7 @@ return new class extends Migration
 		$table->string('eltt');
         $table->string('eltt2')->default('N/A')->nullable();
         $table->string('eltt3')->default('N/A')->nullable();
-        $table->string('eltt4')->default('N/A')->nullable();
+        $table->string('eltt4')->default('N/A')->nullable();    
 		$table->string('rfftp');
         $table->string('rfftp2')->default('N/A')->nullable();
         $table->string('rfftp3')->default('N/A')->nullable();

@@ -33,7 +33,7 @@
     <body style="background-color: #666666;">
     <div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100">
+			<div class="wrap-login100" style="background-image: url('bg.png'); background-size: auto 50%; background-position: 200px center; background-repeat: no-repeat; object-fit: cover;">
             <div class="login-container">
                 {{ $slot }}
             </div>

@@ -1,7 +1,21 @@
 <x-guest-layout>
     <form class="login100-form" method="POST" action="{{ route('password.email') }}">
     @csrf
-    <span class="login100-form-title p-b-43">Forget password</span>
+
+    <style>
+  .image-container {
+    display: flex;
+  
+    align-items: center; /* Align images in the middle */
+  }
+</style>
+
+<div class="image-container">
+  <img src="tesdabg.gif" alt="My GIF" width="300">
+  <img src="bagongpili.png" alt="My GIF" width="300" style="margin-left: -50px;">
+</div>
+
+    <span class="login100-form-title p-b-43">Forget Password</span>
         
     <p>Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
     

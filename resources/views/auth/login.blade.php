@@ -16,7 +16,7 @@
   <img src="tesdabg.gif" alt="My GIF" width="300">
   <img src="bagongpili.png" alt="My GIF" width="300" style="margin-left: -50px;">
 </div>
-    <span class="login100-form-title p-b-43">Login to continue</span>
+    <span class="login100-form-title p-b-43">Login to Continue</span>
         
        <!-- Email Field with Validation Error in data-validate -->
        <div class="wrap-input100 validate-input @error('email') alert-validate @enderror" 

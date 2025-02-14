@@ -6,6 +6,21 @@
     <form method="POST" action="{{ route('password.confirm') }}">
         @csrf
 
+        <style>
+  .image-container {
+    display: flex;
+  
+    align-items: center; /* Align images in the middle */
+  }
+</style>
+
+<div class="image-container">
+  <img src="tesdabg.gif" alt="My GIF" width="300">
+  <img src="bagongpili.png" alt="My GIF" width="300" style="margin-left: -50px;">
+</div>
+
+<span class="login100-form-title p-b-43">Confirm Password</span>
+
         <!-- Password -->
         <div>
             <x-input-label for="password" :value="__('Password')" />

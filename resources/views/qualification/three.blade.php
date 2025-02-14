@@ -6,7 +6,7 @@
     </x-slot>
     
     <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"> -->
         <div class="blue-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="py-12 flex items-center justify-center min-h-screen">
                 <div class="w-1/2 sm:px-6 lg:px-8">
@@ -47,6 +47,8 @@
     >
 </div>
 
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
 
                                                           <div>
                                     <label for="qualification" class="block text-sm font-medium mb-2">
@@ -62,6 +64,36 @@
                                     </select>
                                 </div>
 
+
+                                <div>
+                                    <label for="qualification" class="block text-sm font-medium mb-2">
+                                        Qualification 2:
+                                    </label>
+                                    <select id="qualification2" name="qualification2" required 
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                                        <option value="" disabled selected>Select your qualification</option>
+                                        <option value="FBS NC II">FBS NC II</option>
+                                        <option value="CSS NC II">CSS NC II</option>
+					<option value="Cook NC II">Cook NC II</option>
+                                        <option value="Driving NC II">Driving NC II</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="qualification" class="block text-sm font-medium mb-2">
+                                        Qualification 3:
+                                    </label>
+                                    <select id="qualification3" name="qualification3" required 
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                                        <option value="" disabled selected>Select your qualification</option>
+                                        <option value="FBS NC II">FBS NC II</option>
+                                        <option value="CSS NC II">CSS NC II</option>
+					<option value="Cook NC II">Cook NC II</option>
+                                        <option value="Driving NC II">Driving NC II</option>
+                                    </select>
+                                </div>
+
+
                                 <div>
                                     <label for="no_of_pax" class="block text-sm font-medium mb-2">
                                         Number of Pax:
@@ -75,6 +107,36 @@
                                     </select>
                                 </div>
 
+                                
+                                <div>
+                                    <label for="no_of_pax" class="block text-sm font-medium mb-2">
+                                        Number of Pax:
+                                    </label>
+                                    <select id="no_of_pax" name="no_of_pax2" required 
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                                        <option value="" disabled selected>Select your number of tax</option>
+                                        @for ($i = 1; $i <= 10; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+
+                                
+                                <div>
+                                    <label for="no_of_pax" class="block text-sm font-medium mb-2">
+                                        Number of Pax:
+                                    </label>
+                                    <select id="no_of_pax" name="no_of_pax3" required 
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                                        <option value="" disabled selected>Select your number of tax</option>
+                                        @for ($i = 1; $i <= 10; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+
+
+
                                 <div>
                                     <label for="training_status" class="block text-sm font-medium mb-2">
                                         Training Status:
@@ -86,6 +148,34 @@
                                         <option value="non-scholar">Non-Scholar</option>
                                     </select>
                                 </div>
+
+                                <div>
+                                    <label for="training_status2" class="block text-sm font-medium mb-2">
+                                        Training Status:
+                                    </label>
+                                    <select id="training_status2" name="training_status2" required 
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                                        <option value="" disabled selected>Select your training status</option>
+                                        <option value="scholar">Scholar</option>
+                                        <option value="non-scholar">Non-Scholar</option>
+                                    </select>
+                                </div>
+
+                                
+                                <div>
+                                    <label for="training_status3" class="block text-sm font-medium mb-2">
+                                        Training Status:
+                                    </label>
+                                    <select id="training_status3" name="training_status3" required 
+					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                                        <option value="" disabled selected>Select your training status</option>
+                                        <option value="scholar">Scholar</option>
+                                        <option value="non-scholar">Non-Scholar</option>
+                                    </select>
+                                </div>
+
+
+
 <script>
     document.getElementById('training_status').addEventListener('change', function () {
     var scholarshipDiv = document.getElementById('scholarship_div');
@@ -115,44 +205,9 @@
                                     </select>
 				</div>
 
-                <div>
-                                    <label for="qualification" class="block text-sm font-medium mb-2">
-                                        Qualification 2:
-                                    </label>
-                                    <select id="qualification2" name="qualification2" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-                                        <option value="" disabled selected>Select your qualification</option>
-                                        <option value="FBS NC II">FBS NC II</option>
-                                        <option value="CSS NC II">CSS NC II</option>
-					<option value="Cook NC II">Cook NC II</option>
-                                        <option value="Driving NC II">Driving NC II</option>
-                                    </select>
-                                </div>
+              
 
-                                <div>
-                                    <label for="no_of_pax" class="block text-sm font-medium mb-2">
-                                        Number of Pax:
-                                    </label>
-                                    <select id="no_of_pax" name="no_of_pax2" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your number of tax</option>
-                                        @for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="training_status2" class="block text-sm font-medium mb-2">
-                                        Training Status:
-                                    </label>
-                                    <select id="training_status2" name="training_status2" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your training status</option>
-                                        <option value="scholar">Scholar</option>
-                                        <option value="non-scholar">Non-Scholar</option>
-                                    </select>
-                                </div>
+                         
 
 
                                 <script>
@@ -185,44 +240,8 @@
 				</div>
 
                 
-                <div>
-                                    <label for="qualification" class="block text-sm font-medium mb-2">
-                                        Qualification 3:
-                                    </label>
-                                    <select id="qualification3" name="qualification3" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-                                        <option value="" disabled selected>Select your qualification</option>
-                                        <option value="FBS NC II">FBS NC II</option>
-                                        <option value="CSS NC II">CSS NC II</option>
-					<option value="Cook NC II">Cook NC II</option>
-                                        <option value="Driving NC II">Driving NC II</option>
-                                    </select>
-                                </div>
+            
 
-                                <div>
-                                    <label for="no_of_pax" class="block text-sm font-medium mb-2">
-                                        Number of Pax:
-                                    </label>
-                                    <select id="no_of_pax" name="no_of_pax3" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your number of tax</option>
-                                        @for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="training_status3" class="block text-sm font-medium mb-2">
-                                        Training Status:
-                                    </label>
-                                    <select id="training_status3" name="training_status3" required 
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your training status</option>
-                                        <option value="scholar">Scholar</option>
-                                        <option value="non-scholar">Non-Scholar</option>
-                                    </select>
-                                </div>
 
 
                                 <script>
@@ -254,6 +273,8 @@
                                     </select>
 				</div>
 
+</div>
+
 
 <div>
     <label for="agreement" class="flex items-center space-x-2">
@@ -270,7 +291,7 @@
 </script>
     
 <button type="button" id="next_button" 
-        class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50" 
+        class="mt-4 px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50" 
         disabled>
     Apply Schedule
 </button>
@@ -286,10 +307,25 @@
  <!-- Step 2: Document Upload -->
     <div id="step2" style="display: none;">
         
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
     <!-- Document Title -->
     <div id="qualificationTitle" class="mt-4">
             <h2>Please upload your document here (PDF)</h2>
         </div>
+
+         <!-- Document Title -->
+    <div id="qualificationTitle2" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+
+            <!-- Document Title -->
+      <div id="qualificationTitle3" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+
 
         <script>
     // Handle qualification selection and dynamically update Step 2 title
@@ -311,10 +347,35 @@
     <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="elttPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
+    <!-- <div id="elttPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
         <iframe id="elttPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
+    </div> -->
 </div>
+
+<!-- Endorsement Letter To TESDA -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+    <x-text-input id="elttDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt2" placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" autocomplete="eltt2" onchange="previewDocument(event, 'elttPreviewContainer2', 'elttPreview2')" required/>
+    <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <!-- <div id="elttPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
+        <iframe id="elttPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    </div> -->
+</div>
+
+<!-- Endorsement Letter To TESDA -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+    <x-text-input id="elttDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt3" placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" autocomplete="eltt3" onchange="previewDocument(event, 'elttPreviewContainer3', 'elttPreview3')" required/>
+    <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <!-- <div id="elttPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
+        <iframe id="elttPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    </div> -->
+</div>
+
 
 <!-- Request Form For Test Package -->
 <div class="mt-4">
@@ -323,10 +384,36 @@
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="rfftpPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
+    <!-- <div id="rfftpPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
         <iframe id="rfftpPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
+    </div> -->
 </div>
+
+<!-- Request Form For Test Package -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'rfftpPreviewContainer2', 'rfftpPreview2')" required/>
+    <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <!-- <div id="rfftpPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
+        <iframe id="rfftpPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    </div> -->
+</div>
+
+<!-- Request Form For Test Package -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'rfftpPreviewContainer3', 'rfftpPreview3')" required/>
+    <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <!-- <div id="rfftpPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
+        <iframe id="rfftpPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    </div> -->
+</div>
+
+
 
 <!-- Official Receipt of Payment for Assessment for Non-Scholar -->
 <div class="mt-4" class="text-white" style="display: none;" id="orInputContainer">
@@ -335,10 +422,38 @@
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
+    <!-- <div id="oropfafnsPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
         <iframe id="oropfafnsPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
+    </div> -->
 </div>
+
+
+<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
+<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer2">
+    <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'oropfafnsPreviewContainer2', 'oropfafnsPreview2')"/>
+    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <!-- <div id="oropfafnsPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
+        <iframe id="oropfafnsPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    </div> -->
+</div>
+
+
+<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
+<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer3">
+    <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'oropfafnsPreviewContainer3', 'oropfafnsPreview3')"/>
+    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <!-- <div id="oropfafnsPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
+        <iframe id="oropfafnsPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    </div> -->
+</div>
+
+
 
 
 <!-- Submission of Previous CCTV Recordings -->
@@ -348,17 +463,14 @@
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
+    <!-- <div id="sopcctvrPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
         <iframe id="sopcctvrPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
+    </div> -->
 </div>
 
 
 
-    <!-- Document Title -->
-    <div id="qualificationTitle2" class="mt-4">
-            <h2>Please upload your document here (PDF)</h2>
-        </div>
+   
 
         <script>
     // Handle qualification selection and dynamically update Step 2 title
@@ -373,41 +485,9 @@
     });
 </script>
 
-<!-- Endorsement Letter To TESDA -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt2" placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" autocomplete="eltt2" onchange="previewDocument(event, 'elttPreviewContainer2', 'elttPreview2')" required/>
-    <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="elttPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
-        <iframe id="elttPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
-</div>
 
-<!-- Request Form For Test Package -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'rfftpPreviewContainer2', 'rfftpPreview2')" required/>
-    <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="rfftpPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
-        <iframe id="rfftpPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
-</div>
-
-<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
-<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer2">
-    <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'oropfafnsPreviewContainer2', 'oropfafnsPreview2')"/>
-    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
-
-    <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
-        <iframe id="oropfafnsPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
-</div>
 
 
 <!-- Submission of Previous CCTV Recordings -->
@@ -417,18 +497,14 @@
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
+    <!-- <div id="sopcctvrPreviewContainer2" style="display:none; margin-top: 10px; text-align: center;">
         <iframe id="sopcctvrPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
+    </div> -->
 </div>
 
 
  
-      <!-- Document Title -->
-      <div id="qualificationTitle3" class="mt-4">
-            <h2>Please upload your document here (PDF)</h2>
-        </div>
-
+  
         <script>
     // Handle qualification selection and dynamically update Step 2 title
     document.getElementById('qualification3').addEventListener('change', function() {
@@ -442,41 +518,10 @@
     });
 </script>
 
-<!-- Endorsement Letter To TESDA -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt3" placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" autocomplete="eltt3" onchange="previewDocument(event, 'elttPreviewContainer3', 'elttPreview3')" required/>
-    <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="elttPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
-        <iframe id="elttPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
-</div>
 
-<!-- Request Form For Test Package -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'rfftpPreviewContainer3', 'rfftpPreview3')" required/>
-    <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="rfftpPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
-        <iframe id="rfftpPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
-</div>
 
-<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
-<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer3">
-    <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'oropfafnsPreviewContainer3', 'oropfafnsPreview3')"/>
-    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
-
-    <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
-        <iframe id="oropfafnsPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
-</div>
 
 
 <!-- Submission of Previous CCTV Recordings -->
@@ -486,11 +531,12 @@
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
+    <!-- <div id="sopcctvrPreviewContainer3" style="display:none; margin-top: 10px; text-align: center;">
         <iframe id="sopcctvrPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
+    </div> -->
 </div>
 
+</div>
 
 	<div class="mt-4">
                                     <button id="submit_button" type="submit" 

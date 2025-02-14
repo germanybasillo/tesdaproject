@@ -50,7 +50,7 @@ class Qualification extends Controller
 
         // return $now->isMonday() && $now->between($start, $end);
         
-        return $now->isThursday() && $now->between($start, $end);
+        return $now->isFriday() && $now->between($start, $end);
 
     }
 
