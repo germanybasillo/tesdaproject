@@ -14,9 +14,42 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
 
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-blue-100">
-                  {{ __('Dashboard') }}
-                   </x-nav-link>
+                @php
+    use App\Models\Assessment;
+    use Illuminate\Support\Facades\Auth;
+
+    $user = Auth::user();
+
+    // If the user is an admin, count all "pending" assessments
+    if ($user->role === 'admin') {
+        $pendingCount = Assessment::where('status', 'pending')->count();
+    } else {
+        // If the user is not an admin, count their "returned" assessments
+        $assessments = Assessment::where('user_id', $user->id)->get();
+        $returnedCount = $assessments->where('status', 'returned')->count();
+    }
+
+    // Set dashboard color for users with "returned" assessments
+    $dashboardColor = isset($returnedCount) && $returnedCount > 0 ? 'text-red-500' : 'text-white';
+@endphp
+
+<x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="{{ $dashboardColor }} hover:text-blue-100">
+    {{ __('Dashboard') }} 
+
+    @if ($user->role === 'admin' && $pendingCount > 0)
+        <span class="ml-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">
+            {{ $pendingCount }} Pending
+        </span>
+    @elseif (isset($returnedCount) && $returnedCount > 0)
+        <span class="ml-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs">
+            {{ $returnedCount }}
+        </span>
+        <span class="ml-2 text-red-300 text-xs italic">
+            (Please check your email)
+        </span>
+    @endif
+</x-nav-link>
+
 
                     @if(auth()->user() && auth()->user()->role !== 'admin')
                     <x-nav-link :href="route('list_view')" :active="request()->routeIs('list_view')" class="text-white hover:text-blue-100">

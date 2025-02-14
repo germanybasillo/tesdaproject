@@ -25,6 +25,8 @@ Route::get('/', function () {
     return view('list_view', compact('assessments'));
 })->middleware(['auth', 'verified'])->name('list_view');
 
+
+
 Route::get('/dashboard', function () {
     $user = Auth::user();
 
@@ -56,8 +58,8 @@ Route::get('/one/{id}', function ($id) {
         abort(403, 'Unauthorized access'); // Prevent unauthorized access
     }
 
-      // Fetch only the comments that belong to this assessment
-      $comments = Comment::where('id', $assessment->id)->latest()->get();
+    // Fetch only the comments that belong to this assessment
+    $comments = Comment::where('id', $assessment->id)->latest()->get();
 
     return view('view-document.one', compact('assessment', 'comments'));
 })->middleware(['auth', 'verified']);
@@ -80,8 +82,8 @@ Route::get('/two/{id}', function ($id) {
         abort(403, 'Unauthorized access'); // Prevent unauthorized access
     }
 
-    // Fetch comments
-    $comments = Comment::latest()->get();
+    // Fetch only the comments that belong to this assessment
+    $comments = Comment::where('id', $assessment->id)->latest()->get();
 
     return view('view-document.one', compact('assessment', 'comments'));
 })->middleware(['auth', 'verified']);
@@ -103,8 +105,8 @@ Route::get('/three/{id}', function ($id) {
          abort(403, 'Unauthorized access'); // Prevent unauthorized access
      }
  
-     // Fetch comments
-     $comments = Comment::latest()->get();
+    // Fetch only the comments that belong to this assessment
+    $comments = Comment::where('id', $assessment->id)->latest()->get();
  
      return view('view-document.one', compact('assessment', 'comments'));
   
@@ -127,8 +129,8 @@ Route::get('/four/{id}', function ($id) {
         abort(403, 'Unauthorized access'); // Prevent unauthorized access
     }
 
-    // Fetch comments
-    $comments = Comment::latest()->get();
+     // Fetch only the comments that belong to this assessment
+     $comments = Comment::where('id', $assessment->id)->latest()->get();
 
     return view('view-document.one', compact('assessment', 'comments'));
   
