@@ -67,6 +67,7 @@
 <body>
 
 @foreach ($assessments as $assessment)
+@if ($assessment->status === 'approved')
 <table>
     <thead>
         <tr>
@@ -153,6 +154,7 @@
         @endif
     </tbody>
 </table>
+@endif
 @endforeach
         
 

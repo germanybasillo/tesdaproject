@@ -56,8 +56,8 @@ Route::get('/one/{id}', function ($id) {
         abort(403, 'Unauthorized access'); // Prevent unauthorized access
     }
 
-    // Fetch comments
-    $comments = Comment::latest()->get();
+      // Fetch only the comments that belong to this assessment
+      $comments = Comment::where('id', $assessment->id)->latest()->get();
 
     return view('view-document.one', compact('assessment', 'comments'));
 })->middleware(['auth', 'verified']);
