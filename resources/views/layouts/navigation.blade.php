@@ -53,7 +53,7 @@
 
                     @if(auth()->user() && auth()->user()->role !== 'admin')
                     <x-nav-link :href="route('list_view')" :active="request()->routeIs('list_view')" class="text-white hover:text-blue-100">
-                        {{ __('Assessments') }}
+                        {{ __('Assessments List') }}
                     </x-nav-link>
                   
 

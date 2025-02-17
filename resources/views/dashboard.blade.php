@@ -130,6 +130,7 @@
     </label> -->
 
    <!-- Filter Form -->
+
 <form method="GET" action="{{ route('dashboard') }}" id="filterForm">
     <label>Status:
         <select name="status" onchange="document.getElementById('filterForm').submit()">
@@ -149,10 +150,14 @@
         <tr>
             <th>Assessment ID #</th>
             <th>Assessment Date</th>
+            @if (Auth::user()->role === 'admin')
             <th>Name of TVI</th>
+            @endif
             <th>Region</th>
             <th>Province</th>
+            @if (Auth::user()->role === 'admin')
             <th>Submitted By</th>
+            @endif
             <th>Date Submitted</th>
             <th>Status</th>
             <th>Qualification</th>
@@ -169,10 +174,14 @@
             }}">
             <td>{{$assessment->id}}</td>
             <td>{{$assessment->assessment_date}}</td>
+            @if (Auth::user()->role === 'admin')
             <td>{{$assessment->user->name}}</td>
+            @endif
             <td>Region XI - Davao</td>
             <td>Davao del Norte</td> <!-- This is the province you're asking to set as "4" -->
+            @if (Auth::user()->role === 'admin')
             <td>{{$assessment->user->name}} ({{$assessment->user->email}})</td>
+            @endif
             <td>{{ $assessment->created_at->timezone('Asia/Manila')->format('M d, Y - h:i A') }}</td>
             <td>{{$assessment->status}}</td>
 
@@ -275,12 +284,15 @@
         {{ $assessments->links() }}
     </div>
 
+    
      <!-- Display total counts and legend in table format -->
      <table>
+     @if (Auth::user()->role === 'admin')
         <tr>
             <th>Total Assessment</th>
             <td>{{ $assessments->total() }}</td> <!-- Display total number of assessments -->
         </tr>
+        @endif
         <tr>
             <th>Legend</th>
             <td>

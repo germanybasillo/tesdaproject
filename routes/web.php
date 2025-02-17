@@ -23,59 +23,122 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
+    $query = Assessment::query();
+    $user = Auth::user();
         $assessments = Assessment::all();
-    return view('list_view', compact('assessments'));
+      // Paginate the main assessment list
+    $assessments = $query->paginate(10);
+
+    // Get counts for each status separately with filtering
+    $pendingCount = Assessment::where('status', 'pending')
+        ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
+        ->count();
+
+    $approvedCount = Assessment::where('status', 'approved')
+        ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
+        ->count();
+
+    $returnedCount = Assessment::where('status', 'returned')
+        ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
+        ->count();
+
+    // 🔍 Debugging: Check if counts are correct
+    \Log::info("Pending: $pendingCount, Approved: $approvedCount, Returned: $returnedCount");
+    return view('list_view', compact('assessments', 'pendingCount', 'approvedCount', 'returnedCount'));    
 })->middleware(['auth', 'verified'])->name('list_view');
 
 
 
 Route::get('/dashboard', function (Request $request) {
     $user = Auth::user();
+    $query = Assessment::query();
 
-    // Admins see all assessments, regular users see only their own
-    if ($user->role === 'admin') {
-        $assessments = Assessment::all();
-        // Count the number of assessments for each status
-        $pendingCount = $assessments->where('status', 'pending')->count();
-        $approvedCount = $assessments->where('status', 'approved')->count();
-        $returnedCount = $assessments->where('status', 'returned')->count();
-        // Paginate assessments, displaying 10 per page
-        // $assessments = Assessment::paginate(10);
-
-        $status = $request->input('status');
-        $dateSubmitted = $request->input('date_submitted');
-
-        $assessments = Assessment::when($status, function ($query, $status) {
-            return $query->where('status', $status);
-        })
-        ->when($dateSubmitted, function ($query, $dateSubmitted) {
-            return $query->whereDate('created_at', $dateSubmitted);
-        })
-        ->paginate(10);
-
-    } else {
-        $assessments = Assessment::where('user_id', $user->id)->get();
-        // Count the number of assessments for each status
-        $pendingCount = $assessments->where('status', 'pending')->count();
-        $approvedCount = $assessments->where('status', 'approved')->count();
-        $returnedCount = $assessments->where('status', 'returned')->count();
-        // Paginate assessments, displaying 10 per page
-        // $assessments = Assessment::paginate(10);
-
-        $status = $request->input('status');
-        $dateSubmitted = $request->input('date_submitted');
-
-        $assessments = Assessment::when($status, function ($query, $status) {
-            return $query->where('status', $status);
-        })
-        ->when($dateSubmitted, function ($query, $dateSubmitted) {
-            return $query->whereDate('created_at', $dateSubmitted);
-        })
-        ->paginate(10);
+    // Filter assessments based on user role
+    if ($user->role !== 'admin') {
+        $query->where('user_id', $user->id);
     }
+
+    // Apply filters for status and date
+    $status = $request->input('status');
+    $dateSubmitted = $request->input('date_submitted');
+
+    $query->when($status, function ($q, $status) {
+        return $q->where('status', $status);
+    })->when($dateSubmitted, function ($q, $dateSubmitted) {
+        return $q->whereDate('created_at', $dateSubmitted);
+    });
+
+    // Paginate the main assessment list
+    $assessments = $query->paginate(10);
+
+    // Get counts for each status separately with filtering
+    $pendingCount = Assessment::where('status', 'pending')
+        ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
+        ->count();
+
+    $approvedCount = Assessment::where('status', 'approved')
+        ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
+        ->count();
+
+    $returnedCount = Assessment::where('status', 'returned')
+        ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
+        ->count();
+
+    // 🔍 Debugging: Check if counts are correct
+    \Log::info("Pending: $pendingCount, Approved: $approvedCount, Returned: $returnedCount");
 
     return view('dashboard', compact('assessments', 'pendingCount', 'approvedCount', 'returnedCount'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+// Route::get('/dashboard', function (Request $request) {
+//     $user = Auth::user();
+
+//     // Admins see all assessments, regular users see only their own
+//     if ($user->role === 'admin') {
+//         $assessments = Assessment::all();
+//         // Count the number of assessments for each status
+//         $pendingCount = $assessments->where('status', 'pending')->count();
+//         $approvedCount = $assessments->where('status', 'approved')->count();
+//         $returnedCount = $assessments->where('status', 'returned')->count();
+//         // Paginate assessments, displaying 10 per page
+//         // $assessments = Assessment::paginate(10);
+
+//         $status = $request->input('status');
+//         $dateSubmitted = $request->input('date_submitted');
+
+//         $assessments = Assessment::when($status, function ($query, $status) {
+//             return $query->where('status', $status);
+//         })
+//         ->when($dateSubmitted, function ($query, $dateSubmitted) {
+//             return $query->whereDate('created_at', $dateSubmitted);
+//         })
+//         ->paginate(10);
+
+//     } else {
+//         $assessments = Assessment::where('user_id', $user->id)->get();
+//         // Count the number of assessments for each status
+//         $pendingCount = $assessments->where('status', 'pending')->count();
+//         $approvedCount = $assessments->where('status', 'approved')->count();
+//         $returnedCount = $assessments->where('status', 'returned')->count();
+//         // Paginate assessments, displaying 10 per page
+//         // $assessments = Assessment::paginate(10);
+
+//         $status = $request->input('status');
+//         $dateSubmitted = $request->input('date_submitted');
+
+//         $assessments = Assessment::when($status, function ($query, $status) {
+//             return $query->where('status', $status);
+//         })
+//         ->when($dateSubmitted, function ($query, $dateSubmitted) {
+//             return $query->whereDate('created_at', $dateSubmitted);
+//         })
+//         ->paginate(10);
+//     }
+
+//     return view('dashboard', compact('assessments', 'pendingCount', 'approvedCount', 'returnedCount'));
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
@@ -180,9 +243,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/apply', function () {
-    return view('apply');
-})->middleware(['auth', 'verified'])->name('apply');
+// Route::get('/apply', function () {
+//     return view('apply');
+// })->middleware(['auth', 'verified'])->name('apply');
 
 
 Route::middleware('auth')->group(function () {
