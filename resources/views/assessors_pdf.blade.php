@@ -1,37 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Assignment of Assessors</title>
+    <title>TESDA Assessment Appointment</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            font-weight: bold;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .signature {
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
-    <h2>TESDA-OP-CO-05-F36</h2>
-    <p>Rev.No.00-03/08/17</p>
-    <h2>ASSIGNMENT OF ASSESSORS</h2>
+    <div class="container">
+        <div class="header">
+            <p>Technical Education and Skills Development Authority</p>
+            <p>ASSESSMENT AND CERTIFICATION PROGRAM</p>
+        </div>
 
-    <p><strong>For the month of:</strong> {{ now()->format('F Y') }}</p>
+        <p>February 14, 2025</p>
 
-    <table>
-        <tr>
-            <th>Name of Assessor</th>
-            <th>Assessment Center</th>
-            <th>Date of Assessment</th>
-            <th>Status</th>
-        </tr>
-        @foreach ($assessors as $assessor)
-        <tr>
-            <td>{{ $assessor->name }}</td>
-            <td>{{ $assessor->assessment_center }}</td>
-            <td>{{ $assessor->date_of_assessment }}</td>
-            <td>{{ ucfirst($assessor->status) }}</td>
-        </tr>
-        @endforeach
-    </table>
+        <p><strong>GLAICEL D. LIGAN</strong><br>
+        Competency Assessor<br>
+        Bread and Pastry Production NC II</p>
+
+        <p>Dear Ms. Ligan,</p>
+
+        <p>This letter officially appoints you as competency assessor on <strong>February 17, 2025</strong> <br>
+        for <strong>Bread and Pastry Production NC II</strong> at <strong>PRECIOUS CARE INSTITUTE OF TECHNOLOGY</strong>.<br>
+        Please report to the Assessment Center as scheduled.</p>
+
+        <p>If you have any questions, please call Ms. Lythelle A. Ramos at <strong>09171344523</strong>.<br>
+        We look forward to your acceptance of this appointment.</p>
+
+        <p>Very truly yours,</p>
+
+        <div class="signature">
+            <p>Conformed:</p>
+            <p><strong>GLAICEL D. LIGAN</strong><br>
+            Signature of Assessor</p>
+        </div>
+    </div>
 </body>
 </html>
