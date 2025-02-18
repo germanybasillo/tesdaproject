@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Mail\StatusUpdated;
 use Illuminate\Support\Facades\Mail;
-use Barryvdh\DomPDF\Facade\Pdf;
+// use Barryvdh\DomPDF\Facade\Pdf;
 
 class AssessmentController extends Controller
 {
@@ -44,6 +44,7 @@ class AssessmentController extends Controller
              'no_of_pax' => 'required|integer',
              'training_status' => 'required|in:scholar,non-scholar',
              'type_of_scholar' => 'nullable|string|max:255',
+             'type_of_non_scholar' => 'nullable|string|max:255',
              'eltt' => 'required|mimes:pdf',
              'rfftp' => 'required|mimes:pdf',
              'oropfafns' => 'nullable|mimes:pdf',
@@ -51,9 +52,9 @@ class AssessmentController extends Controller
          ]);
  
          // If training status is non-scholar, set type_of_scholar to 'NA'
- if ($request->training_status == 'non-scholar') {
-     $request->merge(['type_of_scholar' => 'N/A']);
- }
+//  if ($request->training_status == 'non-scholar') {
+//      $request->merge(['type_of_scholar' => 'N/A']);
+//  }
  
 
  if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
@@ -69,6 +70,7 @@ class AssessmentController extends Controller
          $assessment->no_of_pax = $request->no_of_pax;
          $assessment->training_status = $request->training_status;
          $assessment->type_of_scholar = $request->type_of_scholar;
+         $assessment->type_of_non_scholar = $request->type_of_non_scholar;
           $assessment->status = 'pending';
      
  
@@ -127,6 +129,8 @@ class AssessmentController extends Controller
             'training_status2' => 'required|in:scholar,non-scholar',
             'type_of_scholar' => 'nullable|string|max:255',
             'type_of_scholar2' => 'nullable|string|max:255',
+            'type_of_non_scholar' => 'nullable|string|max:255',
+            'type_of_non_scholar2' => 'nullable|string|max:255',
             'eltt' => 'required|mimes:pdf',
             'eltt2' => 'required|mimes:pdf',
             'rfftp' => 'required|mimes:pdf',
@@ -138,13 +142,13 @@ class AssessmentController extends Controller
         ]);
 
         // If training status is non-scholar, set type_of_scholar to 'NA'
-if ($request->training_status == 'non-scholar') {
-    $request->merge(['type_of_scholar' => 'N/A']);
-}
+// if ($request->training_status == 'non-scholar') {
+//     $request->merge(['type_of_scholar' => 'N/A']);
+// }
 
-if ($request->training_status2 == 'non-scholar') {
-    $request->merge(['type_of_scholar2' => 'N/A']);
-}
+// if ($request->training_status2 == 'non-scholar') {
+//     $request->merge(['type_of_scholar2' => 'N/A']);
+// }
 
 if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
     $request->merge(['oropfafns' => 'N/A']);
@@ -166,6 +170,8 @@ if ($request->training_status2 == 'scholar' && !$request->hasFile('oropfafns2'))
         $assessment->training_status2 = $request->training_status2;
         $assessment->type_of_scholar = $request->type_of_scholar;
         $assessment->type_of_scholar2 = $request->type_of_scholar2;
+        $assessment->type_of_non_scholar = $request->type_of_non_scholar;
+        $assessment->type_of_non_schola2 = $request->type_of_non_scholar2;
         $assessment->status = 'pending';
     
 
@@ -253,6 +259,9 @@ if ($request->training_status2 == 'scholar' && !$request->hasFile('oropfafns2'))
             'type_of_scholar' => 'nullable|string|max:255',
             'type_of_scholar2' => 'nullable|string|max:255',
             'type_of_scholar3' => 'nullable|string|max:255',
+            'type_of_non_scholar' => 'nullable|string|max:255',
+            'type_of_non_scholar2' => 'nullable|string|max:255',
+            'type_of_non_scholar3' => 'nullable|string|max:255',
             'eltt' => 'required|mimes:pdf',
             'eltt2' => 'required|mimes:pdf',
             'eltt3' => 'required|mimes:pdf',
@@ -268,17 +277,17 @@ if ($request->training_status2 == 'scholar' && !$request->hasFile('oropfafns2'))
         ]);
 
         // If training status is non-scholar, set type_of_scholar to 'NA'
-if ($request->training_status == 'non-scholar') {
-    $request->merge(['type_of_scholar' => 'N/A']);
-}
+// if ($request->training_status == 'non-scholar') {
+//     $request->merge(['type_of_scholar' => 'N/A']);
+// }
 
-if ($request->training_status2 == 'non-scholar') {
-    $request->merge(['type_of_scholar2' => 'N/A']);
-}
+// if ($request->training_status2 == 'non-scholar') {
+//     $request->merge(['type_of_scholar2' => 'N/A']);
+// }
 
-if ($request->training_status3 == 'non-scholar') {
-    $request->merge(['type_of_scholar3' => 'N/A']);
-}
+// if ($request->training_status3 == 'non-scholar') {
+//     $request->merge(['type_of_scholar3' => 'N/A']);
+// }
 
 
 if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
@@ -310,6 +319,9 @@ if ($request->training_status3 == 'scholar' && !$request->hasFile('oropfafns3'))
         $assessment->type_of_scholar = $request->type_of_scholar;
         $assessment->type_of_scholar2 = $request->type_of_scholar2;
         $assessment->type_of_scholar3 = $request->type_of_scholar3;
+        $assessment->type_of_non_scholar = $request->type_of_non_scholar;
+        $assessment->type_of_non_scholar2 = $request->type_of_non_scholar2;
+        $assessment->type_of_non_scholar3 = $request->type_of_non_scholar3;
         $assessment->status = 'pending';
     
 
@@ -428,6 +440,10 @@ if ($request->training_status3 == 'scholar' && !$request->hasFile('oropfafns3'))
             'type_of_scholar2' => 'nullable|string|max:255',
             'type_of_scholar3' => 'nullable|string|max:255',
             'type_of_scholar4' => 'nullable|string|max:255',
+            'type_of_non_scholar' => 'nullable|string|max:255',
+            'type_of_non_scholar2' => 'nullable|string|max:255',
+            'type_of_non_scholar3' => 'nullable|string|max:255',
+            'type_of_non_scholar4' => 'nullable|string|max:255',
             'eltt' => 'required|mimes:pdf',
             'eltt2' => 'required|mimes:pdf',
             'eltt3' => 'required|mimes:pdf',
@@ -447,21 +463,21 @@ if ($request->training_status3 == 'scholar' && !$request->hasFile('oropfafns3'))
         ]);
 
         // If training status is non-scholar, set type_of_scholar to 'NA'
-if ($request->training_status == 'non-scholar') {
-    $request->merge(['type_of_scholar' => 'N/A']);
-}
+// if ($request->training_status == 'non-scholar') {
+//     $request->merge(['type_of_scholar' => 'N/A']);
+// }
 
-if ($request->training_status2 == 'non-scholar') {
-    $request->merge(['type_of_scholar2' => 'N/A']);
-}
+// if ($request->training_status2 == 'non-scholar') {
+//     $request->merge(['type_of_scholar2' => 'N/A']);
+// }
 
-if ($request->training_status3 == 'non-scholar') {
-    $request->merge(['type_of_scholar3' => 'N/A']);
-}
+// if ($request->training_status3 == 'non-scholar') {
+//     $request->merge(['type_of_scholar3' => 'N/A']);
+// }
 
-if ($request->training_status4 == 'non-scholar') {
-    $request->merge(['type_of_scholar4' => 'N/A']);
-}
+// if ($request->training_status4 == 'non-scholar') {
+//     $request->merge(['type_of_scholar4' => 'N/A']);
+// }
 
 if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
     $request->merge(['oropfafns' => 'N/A']);
@@ -499,6 +515,10 @@ if ($request->training_status4 == 'scholar' && !$request->hasFile('oropfafns4'))
         $assessment->type_of_scholar2 = $request->type_of_scholar2;
         $assessment->type_of_scholar3 = $request->type_of_scholar3;
         $assessment->type_of_scholar4 = $request->type_of_scholar4;
+        $assessment->type_of_non_scholar = $request->type_of_non_scholar;
+        $assessment->type_of_non_scholar2 = $request->type_of_non_scholar2;
+        $assessment->type_of_non_scholar3 = $request->type_of_non_scholar3;
+        $assessment->type_of_non_scholar4 = $request->type_of_non_scholar4;
         $assessment->status = 'pending';
     
 
@@ -648,7 +668,7 @@ if ($request->training_status4 == 'scholar' && !$request->hasFile('oropfafns4'))
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string|in:pending,approved,returned',
+            'status' => 'required|string|in:pending,approved,disapproved',
         ]);
 
         $assessment = Assessment::findOrFail($id);
@@ -661,11 +681,14 @@ if ($request->training_status4 == 'scholar' && !$request->hasFile('oropfafns4'))
          // Retrieve all assessors
     $assessors = Assessment::all(); 
 
-    // Generate PDF
-    $pdf = Pdf::loadView('assessors_pdf', compact('assessors'));
+    // // Generate PDF
+    // $pdf = Pdf::loadView('assessors_pdf', compact('assessors'));
 
-    // Return PDF for direct download or view
-    return $pdf->stream('Assessment_Assessors.pdf');
+    // // Return PDF for direct download or view
+    // return $pdf->stream('Assessment_Assessors.pdf');
+
+    return redirect()->route('dashboard')->with('success', 'Assessment created successfully!');
+
     }
 
     /**

@@ -6,12 +6,13 @@
     </x-slot>
     
     <div class="p-4">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="blue-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="py-12 flex items-center justify-center min-h-screen">
+            <div class="py-12 flex items-center justify-center min-h-screen"> -->
+            <div class="max-w-7xl">
                 <div class="w-1/2 sm:px-6 lg:px-8">
                     <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-8 text-gray-900 dark:text-gray-100 text-center">
+                        <div class="p-8 text-gray-900 dark:text-gray-100">
                             <h2 class="text-xl font-bold mb-4">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
                             <style>
@@ -35,17 +36,17 @@
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
         <i class="fas fa-calendar-alt mr-2"></i>
         {{ __('Apply Assessment Schedule') }}
-    </h2>
+    </h2><br>
 
    <div>
     <label for="assessment_date" class="block text-sm font-medium mb-2">
         Desired Date of Assessment:    </label>
-    <input 
+    <input class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black"
         type="date" 
         id="assessment_date" 
-        name="assessment_date" 
+        name="assessment_date"
+        placeholder="Select Date"
         required 
-        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black"
     >
 </div>
 
@@ -70,7 +71,7 @@
                                     </label>
                                     <select id="no_of_pax" name="no_of_pax" required 
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your number of tax</option>
+                                        <option value="" disabled selected>Select your number of pax</option>
                                         @for ($i = 1; $i <= 10; $i++)
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
@@ -88,19 +89,22 @@
                                         <option value="non-scholar">Non-Scholar</option>
                                     </select>
                                 </div>
-<script>
+                                <script>
     document.getElementById('training_status').addEventListener('change', function () {
-    var scholarshipDiv = document.getElementById('scholarship_div');
-    var orInputContainer = document.getElementById('orInputContainer');
+        var scholarshipDiv = document.getElementById('scholarship_div');
+        var non_scholarshipDiv = document.getElementById('non_scholarship_div');
+        var orInputContainer = document.getElementById('orInputContainer');
 
-    if (this.value === 'scholar') {
-        scholarshipDiv.style.display = 'block';  // Show the scholarship dropdown
-        orInputContainer.style.display = 'none';  // Hide the document upload field
-    } else {
-        scholarshipDiv.style.display = 'none';  // Hide the scholarship dropdown
-        orInputContainer.style.display = 'block';  // Show the document upload field
-    }
-});
+        if (this.value === 'scholar') {
+            scholarshipDiv.style.display = 'block';  // Show the scholarship dropdown
+            non_scholarshipDiv.style.display = 'none';  // Hide the non-scholarship dropdown
+            orInputContainer.style.display = 'none';  // Hide the document upload field
+        } else {
+            scholarshipDiv.style.display = 'none';  // Hide the scholarship dropdown
+            non_scholarshipDiv.style.display = 'block';  // Show the non-scholarship dropdown
+            orInputContainer.style.display = 'block';  // Show the document upload field
+        }
+    });
 </script>
 
                                 <div id="scholarship_div" style="display: none;">
@@ -113,6 +117,20 @@
                                         <option value="cfsp">CFSP</option>
 					<option value="uaqtea">UAQTEA</option>
                                         <option value="uaqtea">TWSP</option>
+
+                                    </select>
+				</div>
+
+                <div id="non_scholarship_div" style="display: none;">
+                                    <label for="non_scholarship" class="block text-sm font-medium mb-2">
+                                        Non Scholarship Type:
+                                    </label>
+				    <select id="scholarship" name="type_of_non_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                                        <option value="" disabled selected>Select your non scholarship type</option>
+                                        <option value="walk-in">Walk-In</option>
+                                        <option value="CAWS">CAWS</option>
+					<option value="pangthree">Three</option>
+                                        <option value="pangfour">Four</option>
 
                                     </select>
 				</div>
@@ -173,10 +191,12 @@
     <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="elttPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
-        <iframe id="elttPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    </div>
+    <div id="elttPreviewContainer" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <iframe id="elttPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    <h3 style="color:blue;">Preview Endorsement Letter</h3>
 </div>
+</div>
+
 
 <!-- Request Form For Test Package -->
 <div class="mt-4">
@@ -185,9 +205,11 @@
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="rfftpPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
+    <div id="rfftpPreviewContainer" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
         <iframe id="rfftpPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Request Form</h3>
     </div>
+
 </div>
 
 <!-- Official Receipt of Payment for Assessment for Non-Scholar -->
@@ -197,8 +219,9 @@
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
+    <div id="oropfafnsPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
         <iframe id="oropfafnsPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Official Receipt</h3>
     </div>
 </div>
 
@@ -210,8 +233,9 @@
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer" style="display:none; margin-top: 10px; text-align: center;">
+    <div id="sopcctvrPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
         <iframe id="sopcctvrPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview CCTV Recordings</h3>
     </div>
 </div>
 
@@ -241,6 +265,8 @@
 </div>
 </div>
 </form>
+
+
 
 
 <script>

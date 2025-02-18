@@ -80,18 +80,47 @@
     color: white; /* White text color on hover */
 }
 
- /* Custom Background Colors */
- .pending {
-            background-color: #28a745; /* Green */
-            color: white;
-        }
-        .approved {
-            background-color: #007bff; /* Blue */
-            color: white;
-        }
-        .returned {
-            color: red;
-        }
+.pending {
+    color: #856404; /* Dark yellow text */
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #fff3cd; /* Light yellow background */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pending:hover {
+    background-color: #ffeeba; /* Slightly darker yellow on hover */
+    color: #856404; /* Dark yellow text on hover */
+}
+
+.approved {
+    color: #155724; /* Dark green text */
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #d4edda; /* Light green background */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.approved:hover {
+    background-color: #c3e6cb; /* Slightly darker green on hover */
+    color: #155724; /* Dark green text on hover */
+}
+
+.disapproved {
+    color: red;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #f8d7da; /* Light red background */
+    transition: background-color 0.3s ease;
+}
+
+.disapproved:hover {
+    background-color: #f1b0b7; /* Slightly darker red on hover */
+}
+
 
         .pagination {
             display: flex;
@@ -113,6 +142,29 @@
             background-color: #0056b3;
             font-weight: bold;
         }
+
+        .button-style {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff; /* Button background color */
+        color: white; /* Text color */
+        text-align: center;
+        text-decoration: none; /* Remove underline */
+        border-radius: 5px; /* Rounded corners */
+        transition: background-color 0.3s ease;
+    }
+
+    .button-style:hover {
+        background-color: #0056b3; /* Darker color on hover */
+    }
+
+    .button-style:active {
+        background-color: #004085; /* Even darker on click */
+    }
+
+    .primary {
+        font-weight: bold;
+    }
     </style>
 </head>
 <body>
@@ -137,13 +189,19 @@
             <option value="">Select Status</option>
             <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
             <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Approved</option>
-            <option value="returned" {{ request('status') == 'returned' ? 'selected' : '' }}>Returned</option>
+            <option value="disapproved" {{ request('status') == 'disapproved' ? 'selected' : '' }}>Disapproved</option>
         </select>
     </label>
 
     <label>Date Submitted:
         <input type="date" name="date_submitted" value="{{ request('date_submitted') }}" onchange="document.getElementById('filterForm').submit()">
     </label>
+
+    <label>Add New:
+    <a href="#" class="primary button-style">Request Assessment</a>
+</label>
+
+
 </form>
     
     <table>
@@ -163,14 +221,20 @@
             <th>Qualification</th>
             <th>No of Pax</th>
             <th>Training of Status</th>
+            @foreach ($assessments as $assessment)
+            @if($assessment->training_status === 'scholar')
             <th>Type of Scholar</th>
+            @else($assessment->training_status === 'non_scholar')
+            <th>Type of Non Scholar</th>
+            @endif
+            @endforeach
             <th>Action</th>
         </tr>
         @foreach ($assessments as $assessment)
         <tr class="{{ 
                 $assessment->status == 'pending' ? 'pending' : 
                 ($assessment->status == 'approved' ? 'approved' : 
-                ($assessment->status == 'returned' ? 'returned' : ''))
+                ($assessment->status == 'disapproved' ? 'disapproved' : ''))
             }}">
             <td>{{$assessment->id}}</td>
             <td>{{$assessment->assessment_date}}</td>
@@ -229,6 +293,8 @@
             {{$assessment->training_status4}}
             @endif
             </td>
+
+            @if($assessment->training_status === 'scholar')
             
             <td>{{$assessment->type_of_scholar}}<br>
 
@@ -244,6 +310,28 @@
             {{$assessment->type_of_scholar4}}
             @endif
             </td>
+
+            </td>
+            
+            @elseif($assessment->training_status === 'non-scholar')
+
+            <td>{{$assessment->type_of_non_scholar}}<br>
+
+            @if($assessment->qualification2 !== 'N/A')
+            {{$assessment->type_of_non_scholar2}}<br>
+            @endif
+
+            @if($assessment->qualification3 !== 'N/A')
+            {{$assessment->type_of_non_scholar3}}<br>
+            @endif
+
+            @if($assessment->qualification4 !== 'N/A')
+            {{$assessment->type_of_non_scholar4}}
+            @endif
+            </td>
+
+        @endif
+
             <td>
                 <a href="{{ url('/one/' . $assessment->id) }}" target="_blank">
                 <button class="small-btn">
@@ -296,9 +384,9 @@
         <tr>
             <th>Legend</th>
             <td>
-                <span class="pending">pending         ({{ $pendingCount }})</span><br>
-                <span class="approved">approved       ({{ $approvedCount }})</span><br>
-                <span class="returned">returned       ({{ $returnedCount }})</span>
+                <span class="pending">pending         ({{ $pendingCount }})</span>
+                <span class="approved">approved       ({{ $approvedCount }})</span>
+                <span class="disapproved">disapproved       ({{ $disapprovedCount }})</span>
             </td>
         </tr>
     </table>

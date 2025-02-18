@@ -9,8 +9,9 @@
         <style>
   .image-container {
     display: flex;
-  
+    margin-top:-29%;
     align-items: center; /* Align images in the middle */
+    margin-left:120px;
   }
 </style>
 

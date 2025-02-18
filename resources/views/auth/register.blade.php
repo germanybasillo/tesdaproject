@@ -6,14 +6,15 @@
     <style>
   .image-container {
     display: flex;
-  
+    margin-top:-29%;
     align-items: center; /* Align images in the middle */
+    margin-left:120px;
   }
 </style>
 
 <div class="image-container">
   <img src="tesdabg.gif" alt="My GIF" width="300">
-  <img src="bagongpili.png" alt="My GIF" width="300" style="margin-left: -50px;">
+  <img src="bagongpili.png" alt="My GIF" width="300">
 </div>
     <span class="login100-form-title p-b-43">Create an Account</span>
 

@@ -38,13 +38,13 @@ Route::get('/', function () {
         ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
         ->count();
 
-    $returnedCount = Assessment::where('status', 'returned')
+    $disapprovedCount = Assessment::where('status', 'disapproved')
         ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
         ->count();
 
     // 🔍 Debugging: Check if counts are correct
-    \Log::info("Pending: $pendingCount, Approved: $approvedCount, Returned: $returnedCount");
-    return view('list_view', compact('assessments', 'pendingCount', 'approvedCount', 'returnedCount'));    
+    // \Log::info("Pending: $pendingCount, Approved: $approvedCount, Disapproved: $disapprovedCount");
+    return view('list_view', compact('assessments', 'pendingCount', 'approvedCount', 'disapprovedCount'));    
 })->middleware(['auth', 'verified'])->name('list_view');
 
 
@@ -80,14 +80,14 @@ Route::get('/dashboard', function (Request $request) {
         ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
         ->count();
 
-    $returnedCount = Assessment::where('status', 'returned')
+    $disapprovedCount = Assessment::where('status', 'disapproved')
         ->when($user->role !== 'admin', fn($q) => $q->where('user_id', $user->id))
         ->count();
 
     // 🔍 Debugging: Check if counts are correct
-    \Log::info("Pending: $pendingCount, Approved: $approvedCount, Returned: $returnedCount");
+    // \Log::info("Pending: $pendingCount, Approved: $approvedCount, Disapproved: $disapprovedCount");
 
-    return view('dashboard', compact('assessments', 'pendingCount', 'approvedCount', 'returnedCount'));
+    return view('dashboard', compact('assessments', 'pendingCount', 'approvedCount', 'disapprovedCount'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 

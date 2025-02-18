@@ -27,11 +27,15 @@ return new class extends Migration
         $table->enum('training_status2', ['scholar', 'non-scholar', 'N/A'])->default('N/A')->nullable();
         $table->enum('training_status3', ['scholar', 'non-scholar', 'N/A'])->default('N/A')->nullable();
         $table->enum('training_status4', ['scholar', 'non-scholar', 'N/A'])->default('N/A')->nullable();
-		$table->enum('status', ['pending', 'approved', 'returned'])->default('pending');
-		$table->string('type_of_scholar');
+		$table->enum('status', ['pending', 'approved', 'disapproved'])->default('pending');
+		$table->string('type_of_scholar')->nullable();
         $table->string('type_of_scholar2')->default('N/A')->nullable();
         $table->string('type_of_scholar3')->default('N/A')->nullable();
         $table->string('type_of_scholar4')->default('N/A')->nullable();
+        $table->string('type_of_non_scholar')->nullable();
+        $table->string('type_of_non_scholar2')->default('N/A')->nullable();
+        $table->string('type_of_non_scholar3')->default('N/A')->nullable();
+        $table->string('type_of_non_scholar4')->default('N/A')->nullable();
 		$table->string('eltt');
         $table->string('eltt2')->default('N/A')->nullable();
         $table->string('eltt3')->default('N/A')->nullable();

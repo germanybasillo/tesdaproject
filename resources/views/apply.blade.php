@@ -16,7 +16,7 @@
                             @php
     $currentDay = \Carbon\Carbon::now()->format('l'); // Get current day (e.g., Monday)
     $currentTime = \Carbon\Carbon::now()->format('H:i'); // Get current time in 24-hour format
-    $isAvailable = ($currentDay === 'Monday' && $currentTime >= '00:00' && $currentTime <= '12:00');
+    $isAvailable = ($currentDay === 'Tuesday' && $currentTime >= '00:00' && $currentTime <= '12:00');
 @endphp
 
 
