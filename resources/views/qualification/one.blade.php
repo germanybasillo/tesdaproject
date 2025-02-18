@@ -796,8 +796,12 @@
 
 </div>
 
+<!-- Next button -->
+<button type="button" id="next" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400">
+    Next
+</button>
 
-<!-- <script>
+<script>
     // Variable to keep track of the current section (2, 3, or 4)
     let nextSection = 2;
 
@@ -817,64 +821,6 @@
             document.getElementById('next').innerText = 'You reached the limit';  // Change button text
         }
     });
-</script> -->
-
-<script>
- // Function to check if any qualification has content
-function checkQualifications() {
-    // Get the values from each qualification dropdown
-    const qualification2 = document.getElementById('qualification2').value.trim();
-    const qualification3 = document.getElementById('qualification3').value.trim();
-    const qualification4 = document.getElementById('qualification4').value.trim();
-
-    // Show the "Next" button for qualification 2 if it has content
-    if (qualification2) {
-        document.getElementById('next2').style.display = 'block';  // Show the "Next" button for qualification 2
-    } else {
-        document.getElementById('next2').style.display = 'none';  // Hide the "Next" button for qualification 2
-    }
-
-    // Show the "Next" button for qualification 3 if it has content
-    if (qualification3) {
-        document.getElementById('next3').style.display = 'block';  // Show the "Next" button for qualification 3
-    } else {
-        document.getElementById('next3').style.display = 'none';  // Hide the "Next" button for qualification 3
-    }
-
-    // Show the "Next" button for qualification 4 if it has content
-    if (qualification4) {
-        document.getElementById('next4').style.display = 'block';  // Show the "Next" button for qualification 4
-    } else {
-        document.getElementById('next4').style.display = 'none';  // Hide the "Next" button for qualification 4
-    }
-}
-
-// Call the function when the page loads to check the initial state
-window.onload = function() {
-    checkQualifications();
-};
-
-// Listen for changes in qualification fields
-document.getElementById('qualification2').addEventListener('change', checkQualifications);
-document.getElementById('qualification3').addEventListener('change', checkQualifications);
-document.getElementById('qualification4').addEventListener('change', checkQualifications);
-
-// Event listeners for the "Next" buttons for each qualification
-document.getElementById('next2').addEventListener('click', function() {
-    document.getElementById('next2').style.display = 'none';  // Hide the button after click
-    document.getElementById('next3').style.display = 'block'; // Show the "Next" button for qualification 3
-});
-
-document.getElementById('next3').addEventListener('click', function() {
-    document.getElementById('next3').style.display = 'none';  // Hide the button after click
-    document.getElementById('next4').style.display = 'block'; // Show the "Next" button for qualification 4
-});
-
-document.getElementById('next4').addEventListener('click', function() {
-    document.getElementById('next4').style.display = 'none';  // Hide the button after click
-    // You can disable the "Next" button or change its text here if desired
-    document.getElementById('next4').innerText = 'You reached the limit';  // Optional change
-});
 </script>
 
 
