@@ -503,7 +503,7 @@
 
         // Update title based on selected qualification
         if (qualification) {
-            titleElement.innerHTML = `<h3>Please add PDF for ${qualification}</h3>`;
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification}</h3>`;
         }
     });
 </script>
@@ -562,6 +562,324 @@
         <h3 style="color:blue;">Preview CCTV Recordings</h3>
     </div>
 </div>
+
+
+<div id="next2" style="display: none;">
+
+   <!-- Document Title -->
+   <div id="qualificationTitle2" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+        <script>
+    // Handle qualification selection and dynamically update Step 2 title
+    document.getElementById('qualification2').addEventListener('change', function() {
+        const qualification2 = this.value;
+        const titleElement = document.getElementById('qualificationTitle2');
+
+        // Update title based on selected qualification
+        if (qualification2) {
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification2}</h3>`;
+        }
+    });
+</script>
+
+<!-- Endorsement Letter To TESDA -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+    <x-text-input id="elttDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt2" placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" autocomplete="eltt2" onchange="previewDocument(event, 'elttPreviewContainer2', 'elttPreview2')" required/>
+    <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="elttPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <iframe id="elttPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    <h3 style="color:blue;">Preview Endorsement Letter</h3>
+</div>
+</div>
+
+
+<!-- Request Form For Test Package -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'rfftpPreviewContainer2', 'rfftpPreview2')" required/>
+    <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="rfftpPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
+        <iframe id="rfftpPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Request Form</h3>
+    </div>
+
+</div>
+
+<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
+<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer2">
+    <x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'oropfafnsPreviewContainer2', 'oropfafnsPreview2')"/>
+    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="oropfafnsPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
+        <iframe id="oropfafnsPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Official Receipt</h3>
+    </div>
+</div>
+
+
+<!-- Submission of Previous CCTV Recordings -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'sopcctvrPreviewContainer2', 'sopcctvrPreview2')" required/>
+    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="sopcctvrPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
+        <iframe id="sopcctvrPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview CCTV Recordings</h3>
+    </div>
+</div>
+
+</div>
+
+
+<div id="next3" style="display: none;">
+
+   <!-- Document Title -->
+   <div id="qualificationTitle3" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+        <script>
+    // Handle qualification selection and dynamically update Step 2 title
+    document.getElementById('qualification3').addEventListener('change', function() {
+        const qualification3 = this.value;
+        const titleElement = document.getElementById('qualificationTitle3');
+
+        // Update title based on selected qualification
+        if (qualification3) {
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification3}</h3>`;
+        }
+    });
+</script>
+
+<!-- Endorsement Letter To TESDA -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+    <x-text-input id="elttDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt3" placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" autocomplete="eltt3" onchange="previewDocument(event, 'elttPreviewContainer3', 'elttPreview3')" required/>
+    <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="elttPreviewContainer3" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <iframe id="elttPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    <h3 style="color:blue;">Preview Endorsement Letter</h3>
+</div>
+</div>
+
+
+<!-- Request Form For Test Package -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'rfftpPreviewContainer3', 'rfftpPreview3')" required/>
+    <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="rfftpPreviewContainer3" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
+        <iframe id="rfftpPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Request Form</h3>
+    </div>
+
+</div>
+
+<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
+<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer3">
+    <x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'oropfafnsPreviewContainer3', 'oropfafnsPreview3')"/>
+    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="oropfafnsPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
+        <iframe id="oropfafnsPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Official Receipt</h3>
+    </div>
+</div>
+
+
+<!-- Submission of Previous CCTV Recordings -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'sopcctvrPreviewContainer3', 'sopcctvrPreview3')" required/>
+    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="sopcctvrPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
+        <iframe id="sopcctvrPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview CCTV Recordings</h3>
+    </div>
+</div>
+
+</div>
+
+<div id="next4" style="display: none;">
+
+   <!-- Document Title -->
+   <div id="qualificationTitle4" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+        <script>
+    // Handle qualification selection and dynamically update Step 2 title
+    document.getElementById('qualification4').addEventListener('change', function() {
+        const qualification4 = this.value;
+        const titleElement = document.getElementById('qualificationTitle4');
+
+        // Update title based on selected qualification
+        if (qualification4) {
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification4}</h3>`;
+        }
+    });
+</script>
+
+<!-- Endorsement Letter To TESDA -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+    <x-text-input id="elttDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt4" placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" autocomplete="eltt4" onchange="previewDocument(event, 'elttPreviewContainer4', 'elttPreview4')" required/>
+    <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="elttPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <iframe id="elttPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+    <h3 style="color:blue;">Preview Endorsement Letter</h3>
+</div>
+</div>
+
+
+<!-- Request Form For Test Package -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'rfftpPreviewContainer4', 'rfftpPreview4')" required/>
+    <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="rfftpPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
+        <iframe id="rfftpPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Request Form</h3>
+    </div>
+
+</div>
+
+<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
+<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer4">
+    <x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns4') }}" autocomplete="oropfafns4" onchange="previewDocument(event, 'oropfafnsPreviewContainer4', 'oropfafnsPreview4')"/>
+    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="oropfafnsPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
+        <iframe id="oropfafnsPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview Official Receipt</h3>
+    </div>
+</div>
+
+
+<!-- Submission of Previous CCTV Recordings -->
+<div class="mt-4">
+    <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'sopcctvrPreviewContainer4', 'sopcctvrPreview4')" required/>
+    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+
+    <!-- Document Preview -->
+    <div id="sopcctvrPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
+        <iframe id="sopcctvrPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+        <h3 style="color:blue;">Preview CCTV Recordings</h3>
+    </div>
+</div>
+
+</div>
+
+
+<!-- <script>
+    // Variable to keep track of the current section (2, 3, or 4)
+    let nextSection = 2;
+
+    // Ensure 'next' button exists and add event listener
+    document.getElementById('next').addEventListener('click', function() {
+        // Show and hide sections based on nextSection
+        if (nextSection === 2) {
+            document.getElementById('next2').style.display = 'block';  // Show section 2
+            nextSection = 3;  // Move to section 3 for next click
+        } else if (nextSection === 3) {
+            document.getElementById('next3').style.display = 'block';  // Show section 3
+            nextSection = 4;  // Move to section 4 for next click
+        } else if (nextSection === 4) {
+            document.getElementById('next4').style.display = 'block';  // Show section 4
+            // Disable the button after showing all sections
+            document.getElementById('next').disabled = true;
+            document.getElementById('next').innerText = 'You reached the limit';  // Change button text
+        }
+    });
+</script> -->
+
+<script>
+ // Function to check if any qualification has content
+function checkQualifications() {
+    // Get the values from each qualification dropdown
+    const qualification2 = document.getElementById('qualification2').value.trim();
+    const qualification3 = document.getElementById('qualification3').value.trim();
+    const qualification4 = document.getElementById('qualification4').value.trim();
+
+    // Show the "Next" button for qualification 2 if it has content
+    if (qualification2) {
+        document.getElementById('next2').style.display = 'block';  // Show the "Next" button for qualification 2
+    } else {
+        document.getElementById('next2').style.display = 'none';  // Hide the "Next" button for qualification 2
+    }
+
+    // Show the "Next" button for qualification 3 if it has content
+    if (qualification3) {
+        document.getElementById('next3').style.display = 'block';  // Show the "Next" button for qualification 3
+    } else {
+        document.getElementById('next3').style.display = 'none';  // Hide the "Next" button for qualification 3
+    }
+
+    // Show the "Next" button for qualification 4 if it has content
+    if (qualification4) {
+        document.getElementById('next4').style.display = 'block';  // Show the "Next" button for qualification 4
+    } else {
+        document.getElementById('next4').style.display = 'none';  // Hide the "Next" button for qualification 4
+    }
+}
+
+// Call the function when the page loads to check the initial state
+window.onload = function() {
+    checkQualifications();
+};
+
+// Listen for changes in qualification fields
+document.getElementById('qualification2').addEventListener('change', checkQualifications);
+document.getElementById('qualification3').addEventListener('change', checkQualifications);
+document.getElementById('qualification4').addEventListener('change', checkQualifications);
+
+// Event listeners for the "Next" buttons for each qualification
+document.getElementById('next2').addEventListener('click', function() {
+    document.getElementById('next2').style.display = 'none';  // Hide the button after click
+    document.getElementById('next3').style.display = 'block'; // Show the "Next" button for qualification 3
+});
+
+document.getElementById('next3').addEventListener('click', function() {
+    document.getElementById('next3').style.display = 'none';  // Hide the button after click
+    document.getElementById('next4').style.display = 'block'; // Show the "Next" button for qualification 4
+});
+
+document.getElementById('next4').addEventListener('click', function() {
+    document.getElementById('next4').style.display = 'none';  // Hide the button after click
+    // You can disable the "Next" button or change its text here if desired
+    document.getElementById('next4').innerText = 'You reached the limit';  // Optional change
+});
+</script>
+
+
+
+
 
 
 	<div class="mt-4">
@@ -637,41 +955,7 @@ document.getElementById('next_button').addEventListener('click', function () {
         }
     }
 
-    // Step 2 Validation (qualification2, no_of_pax2, training_status2)
-    const qualification2 = document.getElementById('qualification2').value;
-    const noOfPax2 = document.getElementById('no_of_pax2').value;
-    const trainingStatus2 = document.getElementById('training_status2').value;
-
-    if (qualification2 === '' && noOfPax2 !== '' || noOfPax2 === '' && qualification2 !== '') {
-        alert('Please fill both qualification2 and no_of_pax2 fields in Step 2.');
-        return;
-    }
-
-    // Step 3 Validation (qualification3, no_of_pax3, training_status3)
-    const qualification3 = document.getElementById('qualification3').value;
-    const noOfPax3 = document.getElementById('no_of_pax3').value;
-    const trainingStatus3 = document.getElementById('training_status3').value;
-
-    if (qualification3 === '' && noOfPax3 !== '' || noOfPax3 === '' && qualification3 !== '') {
-        alert('Please fill both qualification3 and no_of_pax3 fields in Step 3.');
-        return;
-    }
-
-    // Step 4 Validation (qualification4, no_of_pax4, training_status4)
-    const qualification4 = document.getElementById('qualification4').value;
-    const noOfPax4 = document.getElementById('no_of_pax4').value;
-    const trainingStatus4 = document.getElementById('training_status4').value;
-
-    if (qualification4 === '' && noOfPax4 !== '' || noOfPax4 === '' && qualification4 !== '') {
-        alert('Please fill both qualification4 and no_of_pax4 fields in Step 4.');
-        return;
-    }
-
-    // Check if both trainingStatus4 and qualification4 are provided if necessary
-    if (trainingStatus4 && !qualification4) {
-        alert('Please fill the qualification4 field when training status is provided in Step 4.');
-        return;
-    }
+  
     // Hide Step 1 and Show Step 2
     document.getElementById('step1').style.display = 'none';
     document.getElementById('step2').style.display = 'block';

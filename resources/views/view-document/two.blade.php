@@ -142,25 +142,25 @@
     <th class="title">Attached File</th>
     <td>
     @if (!empty($assessment->eltt2) && file_exists(public_path($assessment->eltt2)))
-            <a href="{{ asset($assessment->eltt2) }}" target="_blank" class="view-file">View PDF ELTT</a><br>
+            <a href="{{ asset($assessment->eltt2) }}" target="_blank" class="view-file">View PDF ELTT 2</a><br>
         @else
  
         @endif
 
     @if (!empty($assessment->rfftp2) && file_exists(public_path($assessment->rfftp2)))
-            <a href="{{ asset($assessment->rfftp2) }}" target="_blank" class="view-file">View PDF RFFTP</a><br>
+            <a href="{{ asset($assessment->rfftp2) }}" target="_blank" class="view-file">View PDF RFFTP 2</a><br>
         @else
  
         @endif
 
     @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)))
-            <a href="{{ asset($assessment->oropfafns2) }}" target="_blank" class="view-file">View PDF OROPFAFNS</a><br>
+            <a href="{{ asset($assessment->oropfafns2) }}" target="_blank" class="view-file">View PDF OROPFAFNS 2</a><br>
         @else
   
         @endif
   
     @if (!empty($assessment->sopcctvr2) && file_exists(public_path($assessment->sopcctvr2)))
-            <a href="{{ asset($assessment->sopcctvr2) }}" target="_blank" class="view-file">View PDF SOPCCTVR</a><br>
+            <a href="{{ asset($assessment->sopcctvr2) }}" target="_blank" class="view-file">View PDF SOPCCTVR 2</a><br>
         @else
       
         @endif
