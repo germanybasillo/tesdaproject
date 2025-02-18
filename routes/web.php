@@ -271,8 +271,8 @@ Route::middleware(['auth', 'admin.restrict'])->group(function () {
     Route::get('/two', [Qualification::class, 'two'])->name('qualification.two');
     Route::get('/three', [Qualification::class, 'three'])->name('qualification.three');
     Route::get('/four', [Qualification::class, 'four'])->name('qualification.four');
-    Route::get('/apply', function () {
-        return view('apply');
-    })->name('apply');
+    // Route::get('/apply', function () {
+    //     return view('apply');
+    // })->name('apply');
 });
 

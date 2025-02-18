@@ -26,7 +26,7 @@
 
 
 
-              <form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+              <form action="{{ route('assessments.four') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
     @csrf
 
 
@@ -55,7 +55,7 @@
                                     <label for="qualification" class="block text-sm font-medium mb-2">
                                         Qualification:
                                     </label>
-                                    <select id="qualification" name="qualification" required 
+                                    <select id="qualification" name="qualification"
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
                                         <option value="" disabled selected>Select your qualification</option>
                                         <option value="FBS NC II">FBS NC II</option>
@@ -69,7 +69,7 @@
                                     <label for="no_of_pax" class="block text-sm font-medium mb-2">
                                         Number of Pax:
                                     </label>
-                                    <select id="no_of_pax" name="no_of_pax" required 
+                                    <select id="no_of_pax" name="no_of_pax"
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                                         <option value="" disabled selected>Select your number of pax</option>
                                         @for ($i = 1; $i <= 10; $i++)
@@ -82,7 +82,7 @@
                                     <label for="training_status" class="block text-sm font-medium mb-2">
                                         Training Status:
                                     </label>
-                                    <select id="training_status" name="training_status" required 
+                                    <select id="training_status" name="training_status"
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                                         <option value="" disabled selected>Select your training status</option>
                                         <option value="scholar">Scholar</option>
@@ -125,7 +125,7 @@
                                     <label for="non_scholarship" class="block text-sm font-medium mb-2">
                                         Non Scholarship Type:
                                     </label>
-				    <select id="scholarship" name="type_of_non_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+				    <select id="non_scholarship" name="type_of_non_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                                         <option value="" disabled selected>Select your non scholarship type</option>
                                         <option value="walk-in">Walk-In</option>
                                         <option value="CAWS">CAWS</option>
@@ -134,6 +134,330 @@
 
                                     </select>
 				</div>
+
+              <!-- Hidden Qualification Fields -->
+    <div id="qualificationSection2" style="display: none;">
+        <div>
+            <label for="qualification2" class="block text-sm font-medium mb-2">
+                Qualification:
+            </label>
+            <select id="qualification2" name="qualification2" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                <option value="" disabled selected>Select your qualification</option>
+                <option value="FBS NC II">FBS NC II</option>
+                <option value="CSS NC II">CSS NC II</option>
+                <option value="Cook NC II">Cook NC II</option>
+                <option value="Driving NC II">Driving NC II</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="no_of_pax2" class="block text-sm font-medium mb-2">
+                Number of Pax:
+            </label>
+            <select id="no_of_pax2" name="no_of_pax2" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your number of pax</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
+
+        <div>
+            <label for="training_status2" class="block text-sm font-medium mb-2">
+                Training Status:
+            </label>
+            <select id="training_status2" name="training_status2" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your training status</option>
+                <option value="scholar">Scholar</option>
+                <option value="non-scholar">Non-Scholar</option>
+            </select>
+        </div>
+        
+        <!-- Scholarship and Non-Scholarship Fields -->
+        <script>
+            document.getElementById('training_status2').addEventListener('change', function () {
+                var scholarshipDiv2 = document.getElementById('scholarship_div2');
+                var non_scholarshipDiv2 = document.getElementById('non_scholarship_div2');
+                var orInputContainer2 = document.getElementById('orInputContainer2');
+
+                if (this.value === 'scholar') {
+                    scholarshipDiv2.style.display = 'block';
+                    non_scholarshipDiv2.style.display = 'none';
+                    orInputContainer2.style.display = 'none';
+                } else {
+                    scholarshipDiv2.style.display = 'none';
+                    non_scholarshipDiv2.style.display = 'block';
+                    orInputContainer2.style.display = 'block';
+                }
+            });
+        </script>
+
+        <div id="scholarship_div2" style="display: none;">
+            <label for="scholarship2" class="block text-sm font-medium mb-2">
+                Scholarship Type:
+            </label>
+            <select id="scholarship2" name="type_of_scholar2" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your scholarship type</option>
+                <option value="ttsp">TTSP</option>
+                <option value="cfsp">CFSP</option>
+                <option value="uaqtea">UAQTEA</option>
+                <option value="uaqtea">TWSP</option>
+            </select>
+        </div>
+
+        <div id="non_scholarship_div2" style="display: none;">
+            <label for="non_scholarship2" class="block text-sm font-medium mb-2">
+                Non Scholarship Type:
+            </label>
+            <select id="non_scholarship2" name="type_of_non_scholar2" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your non scholarship type</option>
+                <option value="walk-in">Walk-In</option>
+                <option value="CAWS">CAWS</option>
+                <option value="pangthree">Three</option>
+                <option value="pangfour">Four</option>
+            </select>
+        </div>
+        <button type="button" id="backButton2" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">
+        Back
+    </button>
+    </div>
+
+              <!-- Hidden Qualification Fields -->
+    <div id="qualificationSection3" style="display: none;">
+        <div>
+            <label for="qualification3" class="block text-sm font-medium mb-2">
+                Qualification:
+            </label>
+            <select id="qualification3" name="qualification3" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                <option value="" disabled selected>Select your qualification</option>
+                <option value="FBS NC II">FBS NC II</option>
+                <option value="CSS NC II">CSS NC II</option>
+                <option value="Cook NC II">Cook NC II</option>
+                <option value="Driving NC II">Driving NC II</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="no_of_pax3" class="block text-sm font-medium mb-2">
+                Number of Pax:
+            </label>
+            <select id="no_of_pax3" name="no_of_pax3" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your number of pax</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
+
+        <div>
+            <label for="training_status3" class="block text-sm font-medium mb-2">
+                Training Status:
+            </label>
+            <select id="training_status3" name="training_status3" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your training status</option>
+                <option value="scholar">Scholar</option>
+                <option value="non-scholar">Non-Scholar</option>
+            </select>
+        </div>
+        
+        <!-- Scholarship and Non-Scholarship Fields -->
+        <script>
+            document.getElementById('training_status3').addEventListener('change', function () {
+                var scholarshipDiv3 = document.getElementById('scholarship_div3');
+                var non_scholarshipDiv3 = document.getElementById('non_scholarship_div3');
+                var orInputContainer3 = document.getElementById('orInputContainer3');
+
+                if (this.value === 'scholar') {
+                    scholarshipDiv3.style.display = 'block';
+                    non_scholarshipDiv3.style.display = 'none';
+                    orInputContainer3.style.display = 'none';
+                } else {
+                    scholarshipDiv3.style.display = 'none';
+                    non_scholarshipDiv3.style.display = 'block';
+                    orInputContainer3.style.display = 'block';
+                }
+            });
+        </script>
+
+        <div id="scholarship_div3" style="display: none;">
+            <label for="scholarship3" class="block text-sm font-medium mb-2">
+                Scholarship Type:
+            </label>
+            <select id="scholarship3" name="type_of_scholar3" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your scholarship type</option>
+                <option value="ttsp">TTSP</option>
+                <option value="cfsp">CFSP</option>
+                <option value="uaqtea">UAQTEA</option>
+                <option value="uaqtea">TWSP</option>
+            </select>
+        </div>
+
+        <div id="non_scholarship_div3" style="display: none;">
+            <label for="non_scholarship3" class="block text-sm font-medium mb-2">
+                Non Scholarship Type:
+            </label>
+            <select id="non_scholarship3" name="type_of_non_scholar3" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your non scholarship type</option>
+                <option value="walk-in">Walk-In</option>
+                <option value="CAWS">CAWS</option>
+                <option value="pangthree">Three</option>
+                <option value="pangfour">Four</option>
+            </select>
+        </div>
+        <button type="button" id="backButton3" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">
+        Back
+    </button>
+    </div>
+
+                  <!-- Hidden Qualification Fields -->
+                  <div id="qualificationSection4" style="display: none;">
+        <div>
+            <label for="qualification4" class="block text-sm font-medium mb-2">
+                Qualification:
+            </label>
+            <select id="qualification4" name="qualification4" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                <option value="" disabled selected>Select your qualification</option>
+                <option value="FBS NC II">FBS NC II</option>
+                <option value="CSS NC II">CSS NC II</option>
+                <option value="Cook NC II">Cook NC II</option>
+                <option value="Driving NC II">Driving NC II</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="no_of_pax4" class="block text-sm font-medium mb-2">
+                Number of Pax:
+            </label>
+            <select id="no_of_pax4" name="no_of_pax4" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your number of pax</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
+
+        <div>
+            <label for="training_status4" class="block text-sm font-medium mb-2">
+                Training Status:
+            </label>
+            <select id="training_status4" name="training_status4" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your training status</option>
+                <option value="scholar">Scholar</option>
+                <option value="non-scholar">Non-Scholar</option>
+            </select>
+        </div>
+        
+        <!-- Scholarship and Non-Scholarship Fields -->
+        <script>
+            document.getElementById('training_status4').addEventListener('change', function () {
+                var scholarshipDiv4 = document.getElementById('scholarship_div4');
+                var non_scholarshipDiv4 = document.getElementById('non_scholarship_div4');
+                var orInputContainer4 = document.getElementById('orInputContainer4');
+
+                if (this.value === 'scholar') {
+                    scholarshipDiv4.style.display = 'block';
+                    non_scholarshipDiv4.style.display = 'none';
+                    orInputContainer4.style.display = 'none';
+                } else {
+                    scholarshipDiv4.style.display = 'none';
+                    non_scholarshipDiv4.style.display = 'block';
+                    orInputContainer4.style.display = 'block';
+                }
+            });
+        </script>
+
+        <div id="scholarship_div4" style="display: none;">
+            <label for="scholarship4" class="block text-sm font-medium mb-2">
+                Scholarship Type:
+            </label>
+            <select id="non_scholarship4" name="type_of_scholar4" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your scholarship type</option>
+                <option value="ttsp">TTSP</option>
+                <option value="cfsp">CFSP</option>
+                <option value="uaqtea">UAQTEA</option>
+                <option value="uaqtea">TWSP</option>
+            </select>
+        </div>
+
+        <div id="non_scholarship_div4" style="display: none;">
+            <label for="non_scholarship4" class="block text-sm font-medium mb-2">
+                Non Scholarship Type:
+            </label>
+            <select id="non_scholarship4" name="type_of_non_scholar4" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled selected>Select your non scholarship type</option>
+                <option value="walk-in">Walk-In</option>
+                <option value="CAWS">CAWS</option>
+                <option value="pangthree">Three</option>
+                <option value="pangfour">Four</option>
+            </select>
+        </div>
+        <button type="button" id="backButton4" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">
+        Back
+    </button>
+    </div>
+
+<!-- Single Add Qualification Button -->
+<button type="button" id="addQualificationButton"  
+            class="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400">
+        Add Qualification
+</button>
+
+<script>
+    // Variable to keep track of the current section (2, 3, or 4)
+    let currentSection = 2;
+
+    // Handle Add Qualification Button click
+    document.getElementById('addQualificationButton').addEventListener('click', function() {
+        // Show and hide sections based on currentSection
+        if (currentSection === 2) {
+            document.getElementById('qualificationSection2').style.display = 'block';  // Show section 2
+            currentSection = 3;  // Move to section 3 for next click
+        } else if (currentSection === 3) {
+            document.getElementById('qualificationSection3').style.display = 'block';  // Show section 3
+            currentSection = 4;  // Move to section 4 for next click
+        } else if (currentSection === 4) {
+            document.getElementById('qualificationSection4').style.display = 'block';  // Show section 4
+            // Disable the button after showing all sections
+            document.getElementById('addQualificationButton').disabled = true;
+            document.getElementById('addQualificationButton').innerText = 'You reached the limit';  // Change button text
+        }
+    });
+
+    // Handle Back Button for Qualification Section 2
+    document.getElementById('backButton2').addEventListener('click', function() {
+        document.getElementById('qualificationSection2').style.display = 'none';  // Hide section 2
+        document.getElementById('addQualificationButton').disabled = false;  // Re-enable Add Qualification button
+        document.getElementById('addQualificationButton').innerText = 'Add Qualification';  // Reset button text
+        currentSection = 2;  // Reset to section 2 for next click
+    });
+
+    // Handle Back Button for Qualification Section 3
+    document.getElementById('backButton3').addEventListener('click', function() {
+        document.getElementById('qualificationSection3').style.display = 'none';  // Hide section 3
+        currentSection = 2;  // Reset to section 2 for next click
+    });
+
+    // Handle Back Button for Qualification Section 4
+    document.getElementById('backButton4').addEventListener('click', function() {
+        document.getElementById('qualificationSection4').style.display = 'none';  // Hide section 4
+        currentSection = 3;  // Reset to section 3 for next click
+    });
+</script>
 
 <div>
     <label for="agreement" class="flex items-center space-x-2">
@@ -298,13 +622,13 @@ document.getElementById('next_button').addEventListener('click', function () {
     const noOfPax = document.getElementById('no_of_pax').value;
     const trainingStatus = document.getElementById('training_status').value;
 
-    // Basic Validation
+    // Step 1 Validation
     if (!assessmentDate || !qualification || !noOfPax || !trainingStatus) {
         alert('Please fill all the required fields in Step 1.');
         return;
     }
 
-    // Scholar-specific validation
+    // Scholar-specific validation for Step 1
     if (trainingStatus === 'scholar') {
         const scholarshipType = document.getElementById('scholarship').value;
         if (!scholarshipType) {
@@ -313,6 +637,41 @@ document.getElementById('next_button').addEventListener('click', function () {
         }
     }
 
+    // Step 2 Validation (qualification2, no_of_pax2, training_status2)
+    const qualification2 = document.getElementById('qualification2').value;
+    const noOfPax2 = document.getElementById('no_of_pax2').value;
+    const trainingStatus2 = document.getElementById('training_status2').value;
+
+    if (qualification2 === '' && noOfPax2 !== '' || noOfPax2 === '' && qualification2 !== '') {
+        alert('Please fill both qualification2 and no_of_pax2 fields in Step 2.');
+        return;
+    }
+
+    // Step 3 Validation (qualification3, no_of_pax3, training_status3)
+    const qualification3 = document.getElementById('qualification3').value;
+    const noOfPax3 = document.getElementById('no_of_pax3').value;
+    const trainingStatus3 = document.getElementById('training_status3').value;
+
+    if (qualification3 === '' && noOfPax3 !== '' || noOfPax3 === '' && qualification3 !== '') {
+        alert('Please fill both qualification3 and no_of_pax3 fields in Step 3.');
+        return;
+    }
+
+    // Step 4 Validation (qualification4, no_of_pax4, training_status4)
+    const qualification4 = document.getElementById('qualification4').value;
+    const noOfPax4 = document.getElementById('no_of_pax4').value;
+    const trainingStatus4 = document.getElementById('training_status4').value;
+
+    if (qualification4 === '' && noOfPax4 !== '' || noOfPax4 === '' && qualification4 !== '') {
+        alert('Please fill both qualification4 and no_of_pax4 fields in Step 4.');
+        return;
+    }
+
+    // Check if both trainingStatus4 and qualification4 are provided if necessary
+    if (trainingStatus4 && !qualification4) {
+        alert('Please fill the qualification4 field when training status is provided in Step 4.');
+        return;
+    }
     // Hide Step 1 and Show Step 2
     document.getElementById('step1').style.display = 'none';
     document.getElementById('step2').style.display = 'block';

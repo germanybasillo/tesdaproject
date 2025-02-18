@@ -55,11 +55,6 @@
                     <x-nav-link :href="route('list_view')" :active="request()->routeIs('list_view')" class="text-white hover:text-blue-100">
                         {{ __('Assessments List') }}
                     </x-nav-link>
-                  
-
-                <x-nav-link :href="route('apply')" :active="request()->routeIs('apply')" class="text-white hover:text-blue-100">
-                  {{ __('Request Assessments') }}
-                   </x-nav-link>
                    @endif
 
 

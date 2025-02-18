@@ -421,21 +421,25 @@ if ($request->training_status3 == 'scholar' && !$request->hasFile('oropfafns3'))
 
     public function four(Request $request)
     {
+        // Convert empty strings to null before validation
+        $request->merge(array_map(function($value) {
+            return $value === '' ? null : $value;
+        }, $request->all()));
  
         $request->validate([
             'assessment_date' => 'required|date|after_or_equal:today',
-            'qualification' => 'required|string|max:255',
-            'qualification2' => 'required|string|max:255',
-            'qualification3' => 'required|string|max:255',
-            'qualification4' => 'required|string|max:255',
-            'no_of_pax' => 'required|integer',
-            'no_of_pax2' => 'required|integer',
-            'no_of_pax3' => 'required|integer',
-            'no_of_pax4' => 'required|integer',
-            'training_status' => 'required|in:scholar,non-scholar',
-            'training_status2' => 'required|in:scholar,non-scholar',
-            'training_status3' => 'required|in:scholar,non-scholar',
-            'training_status4' => 'required|in:scholar,non-scholar',
+            'qualification' => 'nullable|string|max:255',
+            'qualification2' => 'nullable|string|max:255',
+            'qualification3' => 'nullable|string|max:255',
+            'qualification4' => 'nullable|string|max:255',
+            'no_of_pax' => 'nullable|integer',
+            'no_of_pax2' => 'nullable|integer',
+            'no_of_pax3' => 'nullable|integer',
+            'no_of_pax4' => 'nullable|integer',
+            'training_status' => 'nullable|in:scholar,non-scholar',
+            'training_status2' => 'nullable|in:scholar,non-scholar',
+            'training_status3' => 'nullable|in:scholar,non-scholar',
+            'training_status4' => 'nullable|in:scholar,non-scholar',
             'type_of_scholar' => 'nullable|string|max:255',
             'type_of_scholar2' => 'nullable|string|max:255',
             'type_of_scholar3' => 'nullable|string|max:255',
@@ -444,22 +448,22 @@ if ($request->training_status3 == 'scholar' && !$request->hasFile('oropfafns3'))
             'type_of_non_scholar2' => 'nullable|string|max:255',
             'type_of_non_scholar3' => 'nullable|string|max:255',
             'type_of_non_scholar4' => 'nullable|string|max:255',
-            'eltt' => 'required|mimes:pdf',
-            'eltt2' => 'required|mimes:pdf',
-            'eltt3' => 'required|mimes:pdf',
-            'eltt4' => 'required|mimes:pdf',
-            'rfftp' => 'required|mimes:pdf',
-            'rfftp2' => 'required|mimes:pdf',
-            'rfftp3' => 'required|mimes:pdf',
-            'rfftp4' => 'required|mimes:pdf',
+            'eltt' => 'nullable|mimes:pdf',
+            'eltt2' => 'nullable|mimes:pdf',
+            'eltt3' => 'nullable|mimes:pdf',
+            'eltt4' => 'nullable|mimes:pdf',
+            'rfftp' => 'nullable|mimes:pdf',
+            'rfftp2' => 'nullable|mimes:pdf',
+            'rfftp3' => 'nullable|mimes:pdf',
+            'rfftp4' => 'nullable|mimes:pdf',
             'oropfafns' => 'nullable|mimes:pdf',
             'oropfafns2' => 'nullable|mimes:pdf',
             'oropfafns3' => 'nullable|mimes:pdf',
             'oropfafns4' => 'nullable|mimes:pdf',
-            'sopcctvr' => 'required|mimes:pdf',
-            'sopcctvr2' => 'required|mimes:pdf',
-            'sopcctvr3' => 'required|mimes:pdf',
-            'sopcctvr4' => 'required|mimes:pdf',
+            'sopcctvr' => 'nullable|mimes:pdf',
+            'sopcctvr2' => 'nullable|mimes:pdf',
+            'sopcctvr3' => 'nullable|mimes:pdf',
+            'sopcctvr4' => 'nullable|mimes:pdf',
         ]);
 
         // If training status is non-scholar, set type_of_scholar to 'NA'

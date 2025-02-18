@@ -274,36 +274,42 @@
             @endif
             </td>
             <td>
-                <a href="{{ url('/one/' . $assessment->id) }}" target="_blank">
-                <button class="small-btn">
-        <i class="fa fa-eye"></i> View
-    </button>
-                </a><br>
+    <!-- Check if qualification exists -->
+    @if($assessment->qualification)
+        <a href="{{ url('/one/' . $assessment->id) }}" target="_blank">
+            <button class="small-btn">
+                <i class="fa fa-eye"></i> View
+            </button>
+        </a><br>
+    @endif
 
-                @if($assessment->qualification2 !== 'N/A')
-                <a href="{{ url('/two/' . $assessment->id) }}" target="_blank">
-                <button class="small-btn">
-        <i class="fa fa-eye"></i> View
-    </button>
-                </a><br>
-                @endif
+    <!-- Check if qualification2 exists -->
+    @if($assessment->qualification2)
+        <a href="{{ url('/two/' . $assessment->id) }}" target="_blank">
+            <button class="small-btn">
+                <i class="fa fa-eye"></i> View
+            </button>
+        </a><br>
+    @endif
 
-                @if($assessment->qualification3 !== 'N/A')
-                <a href="{{ url('/three/' . $assessment->id) }}" target="_blank">
-                <button class="small-btn">
-        <i class="fa fa-eye"></i> View
-    </button>
-                </a><br>
-                @endif
+    <!-- Check if qualification3 exists -->
+    @if($assessment->qualification3)
+        <a href="{{ url('/three/' . $assessment->id) }}" target="_blank">
+            <button class="small-btn">
+                <i class="fa fa-eye"></i> View
+            </button>
+        </a><br>
+    @endif
 
-                @if($assessment->qualification4 !== 'N/A')
-                <a href="{{ url('/four/' . $assessment->id) }}" target="_blank">
-                <button class="small-btn">
-        <i class="fa fa-eye"></i> View
-    </button>
-                </a>
-                @endif
-            </td>     
+    <!-- Check if qualification4 exists -->
+    @if($assessment->qualification4)
+        <a href="{{ url('/four/' . $assessment->id) }}" target="_blank">
+            <button class="small-btn">
+                <i class="fa fa-eye"></i> View
+            </button>
+        </a>
+    @endif
+</td>
         </tr>
         @endforeach
     </table>
