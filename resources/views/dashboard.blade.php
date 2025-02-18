@@ -204,6 +204,11 @@
 
 </form>
     
+@php
+    $hasScholar = $assessments->contains('training_status', 'scholar');
+    $hasNonScholar = $assessments->contains('training_status', 'non_scholar');
+@endphp
+
     <table>
         <tr>
             <th>Assessment ID #</th>
@@ -221,13 +226,14 @@
             <th>Qualification</th>
             <th>No of Pax</th>
             <th>Training of Status</th>
-            @foreach ($assessments as $assessment)
+            <!-- @foreach ($assessments as $assessment)
             @if($assessment->training_status === 'scholar')
             <th>Type of Scholar</th>
-            @else($assessment->training_status === 'non_scholar')
+            @elseif($assessment->training_status === 'non_scholar')
             <th>Type of Non Scholar</th>
             @endif
-            @endforeach
+            @endforeach -->
+            <th>Type of Scholar / Non Scholar</th>
             <th>Action</th>
         </tr>
         @foreach ($assessments as $assessment)
