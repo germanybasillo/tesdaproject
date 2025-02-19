@@ -129,8 +129,8 @@
                                         <option value="" disabled selected>Select your non scholarship type</option>
                                         <option value="walk-in">Walk-In</option>
                                         <option value="CAWS">CAWS</option>
-					<option value="pangthree">Three</option>
-                                        <option value="pangfour">Four</option>
+                                        <option value="three">Three</option>
+                                        <option value="four">Four</option>
 
                                     </select>
 				</div>
@@ -218,8 +218,8 @@
                 <option value="" disabled selected>Select your non scholarship type</option>
                 <option value="walk-in">Walk-In</option>
                 <option value="CAWS">CAWS</option>
-                <option value="pangthree">Three</option>
-                <option value="pangfour">Four</option>
+                <option value="three">Three</option>
+                <option value="four">Four</option>
             </select>
         </div>
     </div>
@@ -307,8 +307,8 @@
                 <option value="" disabled selected>Select your non scholarship type</option>
                 <option value="walk-in">Walk-In</option>
                 <option value="CAWS">CAWS</option>
-                <option value="pangthree">Three</option>
-                <option value="pangfour">Four</option>
+                <option value="three">Three</option>
+                <option value="four">Four</option>
             </select>
         </div>
     </div>
@@ -396,8 +396,8 @@
                 <option value="" disabled selected>Select your non scholarship type</option>
                 <option value="walk-in">Walk-In</option>
                 <option value="CAWS">CAWS</option>
-                <option value="pangthree">Three</option>
-                <option value="pangfour">Four</option>
+                <option value="three">Three</option>
+                <option value="four">Four</option>
             </select>
         </div>
     </div>
@@ -585,7 +585,7 @@
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
     <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt2" placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" autocomplete="eltt2" onchange="previewDocument(event, 'elttPreviewContainer2', 'elttPreview2')" required/>
+    <x-text-input id="elttDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt2" placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" autocomplete="eltt2" onchange="previewDocument(event, 'elttPreviewContainer2', 'elttPreview2')" />
     <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -599,7 +599,7 @@
 <!-- Request Form For Test Package -->
 <div class="mt-4">
     <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'rfftpPreviewContainer2', 'rfftpPreview2')" required/>
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'rfftpPreviewContainer2', 'rfftpPreview2')" />
     <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -627,7 +627,7 @@
 <!-- Submission of Previous CCTV Recordings -->
 <div class="mt-4">
     <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'sopcctvrPreviewContainer2', 'sopcctvrPreview2')" required/>
+    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'sopcctvrPreviewContainer2', 'sopcctvrPreview2')" />
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -663,7 +663,7 @@
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
     <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt3" placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" autocomplete="eltt3" onchange="previewDocument(event, 'elttPreviewContainer3', 'elttPreview3')" required/>
+    <x-text-input id="elttDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt3" placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" autocomplete="eltt3" onchange="previewDocument(event, 'elttPreviewContainer3', 'elttPreview3')" />
     <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -677,7 +677,7 @@
 <!-- Request Form For Test Package -->
 <div class="mt-4">
     <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'rfftpPreviewContainer3', 'rfftpPreview3')" required/>
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'rfftpPreviewContainer3', 'rfftpPreview3')" />
     <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -705,7 +705,7 @@
 <!-- Submission of Previous CCTV Recordings -->
 <div class="mt-4">
     <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'sopcctvrPreviewContainer3', 'sopcctvrPreview3')" required/>
+    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'sopcctvrPreviewContainer3', 'sopcctvrPreview3')" />
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -740,7 +740,7 @@
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
     <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt4" placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" autocomplete="eltt4" onchange="previewDocument(event, 'elttPreviewContainer4', 'elttPreview4')" required/>
+    <x-text-input id="elttDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt4" placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" autocomplete="eltt4" onchange="previewDocument(event, 'elttPreviewContainer4', 'elttPreview4')" />
     <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -754,7 +754,7 @@
 <!-- Request Form For Test Package -->
 <div class="mt-4">
     <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'rfftpPreviewContainer4', 'rfftpPreview4')" required/>
+    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'rfftpPreviewContainer4', 'rfftpPreview4')" />
     <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
     <!-- Document Preview -->
@@ -782,7 +782,7 @@
 <!-- Submission of Previous CCTV Recordings -->
 <div class="mt-4">
     <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'sopcctvrPreviewContainer4', 'sopcctvrPreview4')" required/>
+    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'sopcctvrPreviewContainer4', 'sopcctvrPreview4')" />
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
 
     <!-- Document Preview -->
