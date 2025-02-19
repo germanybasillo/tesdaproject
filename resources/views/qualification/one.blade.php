@@ -794,35 +794,71 @@
 
 </div>
 
-<!-- Next button -->
-<button type="button" id="next" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400">
-    Next
-</button>
+
 
 <script>
-    // Variable to keep track of the current section (2, 3, or 4)
-    let nextSection = 2;
+    document.addEventListener("DOMContentLoaded", function () {
+        let nextSection = 1;
+        const nextButton = document.getElementById('next');
+        
+        const qualification2 = document.getElementById('qualification2');
+        const qualification3 = document.getElementById('qualification3');
+        const qualification4 = document.getElementById('qualification4');
 
-    // Ensure 'next' button exists and add event listener
-    document.getElementById('next').addEventListener('click', function() {
-        // Show and hide sections based on nextSection
-        if (nextSection === 2) {
-            document.getElementById('next2').style.display = 'block';  // Show section 2
-            nextSection = 3;  // Move to section 3 for next click
-        } else if (nextSection === 3) {
-            document.getElementById('next3').style.display = 'block';  // Show section 3
-            nextSection = 4;  // Move to section 4 for next click
-        } else if (nextSection === 4) {
-            document.getElementById('next4').style.display = 'block';  // Show section 4
+        function checkQualification2() {
+            console.log("Checking qualification2...");
+            const q2 = qualification2.value.trim();
+            if (q2 !== "") {
+                document.getElementById('next2').style.display = 'block';
+                console.log("Next section 2 is now visible!");
+            } else {
+                document.getElementById('next2').style.display = 'none';
+                console.log("Next section 2 is hidden.");
+            }
         }
+
+        function checkQualification3() {
+            console.log("Checking qualification3...");
+            const q3 = qualification3.value.trim();
+            if (q3 !== "") {
+                document.getElementById('next3').style.display = 'block';
+                console.log("Next section 3 is now visible!");
+            } else {
+                document.getElementById('next3').style.display = 'none';
+                console.log("Next section 3 is hidden.");
+            }
+        }
+
+        function checkQualification4() {
+            console.log("Checking qualification4...");
+            const q4 = qualification4.value.trim();
+            if (q4 !== "") {
+                document.getElementById('next4').style.display = 'block';
+                console.log("Next section 4 is now visible!");
+            } else {
+                document.getElementById('next4').style.display = 'none';
+                console.log("Next section 4 is hidden.");
+            }
+        }
+
+        qualification2.addEventListener('input', checkQualification2);
+        qualification3.addEventListener('input', checkQualification3);
+        qualification4.addEventListener('input', checkQualification4);
+
+        // Initial check on page load
+        checkQualification2();
+        checkQualification3();
+        checkQualification4();
     });
 </script>
 
 
-
-
-
-
+<div class="mt-4">
+<!-- Next button -->
+<button type="button" id="next" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400 hidden">
+    Next
+</button>
+</div>
 
 	<div class="mt-4">
                                     <button id="submit_button" type="submit" 
