@@ -514,8 +514,8 @@
 
     <!-- Document Preview -->
     <div id="elttPreviewContainer" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    <h3 style="color:blue;">Preview Endorsement Letter</h3>
+    <iframe id="elttPreview" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
 </div>
 </div>
 
@@ -527,9 +527,9 @@
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="rfftpPreviewContainer" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
-        <iframe id="rfftpPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Request Form</h3>
+    <div id="rfftpPreviewContainer" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+        <iframe id="rfftpPreview" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
     </div>
 
 </div>
@@ -541,9 +541,9 @@
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
-        <iframe id="oropfafnsPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Official Receipt</h3>
+    <div id="oropfafnsPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
+        <iframe id="oropfafnsPreview" src="#"  style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
     </div>
 </div>
 
@@ -555,9 +555,9 @@
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
-        <iframe id="sopcctvrPreview" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview CCTV Recordings</h3>
+    <div id="sopcctvrPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
+        <iframe id="sopcctvrPreview" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
     </div>
 </div>
 
@@ -589,9 +589,9 @@
     <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="elttPreviewContainer2" style="display:none; margin-top: ; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    <h3 style="color:blue;">Preview Endorsement Letter</h3>
+    <div id="elttPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <iframe id="elttPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
 </div>
 </div>
 
@@ -603,9 +603,9 @@
     <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="rfftpPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
-        <iframe id="rfftpPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Request Form</h3>
+    <div id="rfftpPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+        <iframe id="rfftpPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
     </div>
 
 </div>
@@ -617,9 +617,9 @@
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
-        <iframe id="oropfafnsPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Official Receipt</h3>
+    <div id="oropfafnsPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
+        <iframe id="oropfafnsPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
     </div>
 </div>
 
@@ -631,9 +631,9 @@
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
-        <iframe id="sopcctvrPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview CCTV Recordings</h3>
+    <div id="sopcctvrPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
+        <iframe id="sopcctvrPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
     </div>
 </div>
 
@@ -668,8 +668,8 @@
 
     <!-- Document Preview -->
     <div id="elttPreviewContainer3" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    <h3 style="color:blue;">Preview Endorsement Letter</h3>
+    <iframe id="elttPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
 </div>
 </div>
 
@@ -681,9 +681,9 @@
     <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="rfftpPreviewContainer3" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
-        <iframe id="rfftpPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Request Form</h3>
+    <div id="rfftpPreviewContainer3" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+        <iframe id="rfftpPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
     </div>
 
 </div>
@@ -695,9 +695,9 @@
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
-        <iframe id="oropfafnsPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Official Receipt</h3>
+    <div id="oropfafnsPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+        <iframe id="oropfafnsPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
     </div>
 </div>
 
@@ -709,9 +709,9 @@
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
-        <iframe id="sopcctvrPreview3" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview CCTV Recordings</h3>
+    <div id="sopcctvrPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
+        <iframe id="sopcctvrPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
     </div>
 </div>
 
@@ -744,9 +744,9 @@
     <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="elttPreviewContainer4" style="display:none; margin-top: 40p%; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-    <h3 style="color:blue;">Preview Endorsement Letter</h3>
+    <div id="elttPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <iframe id="elttPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
 </div>
 </div>
 
@@ -758,9 +758,9 @@
     <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="rfftpPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:49%;">
-        <iframe id="rfftpPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Request Form</h3>
+    <div id="rfftpPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+        <iframe id="rfftpPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
     </div>
 
 </div>
@@ -772,9 +772,9 @@
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:65%;">
-        <iframe id="oropfafnsPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview Official Receipt</h3>
+    <div id="oropfafnsPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
+        <iframe id="oropfafnsPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
     </div>
 </div>
 
@@ -786,9 +786,9 @@
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:81%;">
-        <iframe id="sopcctvrPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
-        <h3 style="color:blue;">Preview CCTV Recordings</h3>
+    <div id="sopcctvrPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
+        <iframe id="sopcctvrPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
     </div>
 </div>
 
