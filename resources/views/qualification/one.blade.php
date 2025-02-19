@@ -222,9 +222,6 @@
                 <option value="pangfour">Four</option>
             </select>
         </div>
-        <button type="button" id="backButton2" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">
-        Back
-    </button>
     </div>
 
               <!-- Hidden Qualification Fields -->
@@ -314,9 +311,6 @@
                 <option value="pangfour">Four</option>
             </select>
         </div>
-        <button type="button" id="backButton3" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">
-        Back
-    </button>
     </div>
 
                   <!-- Hidden Qualification Fields -->
@@ -406,9 +400,6 @@
                 <option value="pangfour">Four</option>
             </select>
         </div>
-        <button type="button" id="backButton4" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">
-        Back
-    </button>
     </div>
 
 <!-- Single Add Qualification Button -->
@@ -417,45 +408,52 @@
         Add Qualification
 </button>
 
-<script>
-    // Variable to keep track of the current section (2, 3, or 4)
-    let currentSection = 2;
+<!-- Back Button (Hidden by Default) -->
+<button type="button" id="backButton"  
+        class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400" 
+        style="display: none;">
+    Back
+</button>
 
-    // Handle Add Qualification Button click
+<script>
+    let currentSection = 1; // Tracks the current section number
+
+    // Add Qualification Button Click
     document.getElementById('addQualificationButton').addEventListener('click', function() {
-        // Show and hide sections based on currentSection
-        if (currentSection === 2) {
-            document.getElementById('qualificationSection2').style.display = 'block';  // Show section 2
-            currentSection = 3;  // Move to section 3 for next click
+        if (currentSection === 1) {
+            document.getElementById('qualificationSection2').style.display = 'block';
+            document.getElementById('backButton').style.display = 'inline-block'; // Show Back button
+            currentSection = 2;
+        } else if (currentSection === 2) {
+            document.getElementById('qualificationSection3').style.display = 'block';
+            currentSection = 3;
         } else if (currentSection === 3) {
-            document.getElementById('qualificationSection3').style.display = 'block';  // Show section 3
-            currentSection = 4;  // Move to section 4 for next click
-        } else if (currentSection === 4) {
-            document.getElementById('qualificationSection4').style.display = 'block';  // Show section 4
-            // Disable the button after showing all sections
-            document.getElementById('addQualificationButton').disabled = true;
-            document.getElementById('addQualificationButton').innerText = 'You reached the limit';  // Change button text
+            document.getElementById('qualificationSection4').style.display = 'block';
+            currentSection = 4;
+        } else {
+            // Show SweetAlert2 popup when max is reached
+            Swal.fire({
+                icon: 'error',
+                title: 'Limit Reached',
+                text: 'Maximum of 4 qualifications only!',
+                confirmButtonColor: '#d33'
+            });
         }
     });
 
-    // Handle Back Button for Qualification Section 2
-    document.getElementById('backButton2').addEventListener('click', function() {
-        document.getElementById('qualificationSection2').style.display = 'none';  // Hide section 2
-        document.getElementById('addQualificationButton').disabled = false;  // Re-enable Add Qualification button
-        document.getElementById('addQualificationButton').innerText = 'Add Qualification';  // Reset button text
-        currentSection = 2;  // Reset to section 2 for next click
-    });
-
-    // Handle Back Button for Qualification Section 3
-    document.getElementById('backButton3').addEventListener('click', function() {
-        document.getElementById('qualificationSection3').style.display = 'none';  // Hide section 3
-        currentSection = 2;  // Reset to section 2 for next click
-    });
-
-    // Handle Back Button for Qualification Section 4
-    document.getElementById('backButton4').addEventListener('click', function() {
-        document.getElementById('qualificationSection4').style.display = 'none';  // Hide section 4
-        currentSection = 3;  // Reset to section 3 for next click
+    // Back Button Click
+    document.getElementById('backButton').addEventListener('click', function() {
+        if (currentSection === 2) {
+            document.getElementById('qualificationSection2').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none'; // Hide Back button when no sections are left
+            currentSection = 1;
+        } else if (currentSection === 3) {
+            document.getElementById('qualificationSection3').style.display = 'none';
+            currentSection = 2;
+        } else if (currentSection === 4) {
+            document.getElementById('qualificationSection4').style.display = 'none';
+            currentSection = 3;
+        }
     });
 </script>
 
@@ -591,7 +589,7 @@
     <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="elttPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <div id="elttPreviewContainer2" style="display:none; margin-top: ; text-align: center; position: absolute; top: 73px; left:33%;">
     <iframe id="elttPreview2" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
     <h3 style="color:blue;">Preview Endorsement Letter</h3>
 </div>
@@ -746,7 +744,7 @@
     <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="elttPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <div id="elttPreviewContainer4" style="display:none; margin-top: 40p%; text-align: center; position: absolute; top: 73px; left:33%;">
     <iframe id="elttPreview4" src="#" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
     <h3 style="color:blue;">Preview Endorsement Letter</h3>
 </div>
@@ -816,12 +814,10 @@
             nextSection = 4;  // Move to section 4 for next click
         } else if (nextSection === 4) {
             document.getElementById('next4').style.display = 'block';  // Show section 4
-            // Disable the button after showing all sections
-            document.getElementById('next').disabled = true;
-            document.getElementById('next').innerText = 'You reached the limit';  // Change button text
         }
     });
 </script>
+
 
 
 
