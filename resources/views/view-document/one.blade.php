@@ -144,33 +144,72 @@
         </tr> -->
         <tr>
     <th class="title">Attached File</th>
+    <!-- <td>Letter of Attached Case</td> -->
     <td>
     @if (!empty($assessment->eltt) && file_exists(public_path($assessment->eltt)))
-            <a href="{{ asset($assessment->eltt) }}" target="_blank" class="view-file">View PDF ELTT</a><br>
+            <a href="{{ asset($assessment->eltt) }}" target="_blank" class="view-file">Endorsement Letter To TESDA</a><br>
         @else
  
         @endif
 
     @if (!empty($assessment->rfftp) && file_exists(public_path($assessment->rfftp)))
-            <a href="{{ asset($assessment->rfftp) }}" target="_blank" class="view-file">View PDF RFFTP</a><br>
+            <a href="{{ asset($assessment->rfftp) }}" target="_blank" class="view-file">Request Form For Test Package</a><br>
         @else
  
         @endif
 
     @if (!empty($assessment->oropfafns) && file_exists(public_path($assessment->oropfafns)))
-            <a href="{{ asset($assessment->oropfafns) }}" target="_blank" class="view-file">View PDF OROPFAFNS</a><br>
+            <a href="{{ asset($assessment->oropfafns) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar</a><br>
         @else
   
         @endif
   
     @if (!empty($assessment->sopcctvr) && file_exists(public_path($assessment->sopcctvr)))
-            <a href="{{ asset($assessment->sopcctvr) }}" target="_blank" class="view-file">View PDF SOPCCTVR</a><br>
+            <a href="{{ asset($assessment->sopcctvr) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings</a><br>
         @else
       
         @endif
     </td>
 </tr>
+@if (Auth::user()->role === 'admin')
+<th class="title">Change Status  To</th>
+<td>
 
+<form action="{{ route('assessments.update', $assessment->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+
+    <label>
+        <input type="checkbox" name="status" value="approved" 
+            {{ $assessment->status == 'approved' ? 'checked' : '' }}
+            onchange="handleCheckboxChange(this)">
+        Approved
+    </label>
+    &nbsp; &nbsp;
+    <label>
+        <input type="checkbox" name="status" value="disapproved" 
+            {{ $assessment->status == 'disapproved' ? 'checked' : '' }}
+            onchange="handleCheckboxChange(this)">
+            Disapproved
+    </label>
+</form>
+
+<script>
+    function handleCheckboxChange(checkbox) {
+        // If one checkbox is checked, uncheck the other
+        if (checkbox.value == 'approved') {
+            document.querySelector('input[name="status"][value="disapproved"]').checked = false;
+        } else if (checkbox.value == 'disapproved') {
+            document.querySelector('input[name="status"][value="approved"]').checked = false;
+        }
+
+        // Submit the form after selection
+        checkbox.form.submit();
+    }
+</script>
+</td>
+</tr>
+@endif
     </table><br>
     @endif
 

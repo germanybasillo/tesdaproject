@@ -116,7 +116,7 @@
                                         <option value="ttsp">TTSP</option>
                                         <option value="cfsp">CFSP</option>
 					<option value="uaqtea">UAQTEA</option>
-                                        <option value="uaqtea">TWSP</option>
+                                        <option value="twsp">TWSP</option>
 
                                     </select>
 				</div>
@@ -205,7 +205,7 @@
                 <option value="ttsp">TTSP</option>
                 <option value="cfsp">CFSP</option>
                 <option value="uaqtea">UAQTEA</option>
-                <option value="uaqtea">TWSP</option>
+                <option value="twsp">TWSP</option>
             </select>
         </div>
 
@@ -294,7 +294,7 @@
                 <option value="ttsp">TTSP</option>
                 <option value="cfsp">CFSP</option>
                 <option value="uaqtea">UAQTEA</option>
-                <option value="uaqtea">TWSP</option>
+                <option value="twsp">TWSP</option>
             </select>
         </div>
 
@@ -383,7 +383,7 @@
                 <option value="ttsp">TTSP</option>
                 <option value="cfsp">CFSP</option>
                 <option value="uaqtea">UAQTEA</option>
-                <option value="uaqtea">TWSP</option>
+                <option value="twsp">TWSP</option>
             </select>
         </div>
 

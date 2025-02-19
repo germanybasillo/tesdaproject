@@ -193,7 +193,6 @@
             <th>No of Pax</th>
             <th>Training of Status</th>
             <th>Type of Scholar</th>
-            <th>Action</th>
         </tr>
         @foreach ($assessments as $assessment)
         <tr class="{{ 
@@ -273,43 +272,6 @@
             {{$assessment->type_of_scholar4}}
             @endif
             </td>
-            <td>
-    <!-- Check if qualification exists -->
-    @if($assessment->qualification)
-        <a href="{{ url('/one/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a><br>
-    @endif
-
-    <!-- Check if qualification2 exists -->
-    @if($assessment->qualification2)
-        <a href="{{ url('/two/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a><br>
-    @endif
-
-    <!-- Check if qualification3 exists -->
-    @if($assessment->qualification3)
-        <a href="{{ url('/three/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a><br>
-    @endif
-
-    <!-- Check if qualification4 exists -->
-    @if($assessment->qualification4)
-        <a href="{{ url('/four/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a>
-    @endif
-</td>
         </tr>
         @endforeach
     </table>

@@ -26,7 +26,7 @@
     } else {
         // If the user is not an admin, count their "returned" assessments
         $assessments = Assessment::where('user_id', $user->id)->get();
-        $returnedCount = $assessments->where('status', 'returned')->count();
+        $disapprovedCount = $assessments->where('status', 'disapproved')->count();
     }
 
     // Set dashboard color for users with "returned" assessments
@@ -40,9 +40,9 @@
         <span class="ml-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">
             {{ $pendingCount }} Pending
         </span>
-    @elseif (isset($returnedCount) && $returnedCount > 0)
+    @elseif (isset($disapprovedCount) && $disapprovedCount > 0)
         <span class="ml-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs">
-            {{ $returnedCount }}
+            {{ $disapprovedCount }}
         </span>
         <span class="ml-2 text-red-300 text-xs italic">
             (Please check your email)

@@ -197,10 +197,11 @@
         <input type="date" name="date_submitted" value="{{ request('date_submitted') }}" onchange="document.getElementById('filterForm').submit()">
     </label>
 
+    @if(auth()->user() && auth()->user()->role !== 'admin')
     <label>Add New:
     <a href="/one" class="primary button-style">Request Assessment</a>
 </label>
-
+@endif
 
 </form>
     

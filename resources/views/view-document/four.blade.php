@@ -142,25 +142,25 @@
     <th class="title">Attached File</th>
     <td>
     @if (!empty($assessment->eltt4) && file_exists(public_path($assessment->eltt4)))
-            <a href="{{ asset($assessment->eltt4) }}" target="_blank" class="view-file">View PDF ELTT</a><br>
+            <a href="{{ asset($assessment->eltt4) }}" target="_blank" class="view-file">Endorsement Letter To TESDA</a><br>
         @else
  
         @endif
 
     @if (!empty($assessment->rfftp4) && file_exists(public_path($assessment->rfftp4)))
-            <a href="{{ asset($assessment->rfftp4) }}" target="_blank" class="view-file">View PDF RFFTP</a><br>
+            <a href="{{ asset($assessment->rfftp4) }}" target="_blank" class="view-file">Request Form For Test Package</a><br>
         @else
  
         @endif
 
     @if (!empty($assessment->oropfafns4) && file_exists(public_path($assessment->oropfafns4)))
-            <a href="{{ asset($assessment->oropfafns4) }}" target="_blank" class="view-file">View PDF OROPFAFNS</a><br>
+            <a href="{{ asset($assessment->oropfafns4) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar</a><br>
         @else
   
         @endif
   
     @if (!empty($assessment->sopcctvr4) && file_exists(public_path($assessment->sopcctvr4)))
-            <a href="{{ asset($assessment->sopcctvr4) }}" target="_blank" class="view-file">View PDF SOPCCTVR</a><br>
+            <a href="{{ asset($assessment->sopcctvr4) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings</a><br>
         @else
       
         @endif
@@ -168,9 +168,7 @@
 </tr>
 
     </table><br>
-    @endif
-
-    
+    @endif    
 
                 </div>
             </div>
