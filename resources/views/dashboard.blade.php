@@ -192,20 +192,18 @@
 
 <!-- Modal -->
 <div id="assessmentModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="p-4 rounded-lg shadow-lg w-1/2">
-        <div class="max-w-7xl">
-            <div class="w-full sm:px-6 lg:px-8">
-                <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-8 text-gray-900 dark:text-gray-100">
-                        <button onclick="closeModal()" class="float-right text-white font-bold text-lg">&times;</button>
-                        <form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
-                        @csrf
+    <div class="bg-white p-4 rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
+        <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-8 text-gray-900 dark:text-gray-100 relative">
+                <!-- Close Button -->
+                <button onclick="closeModal()" class="absolute top-3 right-4 text-white font-bold text-2xl">
+                    &times;
+                </button>
 
-                        @include('qualification.one')
-
-                        </form>
-                    </div>
-                </div>
+                <form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+                    @csrf
+                    @include('qualification.one')
+                </form>
             </div>
         </div>
     </div>
@@ -213,15 +211,16 @@
 
 <!-- JavaScript -->
 <script>
-function openModal(event) {
-    event.preventDefault(); // Prevents the link from navigating
-    document.getElementById("assessmentModal").classList.remove("hidden");
-}
+    function openModal(event) {
+        event.preventDefault(); // Prevents page from refreshing
+        document.getElementById("assessmentModal").classList.remove("hidden");
+    }
 
-function closeModal() {
-    document.getElementById("assessmentModal").classList.add("hidden");
-}
+    function closeModal() {
+        document.getElementById("assessmentModal").classList.add("hidden");
+    }
 </script>
+
 
     
 @php

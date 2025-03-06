@@ -166,20 +166,6 @@
     </style>
 </head>
 <body>
-    <!-- <h2>Assessment List</h2> -->
-    
-    <!-- <label>Category:
-        <select>
-            <option>Select Category</option>
-        </select>
-    </label>
-    <label>Title:
-        <select>
-            <option>Select Title</option>
-        </select>
-    </label> -->
-
-   <!-- Filter Form -->
 
 <form method="GET" action="{{ route('dashboard') }}" id="filterForm">
     <label>Status:

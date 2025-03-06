@@ -568,8 +568,8 @@
  <!-- Step 2: Document Upload -->
     <div id="step2" style="display: none;">
         
-    <!-- Document Title -->
-    <div id="qualificationTitle" class="mt-4">
+      <!-- Document Title -->
+      <div id="qualificationTitle" class="mt-4">
             <h2>Please upload your document here (PDF)</h2>
         </div>
 
@@ -585,42 +585,44 @@
         }
     });
 </script>
-
+     
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt" placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" autocomplete="eltt" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
-    <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument" class="block w-full bg-white dark:text-black" type="file" name="eltt" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" 
+                autocomplete="eltt" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+            <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="pdf" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="pdfView" src="#" style="width: 80vh ; height: 80vh; border: 1px solid #ccc;"></iframe>
-    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
-</div>
-</div>
-
-
-<!-- Request Form For Test Package -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+            <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
     <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
-</div>
 
-<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
-<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer">
+    <div style="display: none;" id="orInputContainer">
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
     <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
-</div>
+    </div>
 
-
-<!-- Submission of Previous CCTV Recordings -->
-<div class="mt-4">
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
+
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf" style="display: none; flex: 2;">
+            <h3 style="color: blue;">Preview PDF Here</h3>
+            <iframe id="pdfView" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
+    </div>
 </div>
+
+
+
 
 
 <div id="next2" style="display: none;">
@@ -645,58 +647,39 @@
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt2" placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" autocomplete="eltt2" onchange="previewDocument(event, 'elttPreviewContainer2', 'elttPreview2')" />
-    <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument2" class="block w-full bg-white dark:text-black" type="file" name="eltt2" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" 
+                autocomplete="eltt2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" required/>
+            <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="elttPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
-</div>
-</div>
-
-
-<!-- Request Form For Test Package -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'rfftpPreviewContainer2', 'rfftpPreview2')" />
+            <x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" required/>
     <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="rfftpPreviewContainer2" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-        <iframe id="rfftpPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
-    </div>
-
-</div>
-
-<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
-<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer2">
+    <div style="display: none;" id="orInputContainer2">
     <x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'oropfafnsPreviewContainer2', 'oropfafnsPreview2')"/>
+    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
-
-    <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
-        <iframe id="oropfafnsPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
     </div>
-</div>
 
-
-<!-- Submission of Previous CCTV Recordings -->
-<div class="mt-4">
     <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'sopcctvrPreviewContainer2', 'sopcctvrPreview2')" />
+    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" required/>
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer2"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
-        <iframe id="sopcctvrPreview2" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf2" style="display: none; flex: 2;">
+            <h3 style="color: blue;">Preview PDF Here</h3>
+            <iframe id="pdfView2" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
     </div>
 </div>
+
 
 </div>
 
@@ -723,58 +706,39 @@
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt3" placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" autocomplete="eltt3" onchange="previewDocument(event, 'elttPreviewContainer3', 'elttPreview3')" />
-    <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument3" class="block w-full bg-white dark:text-black" type="file" name="eltt3" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" 
+                autocomplete="eltt3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" required/>
+            <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="elttPreviewContainer3" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
-</div>
-</div>
-
-
-<!-- Request Form For Test Package -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'rfftpPreviewContainer3', 'rfftpPreview3')" />
+            <x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" required/>
     <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="rfftpPreviewContainer3" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-        <iframe id="rfftpPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
-    </div>
-
-</div>
-
-<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
-<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer3">
+    <div style="display: none;" id="orInputContainer3">
     <x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'oropfafnsPreviewContainer3', 'oropfafnsPreview3')"/>
+    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
-
-    <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-        <iframe id="oropfafnsPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
     </div>
-</div>
 
-
-<!-- Submission of Previous CCTV Recordings -->
-<div class="mt-4">
     <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'sopcctvrPreviewContainer3', 'sopcctvrPreview3')" />
+    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" required/>
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer3"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
-        <iframe id="sopcctvrPreview3" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf3" style="display: none; flex: 2;">
+            <h3 style="color: blue;">Preview PDF Here</h3>
+            <iframe id="pdfView3" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
     </div>
 </div>
+
 
 </div>
 
@@ -800,58 +764,41 @@
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-    <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt4" placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" autocomplete="eltt4" onchange="previewDocument(event, 'elttPreviewContainer4', 'elttPreview4')" />
-    <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument4" class="block w-full bg-white dark:text-black" type="file" name="eltt4" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" 
+                autocomplete="eltt4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" required/>
+            <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="elttPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-    <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
-</div>
-</div>
-
-
-<!-- Request Form For Test Package -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'rfftpPreviewContainer4', 'rfftpPreview4')" />
+            <x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" required/>
     <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="rfftpPreviewContainer4" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-        <iframe id="rfftpPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
-    </div>
-
-</div>
-
-<!-- Official Receipt of Payment for Assessment for Non-Scholar -->
-<div class="mt-4" class="text-white" style="display: none;" id="orInputContainer4">
+    <div style="display: none;" id="orInputContainer4">
     <x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns4') }}" autocomplete="oropfafns4" onchange="previewDocument(event, 'oropfafnsPreviewContainer4', 'oropfafnsPreview4')"/>
+    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns4') }}" autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+    </div>
+
+    <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" required/>
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
-        <iframe id="oropfafnsPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf4" style="display: none; flex: 2;">
+            <h3 style="color: blue;">Preview PDF Here</h3>
+            <iframe id="pdfView4" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
     </div>
 </div>
 
 
-<!-- Submission of Previous CCTV Recordings -->
-<div class="mt-4">
-    <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'sopcctvrPreviewContainer4', 'sopcctvrPreview4')" />
-    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
 
-    <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer4"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
-        <iframe id="sopcctvrPreview4" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
-    </div>
-</div>
 
 </div>
 
