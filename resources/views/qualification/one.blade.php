@@ -1,19 +1,4 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight"><i class="fas fa-calendar-alt mr-2"></i>
-            {{ __('Apply Assessment Schedule') }}
-        </h2>
-    </x-slot>
-    
-    <div class="p-4">
-    <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="blue-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="py-12 flex items-center justify-center min-h-screen"> -->
-            <div class="max-w-7xl">
-                <div class="w-1/2 sm:px-6 lg:px-8">
-                    <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-8 text-gray-900 dark:text-gray-100">
-                            <h2 class="text-xl font-bold mb-4">
+
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
                             <style>
                                 .holiday {
@@ -24,10 +9,6 @@
                                 }
                             </style>
 
-
-
-              <form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
-    @csrf
 
 
 
@@ -608,12 +589,12 @@
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
     <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-    <x-text-input id="elttDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt" placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" autocomplete="eltt" onchange="previewDocument(event, 'elttPreviewContainer', 'elttPreview')" required/>
+    <x-text-input id="elttDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="eltt" placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" autocomplete="eltt" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
     <!-- Document Preview -->
-    <div id="elttPreviewContainer" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-    <iframe id="elttPreview" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
+    <div id="pdf" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
+    <iframe id="pdfView" src="#" style="width: 80vh ; height: 80vh; border: 1px solid #ccc;"></iframe>
     <!-- <h3 style="color:blue;">Preview Endorsement Letter</h3> -->
 </div>
 </div>
@@ -622,42 +603,23 @@
 <!-- Request Form For Test Package -->
 <div class="mt-4">
     <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'rfftpPreviewContainer', 'rfftpPreview')" required/>
+    <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
-
-    <!-- Document Preview -->
-    <div id="rfftpPreviewContainer" style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px; left:33%;">
-        <iframe id="rfftpPreview" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Request Form</h3> -->
-    </div>
-
 </div>
 
 <!-- Official Receipt of Payment for Assessment for Non-Scholar -->
 <div class="mt-4" class="text-white" style="display: none;" id="orInputContainer">
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'oropfafnsPreviewContainer', 'oropfafnsPreview')"/>
+    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
-
-    <!-- Document Preview -->
-    <div id="oropfafnsPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
-        <iframe id="oropfafnsPreview" src="#"  style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview Official Receipt</h3> -->
-    </div>
 </div>
 
 
 <!-- Submission of Previous CCTV Recordings -->
 <div class="mt-4">
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'sopcctvrPreviewContainer', 'sopcctvrPreview')" required/>
+    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
-
-    <!-- Document Preview -->
-    <div id="sopcctvrPreviewContainer"  style="display:none; margin-top: 20px; text-align: center; position: absolute; top: 73px;  left:33%;">
-        <iframe id="sopcctvrPreview" src="#" style="width: 80vh; height: 80vh; border: 1px solid #ccc;"></iframe>
-        <!-- <h3 style="color:blue;">Preview CCTV Recordings</h3> -->
-    </div>
 </div>
 
 
@@ -983,7 +945,7 @@
 
 </div>
 </div>
-</form>
+
 
 
 
@@ -1061,11 +1023,3 @@ document.getElementById('next_button').addEventListener('click', function () {
                                     }
                                 });
                             </script>
-     </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</x-app-layout>

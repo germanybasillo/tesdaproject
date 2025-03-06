@@ -9,139 +9,160 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            /* margin: 20px; */
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            margin-right: 15px;
-        }
-        select, input[type="date"] {
-            padding: 8px;
-            margin: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+                <style>
+            body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        margin-right: 10px;
+        font-weight: bold;
+        display: block;
+    }
+
+    select, input[type="date"] {
+        padding: 8px;
+        margin: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%; /* Make inputs responsive */
+        max-width: 250px; /* Limit input width */
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Make table responsive */
+    @media (max-width: 768px) {
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
+            display: block;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            white-space: nowrap;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-        }
-        /* tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #e9ecef;
-        } */
-        p {
-            text-align: center;
-            font-weight: bold;
-            margin-top: 20px;
-        }
+    }
 
-        /* Style for the small button */
-.small-btn {
-    padding: 5px 10px; /* Small padding for the button */
-    background-color: white; /* White background color */
-    border: 1px solid #007bff; /* Blue border */
-    border-radius: 5px; /* Rounded corners */
-    color: #007bff; /* Blue text color */
-    font-size: 14px; /* Smaller text size */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    text-align: center; /* Center the text */
-    display: inline-flex;
-    align-items: center; /* Align the icon and text vertically */
-    justify-content: center; /* Center the content horizontally */
-}
+    /* Button Styling */
+    .button-style {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        width: 100%; /* Make button responsive */
+        max-width: 250px;
+    }
 
-/* Change background color on hover */
-.small-btn:hover {
-    background-color: #007bff; /* Blue background on hover */
-    color: white; /* White text color on hover */
-}
+    .button-style:hover {
+        background-color: #0056b3;
+    }
 
-.pending {
-    color: #856404; /* Dark yellow text */
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-color: #fff3cd; /* Light yellow background */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+    /* Small Button */
+    .small-btn {
+        padding: 5px 10px;
+        background-color: white;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        color: #007bff;
+        font-size: 14px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.pending:hover {
-    background-color: #ffeeba; /* Slightly darker yellow on hover */
-    color: #856404; /* Dark yellow text on hover */
-}
+    .small-btn:hover {
+        background-color: #007bff;
+        color: white;
+    }
 
-.approved {
-    color: #155724; /* Dark green text */
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-color: #d4edda; /* Light green background */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+    /* Status Styles */
+    .pending {
+        color: #856404;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: #fff3cd;
+        transition: background-color 0.3s ease;
+    }
 
-.approved:hover {
-    background-color: #c3e6cb; /* Slightly darker green on hover */
-    color: #155724; /* Dark green text on hover */
-}
+    .approved {
+        color: #155724;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: #d4edda;
+        transition: background-color 0.3s ease;
+    }
 
-.disapproved {
-    color: red;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-color: #f8d7da; /* Light red background */
-    transition: background-color 0.3s ease;
-}
+    .disapproved {
+        color: red;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: #f8d7da;
+        transition: background-color 0.3s ease;
+    }
 
-.disapproved:hover {
-    background-color: #f1b0b7; /* Slightly darker red on hover */
-}
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
 
+    .pagination a {
+        padding: 8px 16px;
+        margin: 0 4px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
 
+    .pagination a:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 600px) {
         .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
+            flex-direction: column;
+            align-items: center;
         }
-        .pagination a {
-            padding: 8px 16px;
-            margin: 0 4px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+
+        select, input[type="date"], .button-style {
+            max-width: 100%;
         }
-        .pagination a:hover {
-            background-color: #0056b3;
-        }
-        .pagination .active {
-            background-color: #0056b3;
-            font-weight: bold;
-        }
+    }
+
     </style>
 </head>
 <body>

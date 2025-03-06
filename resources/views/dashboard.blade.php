@@ -10,178 +10,163 @@
                 <div class="p-6 text-gray-900">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            /* margin: 20px; */
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            margin-right: 15px;
-        }
-        select, input[type="date"] {
-            padding: 8px;
-            margin: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-        }
-        /* tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #e9ecef;
-        } */
-        p {
-            text-align: center;
-            font-weight: bold;
-            margin-top: 20px;
-        }
+            body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
 
-        /* Style for the small button */
-.small-btn {
-    padding: 5px 10px; /* Small padding for the button */
-    background-color: white; /* White background color */
-    border: 1px solid #007bff; /* Blue border */
-    border-radius: 5px; /* Rounded corners */
-    color: #007bff; /* Blue text color */
-    font-size: 14px; /* Smaller text size */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    text-align: center; /* Center the text */
-    display: inline-flex;
-    align-items: center; /* Align the icon and text vertically */
-    justify-content: center; /* Center the content horizontally */
-}
-
-/* Change background color on hover */
-.small-btn:hover {
-    background-color: #007bff; /* Blue background on hover */
-    color: white; /* White text color on hover */
-}
-
-.pending {
-    color: #856404; /* Dark yellow text */
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-color: #fff3cd; /* Light yellow background */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.pending:hover {
-    background-color: #ffeeba; /* Slightly darker yellow on hover */
-    color: #856404; /* Dark yellow text on hover */
-}
-
-.approved {
-    color: #155724; /* Dark green text */
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-color: #d4edda; /* Light green background */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.approved:hover {
-    background-color: #c3e6cb; /* Slightly darker green on hover */
-    color: #155724; /* Dark green text on hover */
-}
-
-.disapproved {
-    color: red;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-color: #f8d7da; /* Light red background */
-    transition: background-color 0.3s ease;
-}
-
-.disapproved:hover {
-    background-color: #f1b0b7; /* Slightly darker red on hover */
-}
-
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .pagination a {
-            padding: 8px 16px;
-            margin: 0 4px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .pagination a:hover {
-            background-color: #0056b3;
-        }
-        .pagination .active {
-            background-color: #0056b3;
-            font-weight: bold;
-        }
-
-        .button-style {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff; /* Button background color */
-        color: white; /* Text color */
+    h2 {
         text-align: center;
-        text-decoration: none; /* Remove underline */
-        border-radius: 5px; /* Rounded corners */
+        color: #333;
+    }
+
+    label {
+        margin-right: 10px;
+        font-weight: bold;
+        display: block;
+    }
+
+    select, input[type="date"] {
+        padding: 8px;
+        margin: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%; /* Make inputs responsive */
+        max-width: 250px; /* Limit input width */
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Make table responsive */
+    @media (max-width: 768px) {
+        table {
+            display: block;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            white-space: nowrap;
+        }
+    }
+
+    /* Button Styling */
+    .button-style {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
         transition: background-color 0.3s ease;
+        width: 100%; /* Make button responsive */
+        max-width: 250px;
     }
 
     .button-style:hover {
-        background-color: #0056b3; /* Darker color on hover */
+        background-color: #0056b3;
     }
 
-    .button-style:active {
-        background-color: #004085; /* Even darker on click */
+    /* Small Button */
+    .small-btn {
+        padding: 5px 10px;
+        background-color: white;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        color: #007bff;
+        font-size: 14px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .primary {
+    .small-btn:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    /* Status Styles */
+    .pending {
+        color: #856404;
         font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: #fff3cd;
+        transition: background-color 0.3s ease;
     }
+
+    .approved {
+        color: #155724;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: #d4edda;
+        transition: background-color 0.3s ease;
+    }
+
+    .disapproved {
+        color: red;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: #f8d7da;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        padding: 8px 16px;
+        margin: 0 4px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .pagination a:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 600px) {
+        .pagination {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        select, input[type="date"], .button-style {
+            max-width: 100%;
+        }
+    }
+
     </style>
 </head>
 <body>
-    <!-- <h2>Assessment List</h2> -->
-    
-    <!-- <label>Category:
-        <select>
-            <option>Select Category</option>
-        </select>
-    </label>
-    <label>Title:
-        <select>
-            <option>Select Title</option>
-        </select>
-    </label> -->
 
-   <!-- Filter Form -->
 
 <form method="GET" action="{{ route('dashboard') }}" id="filterForm">
     <label>Status:
@@ -197,13 +182,47 @@
         <input type="date" name="date_submitted" value="{{ request('date_submitted') }}" onchange="document.getElementById('filterForm').submit()">
     </label>
 
-    @if(auth()->user() && auth()->user()->role !== 'admin')
+    @if (Auth::user()->role === 'user')
     <label>Add New:
-    <a href="/one" class="primary button-style">Request Assessment</a>
+    <a href="#" class="primary button-style" onclick="openModal(event)">Request Assessment</a>
 </label>
 @endif
-
 </form>
+
+
+<!-- Modal -->
+<div id="assessmentModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="p-4 rounded-lg shadow-lg w-1/2">
+        <div class="max-w-7xl">
+            <div class="w-full sm:px-6 lg:px-8">
+                <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-8 text-gray-900 dark:text-gray-100">
+                        <button onclick="closeModal()" class="float-right text-white font-bold text-lg">&times;</button>
+                        <form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+                        @csrf
+
+                        @include('qualification.one')
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+function openModal(event) {
+    event.preventDefault(); // Prevents the link from navigating
+    document.getElementById("assessmentModal").classList.remove("hidden");
+}
+
+function closeModal() {
+    document.getElementById("assessmentModal").classList.add("hidden");
+}
+</script>
+
     
 @php
     $hasScholar = $assessments->contains('training_status', 'scholar');
@@ -227,16 +246,16 @@
             <th>Qualification</th>
             <th>No of Pax</th>
             <th>Training of Status</th>
-            <!-- @foreach ($assessments as $assessment)
-            @if($assessment->training_status === 'scholar')
-            <th>Type of Scholar</th>
-            @elseif($assessment->training_status === 'non_scholar')
-            <th>Type of Non Scholar</th>
-            @endif
-            @endforeach -->
             <th>Type of Scholar / Non Scholar</th>
             <th>Action</th>
         </tr>
+        @if($assessments->isEmpty())
+        <tr>
+    <td colspan="11" style="text-align: center; font-weight: bold; padding: 20px;">No records found.</td>
+</tr>
+
+
+        @else
         @foreach ($assessments as $assessment)
         <tr class="{{ 
                 $assessment->status == 'pending' ? 'pending' : 
@@ -369,6 +388,7 @@
     </td>
         </tr>
         @endforeach
+        @endif
     </table>
 
      <!-- Display Pagination -->

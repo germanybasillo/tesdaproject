@@ -96,7 +96,7 @@ Route::get('/view/{id}', function ($id) {
         $assessment = Assessment::find($id);
 
         // Fetch only the comments that belong to this assessment
-        $comments = Comment::where('id', $assessment->id)->latest()->get();
+            $comments = Comment::where('id', $assessment->id)->latest()->get();
 
  
     } else {
