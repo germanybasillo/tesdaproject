@@ -419,7 +419,7 @@ class AssessmentController extends Controller
     //     return redirect()->route('dashboard')->with('success', 'Assessment created successfully!');
     // }
 
-    public function four(Request $request)
+    public function one(Request $request)
     {
         // Convert empty strings to null before validation
         $request->merge(array_map(function($value) {
@@ -436,10 +436,14 @@ class AssessmentController extends Controller
             'no_of_pax2' => 'nullable|integer',
             'no_of_pax3' => 'nullable|integer',
             'no_of_pax4' => 'nullable|integer',
-            'training_status' => 'nullable|in:scholar,non-scholar',
-            'training_status2' => 'nullable|in:scholar,non-scholar',
-            'training_status3' => 'nullable|in:scholar,non-scholar',
-            'training_status4' => 'nullable|in:scholar,non-scholar',
+            'mix_no' => 'nullable|integer',
+            'mix_no2' => 'nullable|integer',
+            'mix_no3' => 'nullable|integer',
+            'mix_no4' => 'nullable|integer',
+            'training_status' => 'nullable|in:scholar,non-scholar,mix',
+            'training_status2' => 'nullable|in:scholar,non-scholar,mix',
+            'training_status3' => 'nullable|in:scholar,non-scholar,mix',
+            'training_status4' => 'nullable|in:scholar,non-scholar,mix',
             'type_of_scholar' => 'nullable|string|max:255',
             'type_of_scholar2' => 'nullable|string|max:255',
             'type_of_scholar3' => 'nullable|string|max:255',
@@ -466,36 +470,21 @@ class AssessmentController extends Controller
             'sopcctvr4' => 'nullable|mimes:pdf',
         ]);
 
-        // If training status is non-scholar, set type_of_scholar to 'NA'
-// if ($request->training_status == 'non-scholar') {
-//     $request->merge(['type_of_scholar' => 'N/A']);
-// }
 
-// if ($request->training_status2 == 'non-scholar') {
-//     $request->merge(['type_of_scholar2' => 'N/A']);
-// }
 
-// if ($request->training_status3 == 'non-scholar') {
-//     $request->merge(['type_of_scholar3' => 'N/A']);
-// }
-
-// if ($request->training_status4 == 'non-scholar') {
-//     $request->merge(['type_of_scholar4' => 'N/A']);
-// }
-
-if ($request->training_status == 'scholar' && !$request->hasFile('oropfafns')) {
+if ( $request->hasFile('oropfafns')) {
     $request->merge(['oropfafns' => 'N/A']);
 }
 
-if ($request->training_status2 == 'scholar' && !$request->hasFile('oropfafns2')) {
+if ($request->hasFile('oropfafns2')) {
     $request->merge(['oropfafns2' => 'N/A']);
 }
 
-if ($request->training_status3 == 'scholar' && !$request->hasFile('oropfafns3')) {
+if ($request->hasFile('oropfafns3')) {
     $request->merge(['oropfafns3' => 'N/A']);
 }
 
-if ($request->training_status4 == 'scholar' && !$request->hasFile('oropfafns4')) {
+if ($request->hasFile('oropfafns4')) {
     $request->merge(['oropfafns4' => 'N/A']);
 }
 
@@ -511,6 +500,10 @@ if ($request->training_status4 == 'scholar' && !$request->hasFile('oropfafns4'))
         $assessment->no_of_pax2 = $request->no_of_pax2;
         $assessment->no_of_pax3 = $request->no_of_pax3;
         $assessment->no_of_pax4 = $request->no_of_pax4;
+        $assessment->mix_no = $request->mix_no;
+        $assessment->mix_no2 = $request->mix_no2;
+        $assessment->mix_no3 = $request->mix_no3;
+        $assessment->mix_no4 = $request->mix_no4;
         $assessment->training_status = $request->training_status;
         $assessment->training_status2 = $request->training_status2;
         $assessment->training_status3 = $request->training_status3;

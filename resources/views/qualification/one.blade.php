@@ -26,7 +26,7 @@
 
 
 
-              <form action="{{ route('assessments.four') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+              <form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
     @csrf
 
 
@@ -79,61 +79,107 @@
                                 </div>
 
                                 <div>
-                                    <label for="training_status" class="block text-sm font-medium mb-2">
-                                        Training Status:
-                                    </label>
-                                    <select id="training_status" name="training_status"
-					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your training status</option>
-                                        <option value="scholar">Scholar</option>
-                                        <option value="non-scholar">Non-Scholar</option>
-                                    </select>
-                                </div>
-                                <script>
+    <label for="training_status" class="block text-sm font-medium mb-2">
+        Training Status:
+    </label>
+    <select id="training_status" name="training_status"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled selected>Select your training status</option>
+        <option value="scholar">Scholar</option>
+        <option value="non-scholar">Non-Scholar</option>
+        <option value="mix">Mix</option>
+    </select>
+</div>
+
+<script>
     document.getElementById('training_status').addEventListener('change', function () {
         var scholarshipDiv = document.getElementById('scholarship_div');
-        var non_scholarshipDiv = document.getElementById('non_scholarship_div');
+        var nonScholarshipDiv = document.getElementById('non_scholarship_div');
         var orInputContainer = document.getElementById('orInputContainer');
+        var mix_no_container = document.getElementById('mix_no_container');
 
         if (this.value === 'scholar') {
-            scholarshipDiv.style.display = 'block';  // Show the scholarship dropdown
-            non_scholarshipDiv.style.display = 'none';  // Hide the non-scholarship dropdown
-            orInputContainer.style.display = 'none';  // Hide the document upload field
-        } else {
-            scholarshipDiv.style.display = 'none';  // Hide the scholarship dropdown
-            non_scholarshipDiv.style.display = 'block';  // Show the non-scholarship dropdown
-            orInputContainer.style.display = 'block';  // Show the document upload field
+            scholarshipDiv.style.display = 'block';
+            nonScholarshipDiv.style.display = 'none';
+            orInputContainer.style.display = 'none';
+        } else if (this.value === 'non-scholar') {
+            scholarshipDiv.style.display = 'none';
+            nonScholarshipDiv.style.display = 'block';
+            orInputContainer.style.display = 'block';
+        } else if (this.value === 'mix') {
+            scholarshipDiv.style.display = 'block';
+            nonScholarshipDiv.style.display = 'block';
+            orInputContainer.style.display = 'block';
+            mix_no_container.style.display = 'block';
         }
     });
 </script>
 
-                                <div id="scholarship_div" style="display: none;">
-                                    <label for="scholarship" class="block text-sm font-medium mb-2">
-                                        Scholarship Type:
-                                    </label>
-				    <select id="scholarship" name="type_of_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your scholarship type</option>
-                                        <option value="ttsp">TTSP</option>
-                                        <option value="cfsp">CFSP</option>
-					<option value="uaqtea">UAQTEA</option>
-                                        <option value="twsp">TWSP</option>
+<script>
+    document.getElementById('no_of_pax').addEventListener('change', function() {
+        let selectedValue = parseInt(this.value);
+        let mixNoSelect = document.getElementById('mix_no');
 
-                                    </select>
-				</div>
+        // Clear existing options except the first one
+        mixNoSelect.innerHTML = '<option value="" disabled selected>Select your number of Scholar</option>';
 
-                <div id="non_scholarship_div" style="display: none;">
-                                    <label for="non_scholarship" class="block text-sm font-medium mb-2">
-                                        Non Scholarship Type:
-                                    </label>
-				    <select id="non_scholarship" name="type_of_non_scholar" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your non scholarship type</option>
-                                        <option value="walk-in">Walk-In</option>
-                                        <option value="CAWS">CAWS</option>
-                                        <option value="three">Three</option>
-                                        <option value="four">Four</option>
+        // Populate mix_no dropdown only if selectedValue is greater than 1
+        if (selectedValue > 1) {
+            for (let i = selectedValue - 1; i >= 1; i--) {
+                let option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                mixNoSelect.appendChild(option);
+            }
+        }
+    });
+</script>
 
-                                    </select>
-				</div>
+
+<div id="mix_no_container" style="display: none;">
+    <label for="mix_no" class="block text-sm font-medium mb-2">
+        Number of Scholar:
+    </label>
+    <select id="mix_no" name="mix_no" 
+            class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled selected>Select your number of Scholar</option>
+    </select>
+</div>
+
+
+
+<!-- Scholar Section -->
+<div id="scholarship_div" style="display: none;">
+    <label for="scholarship" class="block text-sm font-medium mb-2">
+        Scholarship Type:
+    </label>
+    <select id="scholarship" name="type_of_scholar" 
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled selected>Select your scholarship type</option>
+        <option value="ttsp">TTSP</option>
+        <option value="cfsp">CFSP</option>
+        <option value="uaqtea">UAQTEA</option>
+        <option value="twsp">TWSP</option>
+    </select>
+</div>
+
+<!-- Non-Scholar Section -->
+<div id="non_scholarship_div" style="display: none;">
+    <label for="non_scholarship" class="block text-sm font-medium mb-2">
+        Non-Scholarship Type:
+    </label>
+    <select id="non_scholarship" name="type_of_non_scholar" 
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled selected>Select your non-scholarship type</option>
+        <option value="Walk-In">Walk-In</option>
+        <option value="CAWS">CAWS</option>
+        <option value="Three">Three</option>
+        <option value="Four">Four</option>
+    </select>
+</div>
+
+
+               
 
               <!-- Hidden Qualification Fields -->
     <div id="qualificationSection2" style="display: none;">
@@ -173,27 +219,69 @@
                 <option value="" disabled selected>Select your training status</option>
                 <option value="scholar">Scholar</option>
                 <option value="non-scholar">Non-Scholar</option>
+                <option value="mix">Mix</option>
             </select>
         </div>
         
         <!-- Scholarship and Non-Scholarship Fields -->
         <script>
-            document.getElementById('training_status2').addEventListener('change', function () {
-                var scholarshipDiv2 = document.getElementById('scholarship_div2');
-                var non_scholarshipDiv2 = document.getElementById('non_scholarship_div2');
-                var orInputContainer2 = document.getElementById('orInputContainer2');
+    document.getElementById('training_status2').addEventListener('change', function () {
+        var scholarshipDiv2 = document.getElementById('scholarship_div2');
+        var non_scholarshipDiv2 = document.getElementById('non_scholarship_div2');
+        var orInputContainer2 = document.getElementById('orInputContainer2');
+        var mix_no_container2 = document.getElementById('mix_no_container2');
 
-                if (this.value === 'scholar') {
-                    scholarshipDiv2.style.display = 'block';
-                    non_scholarshipDiv2.style.display = 'none';
-                    orInputContainer2.style.display = 'none';
-                } else {
-                    scholarshipDiv2.style.display = 'none';
-                    non_scholarshipDiv2.style.display = 'block';
-                    orInputContainer2.style.display = 'block';
-                }
-            });
-        </script>
+        if (this.value === 'scholar') {
+            scholarshipDiv2.style.display = 'block';
+            non_scholarshipDiv2.style.display = 'none';
+            orInputContainer2.style.display = 'none';
+        } else if (this.value === 'non-scholar') {
+            scholarshipDiv2.style.display = 'none';
+            non_scholarshipDiv2.style.display = 'block';
+            orInputContainer2.style.display = 'block';
+        } else if (this.value === 'mix') {
+            scholarshipDiv2.style.display = 'block';
+            non_scholarshipDiv2.style.display = 'block';
+            orInputContainer2.style.display = 'block';
+            mix_no_container2.style.display = 'block';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('no_of_pax2').addEventListener('change', function() {
+        let selectedValue = parseInt(this.value);
+        let mixNoSelect = document.getElementById('mix_no2');
+
+        // Clear existing options except the first one
+        mixNoSelect.innerHTML = '<option value="" disabled selected>Select your number of Scholar</option>';
+
+        // Populate mix_no dropdown only if selectedValue is greater than 1
+        if (selectedValue > 1) {
+            for (let i = selectedValue - 1; i >= 1; i--) {
+                let option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                mixNoSelect.appendChild(option);
+            }
+        }
+    });
+</script>
+
+
+<div id="mix_no_container2" style="display: none;">
+    <label for="mix_no2" class="block text-sm font-medium mb-2">
+        Number of Scholar:
+    </label>
+    <select id="mix_no2" name="mix_no2" 
+            class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled selected>Select your number of Scholar</option>
+    </select>
+</div>
+
+
+
+
 
         <div id="scholarship_div2" style="display: none;">
             <label for="scholarship2" class="block text-sm font-medium mb-2">
@@ -216,10 +304,10 @@
             <select id="non_scholarship2" name="type_of_non_scholar2" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                 <option value="" disabled selected>Select your non scholarship type</option>
-                <option value="walk-in">Walk-In</option>
+                <option value="Walk-In">Walk-In</option>
                 <option value="CAWS">CAWS</option>
-                <option value="three">Three</option>
-                <option value="four">Four</option>
+                <option value="Three">Three</option>
+                <option value="Four">Four</option>
             </select>
         </div>
     </div>
@@ -262,27 +350,33 @@
                 <option value="" disabled selected>Select your training status</option>
                 <option value="scholar">Scholar</option>
                 <option value="non-scholar">Non-Scholar</option>
+                <option value="mix">Mix</option>
             </select>
         </div>
         
-        <!-- Scholarship and Non-Scholarship Fields -->
         <script>
-            document.getElementById('training_status3').addEventListener('change', function () {
-                var scholarshipDiv3 = document.getElementById('scholarship_div3');
-                var non_scholarshipDiv3 = document.getElementById('non_scholarship_div3');
-                var orInputContainer3 = document.getElementById('orInputContainer3');
+    document.getElementById('training_status3').addEventListener('change', function () {
+        var scholarshipDiv3 = document.getElementById('scholarship_div3');
+        var non_scholarshipDiv3 = document.getElementById('non_scholarship_div3');
+        var orInputContainer3 = document.getElementById('orInputContainer3');
 
-                if (this.value === 'scholar') {
-                    scholarshipDiv3.style.display = 'block';
-                    non_scholarshipDiv3.style.display = 'none';
-                    orInputContainer3.style.display = 'none';
-                } else {
-                    scholarshipDiv3.style.display = 'none';
-                    non_scholarshipDiv3.style.display = 'block';
-                    orInputContainer3.style.display = 'block';
-                }
-            });
-        </script>
+        if (this.value === 'scholar') {
+            scholarshipDiv3.style.display = 'block';
+            non_scholarshipDiv3.style.display = 'none';
+            orInputContainer3.style.display = 'none';
+        } else if (this.value === 'non-scholar') {
+            scholarshipDiv3.style.display = 'none';
+            non_scholarshipDiv3.style.display = 'block';
+            orInputContainer3.style.display = 'block';
+        } else if (this.value === 'mix') {
+            scholarshipDiv3.style.display = 'block';
+            non_scholarshipDiv3.style.display = 'block';
+            orInputContainer3.style.display = 'block';
+        }
+    });
+</script>
+
+
 
         <div id="scholarship_div3" style="display: none;">
             <label for="scholarship3" class="block text-sm font-medium mb-2">
@@ -305,10 +399,10 @@
             <select id="non_scholarship3" name="type_of_non_scholar3" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                 <option value="" disabled selected>Select your non scholarship type</option>
-                <option value="walk-in">Walk-In</option>
+                <option value="Walk-In">Walk-In</option>
                 <option value="CAWS">CAWS</option>
-                <option value="three">Three</option>
-                <option value="four">Four</option>
+                <option value="Three">Three</option>
+                <option value="Four">Four</option>
             </select>
         </div>
     </div>
@@ -351,27 +445,32 @@
                 <option value="" disabled selected>Select your training status</option>
                 <option value="scholar">Scholar</option>
                 <option value="non-scholar">Non-Scholar</option>
+                <option value="mix">Mix</option>
+
             </select>
         </div>
         
-        <!-- Scholarship and Non-Scholarship Fields -->
         <script>
-            document.getElementById('training_status4').addEventListener('change', function () {
-                var scholarshipDiv4 = document.getElementById('scholarship_div4');
-                var non_scholarshipDiv4 = document.getElementById('non_scholarship_div4');
-                var orInputContainer4 = document.getElementById('orInputContainer4');
+    document.getElementById('training_status4').addEventListener('change', function () {
+        var scholarshipDiv4 = document.getElementById('scholarship_div4');
+        var non_scholarshipDiv4 = document.getElementById('non_scholarship_div4');
+        var orInputContainer4 = document.getElementById('orInputContainer4');
 
-                if (this.value === 'scholar') {
-                    scholarshipDiv4.style.display = 'block';
-                    non_scholarshipDiv4.style.display = 'none';
-                    orInputContainer4.style.display = 'none';
-                } else {
-                    scholarshipDiv4.style.display = 'none';
-                    non_scholarshipDiv4.style.display = 'block';
-                    orInputContainer4.style.display = 'block';
-                }
-            });
-        </script>
+        if (this.value === 'scholar') {
+            scholarshipDiv4.style.display = 'block';
+            non_scholarshipDiv4.style.display = 'none';
+            orInputContainer4.style.display = 'none';
+        } else if (this.value === 'non-scholar') {
+            scholarshipDiv4.style.display = 'none';
+            non_scholarshipDiv4.style.display = 'block';
+            orInputContainer4.style.display = 'block';
+        } else if (this.value === 'mix') {
+            scholarshipDiv4.style.display = 'block';
+            non_scholarshipDiv4.style.display = 'block';
+            orInputContainer4.style.display = 'block';
+        }
+    });
+</script>
 
         <div id="scholarship_div4" style="display: none;">
             <label for="scholarship4" class="block text-sm font-medium mb-2">
@@ -394,10 +493,10 @@
             <select id="non_scholarship4" name="type_of_non_scholar4" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
                 <option value="" disabled selected>Select your non scholarship type</option>
-                <option value="walk-in">Walk-In</option>
+                <option value="Walk-In">Walk-In</option>
                 <option value="CAWS">CAWS</option>
-                <option value="three">Three</option>
-                <option value="four">Four</option>
+                <option value="Three">Three</option>
+                <option value="Four">Four</option>
             </select>
         </div>
     </div>

@@ -15,30 +15,6 @@ class Qualification extends Controller
         return view('qualification.one');
     }
 
-    // public function two()
-    // {
-    //     if (!$this->isAccessAllowed()) {
-    //         return $this->denyAccess();
-    //     }
-    //     return view('qualification.two');
-    // }
-
-    // public function three()
-    // {
-    //     if (!$this->isAccessAllowed()) {
-    //         return $this->denyAccess();
-    //     }
-    //     return view('qualification.three');
-    // }
-
-    // public function four()
-    // {
-    //     if (!$this->isAccessAllowed()) {
-    //         return $this->denyAccess();
-    //     }
-    //     return view('qualification.four');
-    // }
-
     private function isAccessAllowed()
     {
         $now = Carbon::now('Asia/Manila');
@@ -47,7 +23,7 @@ class Qualification extends Controller
     
         // return $now->isThursday() && $now->between($start, $end);
 
-        return $now->isWednesday() && $now->between($start, $end);
+        return $now->isThursday() && $now->between($start, $end);
     }
     
     private function denyAccess()

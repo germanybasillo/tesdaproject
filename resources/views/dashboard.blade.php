@@ -337,45 +337,36 @@
             @endif
             </td>
 
-        @endif
+            @elseif($assessment->training_status === 'mix')
 
-        <td>
-    <!-- Check if qualification exists -->
-    @if($assessment->qualification)
-        <a href="{{ url('/one/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a><br>
+            <td>
+    @if(!empty($assessment->mix_no))
+        {{$assessment->mix_no}} - {{$assessment->type_of_scholar}} / {{10 - $assessment->mix_no}} - {{$assessment->type_of_non_scholar}}<br>
     @endif
 
-    <!-- Check if qualification2 exists -->
-    @if($assessment->qualification2)
-        <a href="{{ url('/two/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a><br>
+    @if(!empty($assessment->mix_no2) && $assessment->qualification2 !== 'N/A')
+        {{$assessment->mix_no2}} - {{$assessment->type_of_scholar2}} / {{10 - $assessment->mix_no2}} - {{$assessment->type_of_non_scholar2}}<br>
     @endif
 
-    <!-- Check if qualification3 exists -->
-    @if($assessment->qualification3)
-        <a href="{{ url('/three/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a><br>
+    @if(!empty($assessment->mix_no3) && $assessment->qualification3 !== 'N/A')
+        {{$assessment->mix_no3}} - {{$assessment->type_of_scholar3}} / {{10 - $assessment->mix_no3}} - {{$assessment->type_of_non_scholar3}}<br>
     @endif
 
-    <!-- Check if qualification4 exists -->
-    @if($assessment->qualification4)
-        <a href="{{ url('/four/' . $assessment->id) }}" target="_blank">
-            <button class="small-btn">
-                <i class="fa fa-eye"></i> View
-            </button>
-        </a>
+    @if(!empty($assessment->mix_no4) && $assessment->qualification4 !== 'N/A')
+        {{$assessment->mix_no4}} - {{$assessment->type_of_scholar4}} / {{10 - $assessment->mix_no4}} - {{$assessment->type_of_non_scholar4}}
     @endif
 </td>
+
+        @endif
+
+
+        <td>
+        <a href="{{ url('/view/' . $assessment->id) }}" target="_blank">
+            <button class="small-btn">
+                <i class="fa fa-eye"></i> View
+            </button>
+        </a><br>
+    </td>
         </tr>
         @endforeach
     </table>
