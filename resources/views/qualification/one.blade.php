@@ -615,7 +615,6 @@
         </div>
         <!-- Right Side: PDF Preview -->
         <div id="pdf" style="display: none; flex: 2;">
-            <h3 style="color: blue;">Preview PDF Here</h3>
             <iframe id="pdfView" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
         </div>
     </div>
@@ -674,7 +673,6 @@
         </div>
         <!-- Right Side: PDF Preview -->
         <div id="pdf2" style="display: none; flex: 2;">
-            <h3 style="color: blue;">Preview PDF Here</h3>
             <iframe id="pdfView2" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
         </div>
     </div>
@@ -733,7 +731,6 @@
         </div>
         <!-- Right Side: PDF Preview -->
         <div id="pdf3" style="display: none; flex: 2;">
-            <h3 style="color: blue;">Preview PDF Here</h3>
             <iframe id="pdfView3" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
         </div>
     </div>
@@ -791,7 +788,6 @@
         </div>
         <!-- Right Side: PDF Preview -->
         <div id="pdf4" style="display: none; flex: 2;">
-            <h3 style="color: blue;">Preview PDF Here</h3>
             <iframe id="pdfView4" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
         </div>
     </div>
