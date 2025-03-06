@@ -10,7 +10,8 @@
                             </style>
 
 
-
+<form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+@csrf
 
 				<div id="step1">
 
@@ -557,13 +558,6 @@
     Apply Schedule
 </button>
 
-   <!-- Cancel Button to go back -->
-   <button type="button" id="cancel_button" 
-            class="mt-4 px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400"
-            onclick="window.history.back();">
-            Cancel
-        </button>
-
             </div>
  <!-- Step 2: Document Upload -->
     <div id="step2" style="display: none;">
@@ -610,7 +604,7 @@
 
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
-    <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
+    <x-input-error :messages="$errors->get('sopcctvr')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
@@ -653,11 +647,11 @@
         <x-input-label class="text-white" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument2" class="block w-full bg-white dark:text-black" type="file" name="eltt2" 
                 placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" 
-                autocomplete="eltt2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" required/>
+                autocomplete="eltt2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
             <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
             <x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" required/>
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
     <div style="display: none;" id="orInputContainer2">
@@ -667,13 +661,13 @@
     </div>
 
     <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" required/>
-    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    <x-input-error :messages="$errors->get('sopcctvr2')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
         <div id="pdf2" style="display: none; flex: 2;">
-            <iframe id="pdfView2" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+            <iframe id="pdfView2" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc; background-color:blue"></iframe>
         </div>
     </div>
 </div>
@@ -711,11 +705,11 @@
         <x-input-label class="text-white" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument3" class="block w-full bg-white dark:text-black" type="file" name="eltt3" 
                 placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" 
-                autocomplete="eltt3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" required/>
+                autocomplete="eltt3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
             <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
             <x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" required/>
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
     <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
     <div style="display: none;" id="orInputContainer3">
@@ -725,8 +719,8 @@
     </div>
 
     <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" required/>
-    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+    <x-input-error :messages="$errors->get('sopcctvr3')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
@@ -768,11 +762,11 @@
         <x-input-label class="text-white" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument4" class="block w-full bg-white dark:text-black" type="file" name="eltt4" 
                 placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" 
-                autocomplete="eltt4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" required/>
+                autocomplete="eltt4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
             <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
             <x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" required/>
+    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
     <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
     <div style="display: none;" id="orInputContainer4">
@@ -781,9 +775,9 @@
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
     </div>
 
-    <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" required/>
-    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+    <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-input-error :messages="$errors->get('sopcctvr4')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
@@ -792,9 +786,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 </div>
 
@@ -888,6 +879,7 @@
 
 </div>
 </div>
+</form>
 
 
 
@@ -966,3 +958,5 @@ document.getElementById('next_button').addEventListener('click', function () {
                                     }
                                 });
                             </script>
+
+           

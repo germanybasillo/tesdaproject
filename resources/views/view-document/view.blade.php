@@ -151,14 +151,51 @@
     <th class="title">Attached File</th>
     <!-- <td>Letter of Attached Case</td> -->
     <td>
-    @if (!empty($assessment->eltt) && file_exists(public_path($assessment->eltt)))
+        @if (!empty($assessment->eltt) && file_exists(public_path($assessment->eltt)))
             <a href="{{ asset($assessment->eltt) }}" target="_blank" class="view-file">Endorsement Letter To TESDA</a><br>
         @else
  
         @endif
+
+        @if (!empty($assessment->rfftp) && file_exists(public_path($assessment->rfftp)))
+            <a href="{{ asset($assessment->rfftp) }}" target="_blank" class="view-file">Request Form For Test Package</a><br>
+        @else
+ 
+        @endif
+
+        @if (!empty($assessment->oropfafns) && file_exists(public_path($assessment->oropfafns)))
+            <a href="{{ asset($assessment->oropfafns) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar</a><br>
+        @else
+  
+        @endif
+
+        @if (!empty($assessment->sopcctvr) && file_exists(public_path($assessment->sopcctvr)))
+            <a href="{{ asset($assessment->sopcctvr) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings</a><br>
+        @else
+      
+        @endif
     
-    @if (!empty($assessment->eltt2) && file_exists(public_path($assessment->eltt2)))
+        @if (!empty($assessment->eltt2) && file_exists(public_path($assessment->eltt2)))
             <a href="{{ asset($assessment->eltt2) }}" target="_blank" class="view-file">Endorsement Letter To TESDA 2</a><br>
+        @else
+
+        @endif
+
+        @if (!empty($assessment->rfftp2) && file_exists(public_path($assessment->rfftp2)))
+            <a href="{{ asset($assessment->rfftp2) }}" target="_blank" class="view-file">Request Form For Test Package 2</a><br>
+        @else
+
+        @endif
+        
+
+        @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)))
+            <a href="{{ asset($assessment->oropfafns2) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar 2</a><br>
+        @else
+
+        @endif
+
+        @if (!empty($assessment->sopcctvr2) && file_exists(public_path($assessment->sopcctvr2)))
+            <a href="{{ asset($assessment->sopcctvr2) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings 2</a><br>
         @else
 
         @endif
@@ -169,44 +206,8 @@
 
         @endif
 
-        @if (!empty($assessment->eltt4) && file_exists(public_path($assessment->eltt4)))
-            <a href="{{ asset($assessment->eltt4) }}" target="_blank" class="view-file">Endorsement Letter To TESDA 4</a><br>
-        @else
-
-        @endif
-
-    @if (!empty($assessment->rfftp) && file_exists(public_path($assessment->rfftp)))
-            <a href="{{ asset($assessment->rfftp) }}" target="_blank" class="view-file">Request Form For Test Package</a><br>
-        @else
- 
-        @endif
-
-    @if (!empty($assessment->rfftp2) && file_exists(public_path($assessment->rfftp2)))
-            <a href="{{ asset($assessment->rfftp2) }}" target="_blank" class="view-file">Request Form For Test Package 2</a><br>
-        @else
-
-        @endif
-
         @if (!empty($assessment->rfftp3) && file_exists(public_path($assessment->rfftp3)))
             <a href="{{ asset($assessment->rfftp3) }}" target="_blank" class="view-file">Request Form For Test Package 3</a><br>
-        @else
-
-        @endif
-
-        @if (!empty($assessment->rfftp4) && file_exists(public_path($assessment->rfftp4)))
-            <a href="{{ asset($assessment->rfftp4) }}" target="_blank" class="view-file">Request Form For Test Package 4</a><br>
-        @else
-
-        @endif
-
-    @if (!empty($assessment->oropfafns) && file_exists(public_path($assessment->oropfafns)))
-            <a href="{{ asset($assessment->oropfafns) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar</a><br>
-        @else
-  
-        @endif
-
-    @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)))
-            <a href="{{ asset($assessment->oropfafns2) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar 2</a><br>
         @else
 
         @endif
@@ -217,30 +218,31 @@
 
         @endif
 
-        @if (!empty($assessment->oropfafns4) && file_exists(public_path($assessment->oropfafns4)))
-            <a href="{{ asset($assessment->oropfafns4) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar 4</a><br>
-        @else
-
-        @endif
-  
-    @if (!empty($assessment->sopcctvr) && file_exists(public_path($assessment->sopcctvr)))
-            <a href="{{ asset($assessment->sopcctvr) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings</a><br>
-        @else
-      
-        @endif
-
-    @if (!empty($assessment->sopcctvr2) && file_exists(public_path($assessment->sopcctvr2)))
-            <a href="{{ asset($assessment->sopcctvr2) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings 2</a><br>
-        @else
-
-        @endif
-
         @if (!empty($assessment->sopcctvr3) && file_exists(public_path($assessment->sopcctvr3)))
             <a href="{{ asset($assessment->sopcctvr3) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings 3</a><br>
         @else
 
         @endif
 
+
+        @if (!empty($assessment->eltt4) && file_exists(public_path($assessment->eltt4)))
+            <a href="{{ asset($assessment->eltt4) }}" target="_blank" class="view-file">Endorsement Letter To TESDA 4</a><br>
+        @else
+
+        @endif
+   
+        @if (!empty($assessment->rfftp4) && file_exists(public_path($assessment->rfftp4)))
+            <a href="{{ asset($assessment->rfftp4) }}" target="_blank" class="view-file">Request Form For Test Package 4</a><br>
+        @else
+
+        @endif
+
+        @if (!empty($assessment->oropfafns4) && file_exists(public_path($assessment->oropfafns4)))
+            <a href="{{ asset($assessment->oropfafns4) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar 4</a><br>
+        @else
+
+        @endif
+  
         @if (!empty($assessment->sopcctvr4) && file_exists(public_path($assessment->sopcctvr4)))
             <a href="{{ asset($assessment->sopcctvr4) }}" target="_blank" class="view-file">Submission of Previous CCTV Recordings 4</a><br>
         @else
