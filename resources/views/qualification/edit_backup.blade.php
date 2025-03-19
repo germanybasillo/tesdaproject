@@ -1,14 +1,23 @@
 
-                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+                            <style>
+                                .holiday {
+                                    background-color: red !important;
+                                    color: white !important;
+                                    border-radius: 50%;
+                                    font-weight: bold;
+                                }
+                            </style>
 
-<form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+<form action="{{ route('assessments.oneUpdate', $assessment->id) }}" method="POST" class="space-y-6" enctype="multipart/form-data">
 @csrf
+@method('PUT')
 
 				<div id="step1">
 
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
         <i class="fas fa-calendar-alt mr-2"></i>
-        {{ __('Apply Assessment Schedule') }}
+        {{ __('Update Assessment Schedule') }}
     </h2><br>
 
    <div>
@@ -16,27 +25,27 @@
         Desired Date of Assessment:    </label>
     <input class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black"
         type="date" 
-        id="assessment_date" 
+
         name="assessment_date"
-        placeholder="Select Date"
+        value="{{  $assessment->assessment_date }}"
+     
         required 
     >
 </div>
 
 
-                                                          <div>
-                                    <label for="qualification" class="block text-sm font-medium mb-2">
-                                        Qualification:
-                                    </label>
-                                    <select id="qualification" name="qualification"
+<div>
+    <label for="qualification" class="block text-sm font-medium mb-2">
+        Qualification:
+    </label>
+    <select id="qualification" name="qualification"
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-                                        <option value="" disabled selected>Select your qualification</option>
-                                        <option value="FBS NC II">FBS NC II</option>
-                                        <option value="CSS NC II">CSS NC II</option>
-					<option value="Cook NC II">Cook NC II</option>
-                                        <option value="Driving NC II">Driving NC II</option>
-                                    </select>
-                                </div>
+        <option value="FBS NC II" {{ $assessment->qualification == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+        <option value="CSS NC II" {{ $assessment->qualification == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+        <option value="Cook NC II" {{ $assessment->qualification == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+        <option value="Driving NC II" {{ $assessment->qualification == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
+    </select>
+</div>
 
                                 <div>
                                     <label for="no_of_pax" class="block text-sm font-medium mb-2">
@@ -44,9 +53,8 @@
                                     </label>
                                     <select id="no_of_pax" name="no_of_pax"
 					    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                                        <option value="" disabled selected>Select your number of pax</option>
                                         @for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
+                                            <option value="{{ $i }}" {{ $assessment->no_of_pax == $i ? 'selected' : '' }}>{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -57,10 +65,9 @@
     </label>
     <select id="training_status" name="training_status"
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-        <option value="" disabled selected>Select your training status</option>
-        <option value="scholar">Scholar</option>
-        <option value="non-scholar">Non-Scholar</option>
-        <option value="mix">Mix</option>
+        <option value="scholar" {{ $assessment->training_status == 'scholar' ? 'selected' : '' }}>Scholar</option>
+        <option value="non-scholar" {{ $assessment->training_status == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
+        <option value="mix" {{ $assessment->training_status == 'mix' ? 'selected' : '' }}>Mix</option>
     </select>
 </div>
 
@@ -93,9 +100,6 @@
         let selectedValue = parseInt(this.value);
         let mixNoSelect = document.getElementById('mix_no');
 
-        // Clear existing options except the first one
-        mixNoSelect.innerHTML = '<option value="" disabled selected>Select your number of Scholar</option>';
-
         // Populate mix_no dropdown only if selectedValue is greater than 1
         if (selectedValue > 1) {
             for (let i = selectedValue - 1; i >= 1; i--) {
@@ -109,13 +113,12 @@
 </script>
 
 
-<div id="mix_no_container">
+<div id="mix_no_container" style="display: none;">
     <label for="mix_no" class="block text-sm font-medium mb-2">
         Number of Scholar:
     </label>
     <select id="mix_no" name="mix_no" 
             class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-        <option value="" disabled selected>Select your number of Scholar</option>
     </select>
 </div>
 
@@ -128,11 +131,10 @@
     </label>
     <select id="scholarship" name="type_of_scholar" 
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-        <option value="" disabled selected>Select your scholarship type</option>
-        <option value="ttsp">TTSP</option>
-        <option value="cfsp">CFSP</option>
-        <option value="uaqtea">UAQTEA</option>
-        <option value="twsp">TWSP</option>
+        <option value="ttsp"  {{ $assessment->type_of_scholar == 'ttsp' ? 'selected' : '' }}>TTSP</option>
+        <option value="cfsp"  {{ $assessment->type_of_scholar == 'cfsp' ? 'selected' : '' }}>CFSP</option>
+        <option value="uaqtea"  {{ $assessment->type_of_scholar == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
+        <option value="twsp"  {{ $assessment->type_of_scholar == 'twsp' ? 'selected' : '' }}>TWSP</option>
     </select>
 </div>
 
@@ -143,11 +145,10 @@
     </label>
     <select id="non_scholarship" name="type_of_non_scholar" 
         class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-        <option value="" disabled selected>Select your non-scholarship type</option>
-        <option value="Walk-In">Walk-In</option>
-        <option value="CAWS">CAWS</option>
-        <option value="Three">Three</option>
-        <option value="Four">Four</option>
+        <option value="Walk-In" {{ $assessment->type_of_non_scholar == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+        <option value="CAWS" {{ $assessment->type_of_non_scholar == 'CAWS' ? 'selected' : '' }}>CAWS</option>
+        <option value="Three" {{ $assessment->type_of_non_scholar == 'Three' ? 'selected' : '' }}>Three</option>
+        <option value="Four" {{ $assessment->type_of_non_scholar == 'Four' ? 'selected' : '' }}>Four</option>
     </select>
 </div>
 
@@ -162,11 +163,10 @@
             </label>
             <select id="qualification2" name="qualification2" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-                <option value="" disabled selected>Select your qualification</option>
-                <option value="FBS NC II">FBS NC II</option>
-                <option value="CSS NC II">CSS NC II</option>
-                <option value="Cook NC II">Cook NC II</option>
-                <option value="Driving NC II">Driving NC II</option>
+                <option value="FBS NC II" {{ $assessment->qualification2 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+                <option value="CSS NC II" {{ $assessment->qualification2 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+                <option value="Cook NC II" {{ $assessment->qualification2 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+                <option value="Driving NC II" {{ $assessment->qualification2 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
             </select>
         </div>
 
@@ -176,9 +176,8 @@
             </label>
             <select id="no_of_pax2" name="no_of_pax2" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your number of pax</option>
                 @for ($i = 1; $i <= 10; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                    <option value="{{ $i }}" {{ $assessment->no_of_pax2 == $i ? 'selected' : '' }}>{{ $i }}</option>
                 @endfor
             </select>
         </div>
@@ -189,10 +188,9 @@
             </label>
             <select id="training_status2" name="training_status2" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your training status</option>
-                <option value="scholar">Scholar</option>
-                <option value="non-scholar">Non-Scholar</option>
-                <option value="mix">Mix</option>
+                    <option value="scholar" {{ $assessment->training_status2 == 'scholar' ? 'selected' : '' }}>Scholar</option>
+        <option value="non-scholar" {{ $assessment->training_status2 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
+        <option value="mix" {{ $assessment->training_status2 == 'mix' ? 'selected' : '' }}>Mix</option>
             </select>
         </div>
         
@@ -226,9 +224,6 @@
         let selectedValue = parseInt(this.value);
         let mixNoSelect = document.getElementById('mix_no2');
 
-        // Clear existing options except the first one
-        mixNoSelect.innerHTML = '<option value="" disabled selected>Select your number of Scholar</option>';
-
         // Populate mix_no dropdown only if selectedValue is greater than 1
         if (selectedValue > 1) {
             for (let i = selectedValue - 1; i >= 1; i--) {
@@ -242,13 +237,12 @@
 </script>
 
 
-<div id="mix_no_container2">
+<div id="mix_no_container2" style="display: none;">
     <label for="mix_no2" class="block text-sm font-medium mb-2">
         Number of Scholar:
     </label>
     <select id="mix_no2" name="mix_no2" 
             class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-        <option value="" disabled selected>Select your number of Scholar</option>
     </select>
 </div>
 
@@ -262,11 +256,10 @@
             </label>
             <select id="scholarship2" name="type_of_scholar2" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your scholarship type</option>
-                <option value="ttsp">TTSP</option>
-                <option value="cfsp">CFSP</option>
-                <option value="uaqtea">UAQTEA</option>
-                <option value="twsp">TWSP</option>
+                    <option value="ttsp"  {{ $assessment->type_of_scholar2 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
+        <option value="cfsp"  {{ $assessment->type_of_scholar2 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
+        <option value="uaqtea"  {{ $assessment->type_of_scholar2 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
+        <option value="twsp"  {{ $assessment->type_of_scholar2 == 'twsp' ? 'selected' : '' }}>TWSP</option>
             </select>
         </div>
 
@@ -276,11 +269,10 @@
             </label>
             <select id="non_scholarship2" name="type_of_non_scholar2" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your non scholarship type</option>
-                <option value="Walk-In">Walk-In</option>
-                <option value="CAWS">CAWS</option>
-                <option value="Three">Three</option>
-                <option value="Four">Four</option>
+                    <option value="Walk-In" {{ $assessment->type_of_non_scholar2 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+        <option value="CAWS" {{ $assessment->type_of_non_scholar2 == 'CAWS' ? 'selected' : '' }}>CAWS</option>
+        <option value="Three" {{ $assessment->type_of_non_scholar2 == 'Three' ? 'selected' : '' }}>Three</option>
+        <option value="Four" {{ $assessment->type_of_non_scholar2 == 'Four' ? 'selected' : '' }}>Four</option>
             </select>
         </div>
     </div>
@@ -293,11 +285,10 @@
             </label>
             <select id="qualification3" name="qualification3" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-                <option value="" disabled selected>Select your qualification</option>
-                <option value="FBS NC II">FBS NC II</option>
-                <option value="CSS NC II">CSS NC II</option>
-                <option value="Cook NC II">Cook NC II</option>
-                <option value="Driving NC II">Driving NC II</option>
+                    <option value="FBS NC II" {{ $assessment->qualification3 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+        <option value="CSS NC II" {{ $assessment->qualification3 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+        <option value="Cook NC II" {{ $assessment->qualification3 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+        <option value="Driving NC II" {{ $assessment->qualification3 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
             </select>
         </div>
 
@@ -307,9 +298,8 @@
             </label>
             <select id="no_of_pax3" name="no_of_pax3" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your number of pax</option>
                 @for ($i = 1; $i <= 10; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                    <option value="{{ $i }}" {{ $assessment->no_of_pax3 == $i ? 'selected' : '' }}>{{ $i }}</option>
                 @endfor
             </select>
         </div>
@@ -320,10 +310,9 @@
             </label>
             <select id="training_status3" name="training_status3" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your training status</option>
-                <option value="scholar">Scholar</option>
-                <option value="non-scholar">Non-Scholar</option>
-                <option value="mix">Mix</option>
+                    <option value="scholar" {{ $assessment->training_status3 == 'scholar' ? 'selected' : '' }}>Scholar</option>
+        <option value="non-scholar" {{ $assessment->training_status3 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
+        <option value="mix" {{ $assessment->training_status3 == 'mix' ? 'selected' : '' }}>Mix</option>
             </select>
         </div>
         
@@ -350,38 +339,6 @@
 </script>
 
 
-<script>
-    document.getElementById('no_of_pax3').addEventListener('change', function() {
-        let selectedValue = parseInt(this.value);
-        let mixNoSelect = document.getElementById('mix_no3');
-
-        // Clear existing options except the first one
-        mixNoSelect.innerHTML = '<option value="" disabled selected>Select your number of Scholar</option>';
-
-        // Populate mix_no dropdown only if selectedValue is greater than 1
-        if (selectedValue > 1) {
-            for (let i = selectedValue - 1; i >= 1; i--) {
-                let option = document.createElement('option');
-                option.value = i;
-                option.textContent = i;
-                mixNoSelect.appendChild(option);
-            }
-        }
-    });
-</script>
-
-
-<div id="mix_no_container2">
-    <label for="mix_no3" class="block text-sm font-medium mb-2">
-        Number of Scholar:
-    </label>
-    <select id="mix_no3" name="mix_no3" 
-            class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-        <option value="" disabled selected>Select your number of Scholar</option>
-    </select>
-</div>
-
-
 
         <div id="scholarship_div3" style="display: none;">
             <label for="scholarship3" class="block text-sm font-medium mb-2">
@@ -389,11 +346,10 @@
             </label>
             <select id="scholarship3" name="type_of_scholar3" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your scholarship type</option>
-                <option value="ttsp">TTSP</option>
-                <option value="cfsp">CFSP</option>
-                <option value="uaqtea">UAQTEA</option>
-                <option value="twsp">TWSP</option>
+                    <option value="ttsp"  {{ $assessment->type_of_scholar3 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
+        <option value="cfsp"  {{ $assessment->type_of_scholar3 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
+        <option value="uaqtea"  {{ $assessment->type_of_scholar3 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
+        <option value="twsp"  {{ $assessment->type_of_scholar3 == 'twsp' ? 'selected' : '' }}>TWSP</option>
             </select>
         </div>
 
@@ -403,11 +359,10 @@
             </label>
             <select id="non_scholarship3" name="type_of_non_scholar3" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your non scholarship type</option>
-                <option value="Walk-In">Walk-In</option>
-                <option value="CAWS">CAWS</option>
-                <option value="Three">Three</option>
-                <option value="Four">Four</option>
+                    <option value="Walk-In" {{ $assessment->type_of_non_scholar3 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+        <option value="CAWS" {{ $assessment->type_of_non_scholar3 == 'CAWS' ? 'selected' : '' }}>CAWS</option>
+        <option value="Three" {{ $assessment->type_of_non_scholar3 == 'Three' ? 'selected' : '' }}>Three</option>
+        <option value="Four" {{ $assessment->type_of_non_scholar3 == 'Four' ? 'selected' : '' }}>Four</option>
             </select>
         </div>
     </div>
@@ -420,11 +375,10 @@
             </label>
             <select id="qualification4" name="qualification4" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-                <option value="" disabled selected>Select your qualification</option>
-                <option value="FBS NC II">FBS NC II</option>
-                <option value="CSS NC II">CSS NC II</option>
-                <option value="Cook NC II">Cook NC II</option>
-                <option value="Driving NC II">Driving NC II</option>
+                    <option value="FBS NC II" {{ $assessment->qualification4 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+        <option value="CSS NC II" {{ $assessment->qualification4 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+        <option value="Cook NC II" {{ $assessment->qualification4 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+        <option value="Driving NC II" {{ $assessment->qualification4 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
             </select>
         </div>
 
@@ -434,9 +388,8 @@
             </label>
             <select id="no_of_pax4" name="no_of_pax4" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your number of pax</option>
                 @for ($i = 1; $i <= 10; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                    <option value="{{ $i }}" {{ $assessment->no_of_pax4 == $i ? 'selected' : '' }}>{{ $i }}</option>
                 @endfor
             </select>
         </div>
@@ -447,10 +400,9 @@
             </label>
             <select id="training_status4" name="training_status4" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your training status</option>
-                <option value="scholar">Scholar</option>
-                <option value="non-scholar">Non-Scholar</option>
-                <option value="mix">Mix</option>
+                    <option value="scholar" {{ $assessment->training_status4 == 'scholar' ? 'selected' : '' }}>Scholar</option>
+        <option value="non-scholar" {{ $assessment->training_status4 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
+        <option value="mix" {{ $assessment->training_status4 == 'mix' ? 'selected' : '' }}>Mix</option>
 
             </select>
         </div>
@@ -477,48 +429,16 @@
     });
 </script>
 
-<script>
-    document.getElementById('no_of_pax4').addEventListener('change', function() {
-        let selectedValue = parseInt(this.value);
-        let mixNoSelect = document.getElementById('mix_no4');
-
-        // Clear existing options except the first one
-        mixNoSelect.innerHTML = '<option value="" disabled selected>Select your number of Scholar</option>';
-
-        // Populate mix_no dropdown only if selectedValue is greater than 1
-        if (selectedValue > 1) {
-            for (let i = selectedValue - 1; i >= 1; i--) {
-                let option = document.createElement('option');
-                option.value = i;
-                option.textContent = i;
-                mixNoSelect.appendChild(option);
-            }
-        }
-    });
-</script>
-
-
-<div id="mix_no_container2">
-    <label for="mix_no4" class="block text-sm font-medium mb-2">
-        Number of Scholar:
-    </label>
-    <select id="mix_no4" name="mix_no4" 
-            class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-        <option value="" disabled selected>Select your number of Scholar</option>
-    </select>
-</div>
-
         <div id="scholarship_div4" style="display: none;">
             <label for="scholarship4" class="block text-sm font-medium mb-2">
                 Scholarship Type:
             </label>
             <select id="non_scholarship4" name="type_of_scholar4" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your scholarship type</option>
-                <option value="ttsp">TTSP</option>
-                <option value="cfsp">CFSP</option>
-                <option value="uaqtea">UAQTEA</option>
-                <option value="twsp">TWSP</option>
+                    <option value="Walk-In" {{ $assessment->type_of_non_scholar4 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+        <option value="CAWS" {{ $assessment->type_of_non_scholar4 == 'CAWS' ? 'selected' : '' }}>CAWS</option>
+        <option value="Three" {{ $assessment->type_of_non_scholar4 == 'Three' ? 'selected' : '' }}>Three</option>
+        <option value="Four" {{ $assessment->type_of_non_scholar4 == 'Four' ? 'selected' : '' }}>Four</option>
             </select>
         </div>
 
@@ -528,87 +448,24 @@
             </label>
             <select id="non_scholarship4" name="type_of_non_scholar4" 
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-                <option value="" disabled selected>Select your non scholarship type</option>
-                <option value="Walk-In">Walk-In</option>
-                <option value="CAWS">CAWS</option>
-                <option value="Three">Three</option>
-                <option value="Four">Four</option>
+                    <option value="Walk-In" {{ $assessment->type_of_non_scholar4 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+        <option value="CAWS" {{ $assessment->type_of_non_scholar4 == 'CAWS' ? 'selected' : '' }}>CAWS</option>
+        <option value="Three" {{ $assessment->type_of_non_scholar4 == 'Three' ? 'selected' : '' }}>Three</option>
+        <option value="Four" {{ $assessment->type_of_non_scholar4 == 'Four' ? 'selected' : '' }}>Four</option>
             </select>
         </div>
     </div>
 
-<!-- Single Add Qualification Button -->
-<button type="button" id="addQualificationButton"  
-            class="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400">
-        Add Qualification
-</button>
-
-<!-- Back Button (Hidden by Default) -->
-<button type="button" id="backButton"  
-        class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400" 
-        style="display: none;">
-    Back
-</button>
-
-<script>
-    let currentSection = 1; // Tracks the current section number
-
-    // Add Qualification Button Click
-    document.getElementById('addQualificationButton').addEventListener('click', function() {
-        if (currentSection === 1) {
-            document.getElementById('qualificationSection2').style.display = 'block';
-            document.getElementById('backButton').style.display = 'inline-block'; // Show Back button
-            currentSection = 2;
-        } else if (currentSection === 2) {
-            document.getElementById('qualificationSection3').style.display = 'block';
-            currentSection = 3;
-        } else if (currentSection === 3) {
-            document.getElementById('qualificationSection4').style.display = 'block';
-            currentSection = 4;
-        } else {
-            // Show SweetAlert2 popup when max is reached
-            Swal.fire({
-                icon: 'error',
-                title: 'Limit Reached',
-                text: 'Maximum of 4 qualifications only!',
-                confirmButtonColor: '#d33'
-            });
-        }
-    });
-
-    // Back Button Click
-    document.getElementById('backButton').addEventListener('click', function() {
-        if (currentSection === 2) {
-            document.getElementById('qualificationSection2').style.display = 'none';
-            document.getElementById('backButton').style.display = 'none'; // Hide Back button when no sections are left
-            currentSection = 1;
-        } else if (currentSection === 3) {
-            document.getElementById('qualificationSection3').style.display = 'none';
-            currentSection = 2;
-        } else if (currentSection === 4) {
-            document.getElementById('qualificationSection4').style.display = 'none';
-            currentSection = 3;
-        }
-    });
-</script>
-
-<div>
-    <label for="agreement" class="flex items-center space-x-2">
-        <input type="checkbox" id="agreement" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-        <span>I agree to the terms and conditions.</span>
-    </label>
-</div>
-
-<script>
-    document.getElementById('agreement').addEventListener('change', function () {
-        const nextButton = document.getElementById('next_button');
-        nextButton.disabled = !this.checked; // Enable if checked, disable otherwise
+    <script>
+    document.getElementById('next_button_step2').addEventListener('click', function() {
+        // Hide step1 and show step2
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
     });
 </script>
     
-<button type="button" id="next_button" 
-        class="mt-4 px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50" 
-        disabled>
+<button type="button" id="next_button_step2" 
+        class="mt-4 px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-600">
     Apply Schedule
 </button>
 
@@ -642,22 +499,22 @@
     
         <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument" class="block w-full bg-white dark:text-black" type="file" name="eltt" 
-                placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" 
+                placeholder="Please upload your document here (PDF)" value="{{ $assessment->eltt }}" 
                 autocomplete="eltt" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
             <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
             <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+    <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ $assessment->rfftp }}" autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
     <div style="display: none;" id="orInputContainer">
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
+    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ $assessment->oropfafns }}" autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
     </div>
 
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ $assessment->sopcctvr }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('sopcctvr')" class="mt-2" />
 
         </div>
@@ -700,22 +557,22 @@
     
         <x-input-label class="text-white" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument2" class="block w-full bg-white dark:text-black" type="file" name="eltt2" 
-                placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" 
+                placeholder="Please upload your document here (PDF)" value="{{ $assessment->eltt2 }}" 
                 autocomplete="eltt2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
             <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
             <x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ $assessment->rfftp2 }}" autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
     <div style="display: none;" id="orInputContainer2">
     <x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ $assessment->oropfafns2 }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
     </div>
 
     <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ $assessment->sopcctvr2 }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     <x-input-error :messages="$errors->get('sopcctvr2')" class="mt-2" />
 
         </div>
@@ -730,7 +587,7 @@
 </div>
 
 
-<div id="next3" style="display: none;">
+
 
    <!-- Document Title -->
    <div id="qualificationTitle3" class="mt-4">
@@ -758,22 +615,22 @@
     
         <x-input-label class="text-white" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument3" class="block w-full bg-white dark:text-black" type="file" name="eltt3" 
-                placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" 
+                placeholder="Please upload your document here (PDF)" value="{{ $assessment->eltt3 }}" 
                 autocomplete="eltt3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
             <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
             <x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ $assessment->rfftp3 }}" autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
     <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
     <div style="display: none;" id="orInputContainer3">
     <x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ $assessment->oropfafns3 }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
     </div>
 
     <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ $assessment->sopcctvr3 }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
     <x-input-error :messages="$errors->get('sopcctvr3')" class="mt-2" />
 
         </div>
@@ -785,9 +642,9 @@
 </div>
 
 
-</div>
 
-<div id="next4" style="display: none;">
+
+
 
    <!-- Document Title -->
    <div id="qualificationTitle4" class="mt-4">
@@ -815,22 +672,22 @@
     
         <x-input-label class="text-white" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument4" class="block w-full bg-white dark:text-black" type="file" name="eltt4" 
-                placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" 
+                placeholder="Please upload your document here (PDF)" value="{{ $assessment->eltt4 }}" 
                 autocomplete="eltt4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
             <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
             <x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
-    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ $assessment->rfftp4 }}" autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
     <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
     <div style="display: none;" id="orInputContainer4">
     <x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns4') }}" autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" placeholder="Please upload your document here (PDF)" value="{{ $assessment->oropfafns4 }}" autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
     </div>
 
     <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
-    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ $assessment->sopcctvr4 }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
     <x-input-error :messages="$errors->get('sopcctvr4')" class="mt-2" />
 
         </div>
@@ -841,7 +698,6 @@
     </div>
 </div>
 
-</div>
 
 
 
@@ -903,10 +759,7 @@
 
 
 <div class="mt-4">
-<!-- Next button -->
-<button type="button" id="next" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400 hidden">
-    Next
-</button>
+
 </div>
 
 	<div class="mt-4">
@@ -988,6 +841,28 @@ document.getElementById('next_button').addEventListener('click', function () {
     document.getElementById('step1').style.display = 'none';
     document.getElementById('step2').style.display = 'block';
 });
+
+
+
+                           
+                                const holidays = [
+                                    "2025-01-01",  
+                                    "2025-02-14",
+                                    "2025-04-01", 
+                                    "2025-12-25"   
+                                ];
+
+                                flatpickr("#assessment_date", {
+                                    altInput: true,
+                                    altFormat: "F j, Y",
+                                    dateFormat: "Y-m-d",
+                                    minDate: "today",
+                                    onDayCreate: function(dObj, dStr, fp, dayElem) {
+                                        const dateStr = dayElem.dateObj.toISOString().slice(0, 10);
+                                        if (holidays.includes(dateStr)) {
+                                            dayElem.classList.add("holiday");
+                                        }
+                                    }
+                                });
                             </script>
 
-           

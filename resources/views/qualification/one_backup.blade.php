@@ -1,5 +1,14 @@
 
-                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+                            <style>
+                                .holiday {
+                                    background-color: red !important;
+                                    color: white !important;
+                                    border-radius: 50%;
+                                    font-weight: bold;
+                                }
+                            </style>
+
 
 <form action="{{ route('assessments.one') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
 @csrf
@@ -988,6 +997,29 @@ document.getElementById('next_button').addEventListener('click', function () {
     document.getElementById('step1').style.display = 'none';
     document.getElementById('step2').style.display = 'block';
 });
+
+
+
+                           
+                                const holidays = [
+                                    "2025-01-01",  
+                                    "2025-02-14",
+                                    "2025-04-01", 
+                                    "2025-12-25"   
+                                ];
+
+                                flatpickr("#assessment_date", {
+                                    altInput: true,
+                                    altFormat: "F j, Y",
+                                    dateFormat: "Y-m-d",
+                                    minDate: "today",
+                                    onDayCreate: function(dObj, dStr, fp, dayElem) {
+                                        const dateStr = dayElem.dateObj.toISOString().slice(0, 10);
+                                        if (holidays.includes(dateStr)) {
+                                            dayElem.classList.add("holiday");
+                                        }
+                                    }
+                                });
                             </script>
 
            

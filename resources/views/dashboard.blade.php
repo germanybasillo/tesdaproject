@@ -192,7 +192,7 @@
 
 <!-- Modal -->
 <div id="assessmentModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-4 rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
+    <div class="bg-white p-4 rounded-lg shadow-lg max-w-2xl max-h-[90vh] overflow-y-auto relative">
         <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-8 text-gray-900 dark:text-gray-100 relative">
                 <!-- Close Button -->
@@ -204,6 +204,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- JavaScript -->
 <script>
@@ -374,9 +376,46 @@
         <td>
         <a href="{{ url('/view/' . $assessment->id) }}" target="_blank">
             <button class="small-btn">
-                <i class="fa fa-eye"></i> View
+                <i class="fa fa-eye"></i>
             </button>
-        </a><br>
+        </a>
+        <a href="#"onclick="openEditModal(event)">
+    <button class="small-btn">
+        <i class="fa-solid fa-edit"></i>
+    </button>
+</a>
+
+<!-- Modal -->
+<div id="assessmenteditModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-4 rounded-lg shadow-lg max-w-2xl max-h-[90vh] overflow-y-auto relative">
+        <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-8 text-gray-900 dark:text-gray-100 relative">
+                <!-- Close Button -->
+                <button onclick="closeEditModal()" class="absolute top-3 right-4 text-white font-bold text-2xl">
+                    &times;
+                </button>
+                    @include('qualification.edit')
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- JavaScript -->
+<script>
+    function openEditModal(event) {
+        event.preventDefault(); // Prevents page from refreshing
+        document.getElementById("assessmenteditModal").classList.remove("hidden");
+    }
+
+    function closeEditModal() {
+        document.getElementById("assessmenteditModal").classList.add("hidden");
+    }
+</script>
+
+
+
     </td>
         </tr>
         @endforeach

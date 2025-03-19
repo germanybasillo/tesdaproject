@@ -86,6 +86,9 @@ Route::get('/dashboard', function (Request $request) {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+
+
+
 Route::get('/view/{id}', function ($id) {
     // Get the authenticated user
     $user = Auth::user();
@@ -122,9 +125,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/assessments/create', [AssessmentController::class, 'create'])->name('assessments.create');
     Route::post('/assessments/one', [AssessmentController::class, 'one'])->name('assessments.one');
-    Route::get('/assessments/{assessment}/edit', [AssessmentController::class, 'edit'])->name('assessments.edit');
+    Route::put('/assessments/oneUpdate/{id}', [AssessmentController::class, 'oneUpdate'])->name('assessments.oneUpdate');
     Route::put('/assessments/{assessment}', [AssessmentController::class, 'update'])->name('assessments.update');
 });
 
@@ -135,3 +137,8 @@ Route::middleware(['auth', 'admin.restrict'])->group(function () {
 });
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+Route::get('/qualificationEdit/{id}', function ($id) {
+    $assessment = Assessment::find($id);
+    return view('qualification.edit', compact('assessment'));
+})->middleware(['auth', 'verified']);
