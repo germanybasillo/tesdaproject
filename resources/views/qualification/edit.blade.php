@@ -565,21 +565,8 @@
         
       <!-- Document Title -->
       <div id="qualificationTitle" class="mt-4">
-            <h2>Please upload your document here (PDF)</h2>
+            <h2>Please upload your document here ({{$assessment->qualification}})</h2>
         </div>
-
-        <script>
-    // Handle qualification selection and dynamically update Step 2 title
-    document.getElementById('qualification').addEventListener('change', function() {
-        const qualification = this.value;
-        const titleElement = document.getElementById('qualificationTitle');
-
-        // Update title based on selected qualification
-        if (qualification) {
-            titleElement.innerHTML = `<h3>Provide PDF for ${qualification}</h3>`;
-        }
-    });
-</script>
      
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
@@ -597,11 +584,11 @@
     <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
-    <div style="display: none;" id="orInputContainer">
+    @if(!empty($assessment->training_status == 'non_scholar' || $assessment->training_status == 'mix'))
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
     <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
-    </div>
+    @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
@@ -615,24 +602,12 @@
     </div>
 </div>
 
+@if(!empty($assessment->qualification2))
 
    <!-- Document Title -->
    <div id="qualificationTitle2" class="mt-4">
-            <h2>Please upload your document here (PDF)</h2>
+            <h2>Please upload your document here ({{$assessment->qualification2}})</h2>
         </div>
-
-        <script>
-    // Handle qualification selection and dynamically update Step 2 title
-    document.getElementById('qualification2').addEventListener('change', function() {
-        const qualification2 = this.value;
-        const titleElement = document.getElementById('qualificationTitle2');
-
-        // Update title based on selected qualification
-        if (qualification2) {
-            titleElement.innerHTML = `<h3>Provide PDF for ${qualification2}</h3>`;
-        }
-    });
-</script>
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
@@ -650,11 +625,11 @@
     <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
-    <div style="display: none;" id="orInputContainer2">
+    @if(!empty($assessment->training_status2 == 'non_scholar' || $assessment->training_status2 == 'mix'))
     <x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
     <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
-    </div>
+    @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
@@ -668,24 +643,15 @@
     </div>
 </div>
 
+@endif
+
+
+@if(!empty($assessment->qualification3))
 
    <!-- Document Title -->
    <div id="qualificationTitle3" class="mt-4">
-            <h2>Please upload your document here (PDF)</h2>
+            <h2>Please upload your document here ({{$assessment->qualification3}})</h2>
         </div>
-
-        <script>
-    // Handle qualification selection and dynamically update Step 2 title
-    document.getElementById('qualification3').addEventListener('change', function() {
-        const qualification3 = this.value;
-        const titleElement = document.getElementById('qualificationTitle3');
-
-        // Update title based on selected qualification
-        if (qualification3) {
-            titleElement.innerHTML = `<h3>Provide PDF for ${qualification3}</h3>`;
-        }
-    });
-</script>
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
@@ -703,11 +669,11 @@
     <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
     <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
-    <div style="display: none;" id="orInputContainer3">
+    @if(!empty($assessment->training_status3 == 'non_scholar' || $assessment->training_status3 == 'mix'))
     <x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
     <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
-    </div>
+    @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
@@ -721,26 +687,15 @@
     </div>
 </div>
 
+@endif
 
 
+@if(!empty($assessment->qualification4))
 
    <!-- Document Title -->
    <div id="qualificationTitle4" class="mt-4">
-            <h2>Please upload your document here (PDF)</h2>
+            <h2>Please upload your document here ({{$assessment->qualification4}})</h2>
         </div>
-
-        <script>
-    // Handle qualification selection and dynamically update Step 2 title
-    document.getElementById('qualification4').addEventListener('change', function() {
-        const qualification4 = this.value;
-        const titleElement = document.getElementById('qualificationTitle4');
-
-        // Update title based on selected qualification
-        if (qualification4) {
-            titleElement.innerHTML = `<h3>Provide PDF for ${qualification4}</h3>`;
-        }
-    });
-</script>
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
@@ -758,11 +713,11 @@
     <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
     <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
-    <div style="display: none;" id="orInputContainer4">
+    @if(!empty($assessment->training_status4 == 'non_scholar' || $assessment->training_status4 == 'mix'))
     <x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
     <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns4') }}" autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
-    </div>
+    @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
@@ -776,7 +731,7 @@
     </div>
 </div>
 
-
+@endif
 
 	<div class="mt-4">
                                     <button id="submit_button" type="submit" 
