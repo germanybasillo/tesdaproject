@@ -1,15 +1,15 @@
-
+<x-app-layout>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+<div class="container mx-auto">
 <form action="{{ route('assessments.oneUpdate', $assessment->id) }}" method="POST" class="space-y-6" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
 				<div id="step1">
 
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-900 leading-tight">
         <i class="fas fa-calendar-alt mr-2"></i>
-        {{ __('Apply Assessment Schedule') }}
+        {{ __('Update Assessment Schedule') }}
     </h2><br>
 
    <div>
@@ -542,7 +542,7 @@
 <div>
     <label for="agreement" class="flex items-center space-x-2">
         <input type="checkbox" id="agreement" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-        <span>I agree to the terms and conditions.</span>
+        <span>I agree the updates.</span>
     </label>
 </div>
 
@@ -556,7 +556,7 @@
 <button type="button" id="next_button" 
         class="mt-4 px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50" 
         disabled>
-    Apply Schedule
+    Apply Update
 </button>
 
             </div>
@@ -793,4 +793,5 @@ document.getElementById('next_button').addEventListener('click', function () {
 });
                             </script>
 
-           
+</div>
+</x-app-layout> 
