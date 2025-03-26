@@ -220,65 +220,125 @@
             <td>{{ $assessment->created_at->timezone('Asia/Manila')->format('M d, Y - h:i A') }}</td>
             <td>{{$assessment->status}}</td>
 
-            <td>{{$assessment->qualification}}<br>
+            <td>
+    @php
+        $qualifications = [$assessment->qualification];
+
+        if ($assessment->qualification2 !== 'N/A') {
+            $qualifications[] = $assessment->qualification2;
+        }
+
+        if ($assessment->qualification3 !== 'N/A') {
+            $qualifications[] = $assessment->qualification3;
+        }
+
+        if ($assessment->qualification4 !== 'N/A') {
+            $qualifications[] = $assessment->qualification4;
+        }
+    @endphp
+
+    {!! implode('<br>', array_filter($qualifications)) !!}
+</td>
             
-            @if($assessment->qualification2 !== 'N/A')
-                {{$assessment->qualification2}}<br>
-            @endif
+            <td>
+    @php
+        $paxNumbers = [$assessment->no_of_pax];
+
+        if ($assessment->qualification2 !== 'N/A') {
+            $paxNumbers[] = $assessment->no_of_pax2;
+        }
+
+        if ($assessment->qualification3 !== 'N/A') {
+            $paxNumbers[] = $assessment->no_of_pax3;
+        }
+
+        if ($assessment->qualification4 !== 'N/A') {
+            $paxNumbers[] = $assessment->no_of_pax4;
+        }
+    @endphp
+
+    {!! implode('<br>', array_filter($paxNumbers)) !!}
+</td>
             
-            @if($assessment->qualification3 !== 'N/A')
-                {{$assessment->qualification3}}<br>
-            @endif
+            <td>
+    @php
+        $statuses = [$assessment->training_status];
+
+        if ($assessment->qualification2 !== 'N/A') {
+            $statuses[] = $assessment->training_status2;
+        }
+
+        if ($assessment->qualification3 !== 'N/A') {
+            $statuses[] = $assessment->training_status3;
+        }
+
+        if ($assessment->qualification4 !== 'N/A') {
+            $statuses[] = $assessment->training_status4;
+        }
+    @endphp
+
+    {!! implode('<br>', array_filter($statuses)) !!}
+</td>
+
             
-            @if($assessment->qualification4 !== 'N/A')
-                {{$assessment->qualification4}}<br>
-            @endif
-            </td>
-            
-            <td>{{$assessment->no_of_pax}}<br>
+            <td>
+    @php
+        $rows = [];
 
-            @if($assessment->qualification2 !== 'N/A')
-            {{$assessment->no_of_pax2}}<br>
-            @endif
+        if (!empty($assessment->mix_no) && !empty($assessment->type_of_scholar) && !empty($assessment->type_of_non_scholar)) {
+    $rows[] = "{$assessment->mix_no} - {$assessment->type_of_scholar} / " . (10 - $assessment->mix_no) . " - {$assessment->type_of_non_scholar}";
+} else {
+    if (isset($assessment->training_status) && $assessment->training_status == 'scholar' && !empty($assessment->type_of_scholar)) {
+        $rows[] = $assessment->type_of_scholar;
+    } 
 
-            @if($assessment->qualification3 !== 'N/A')
-            {{$assessment->no_of_pax3}}<br>
-            @endif
+    if (isset($assessment->training_status) && ($assessment->training_status == 'non_scholar' || $assessment->training_status == 'non-scholar') && !empty($assessment->type_of_non_scholar)) {
+        $rows[] = $assessment->type_of_non_scholar;
+    }
+}
 
-            @if($assessment->qualification4 !== 'N/A')
-            {{$assessment->no_of_pax4}}
-            @endif
-            </td>
-            
-            <td>{{$assessment->training_status}}<br>
 
-            @if($assessment->qualification2 !== 'N/A')
-            {{$assessment->training_status2}}<br>
-            @endif
+if (!empty($assessment->mix_no2) && !empty($assessment->type_of_scholar2) && !empty($assessment->type_of_non_scholar2)&& $assessment->qualification2 !== 'N/A') {
+    $rows[] = "{$assessment->mix_no2} - {$assessment->type_of_scholar2} / " . (10 - $assessment->mix_no2) . " - {$assessment->type_of_non_scholar2}";
+} else {
+    if (isset($assessment->training_status2) && $assessment->training_status2 == 'scholar' && !empty($assessment->type_of_scholar2)) {
+        $rows[] = $assessment->type_of_scholar2;
+    } 
 
-            @if($assessment->qualification3 !== 'N/A')
-            {{$assessment->training_status3}}<br>
-            @endif
+    if (isset($assessment->training_status2) && ($assessment->training_status2 == 'non_scholar' || $assessment->training_status2 == 'non-scholar') && !empty($assessment->type_of_non_scholar2)) {
+        $rows[] = $assessment->type_of_non_scholar2;
+    }
+}
 
-            @if($assessment->qualification4 !== 'N/A')
-            {{$assessment->training_status4}}
-            @endif
-            </td>
-            
-            <td>{{$assessment->type_of_scholar}}<br>
 
-            @if($assessment->qualification2 !== 'N/A')
-            {{$assessment->type_of_scholar2}}<br>
-            @endif
+if (!empty($assessment->mix_no3) && !empty($assessment->type_of_scholar3) && !empty($assessment->type_of_non_scholar3)&& $assessment->qualification3 !== 'N/A') {
+    $rows[] = "{$assessment->mix_no3} - {$assessment->type_of_scholar3} / " . (10 - $assessment->mix_no3) . " - {$assessment->type_of_non_scholar3}";
+} else {
+    if (isset($assessment->training_status3) && $assessment->training_status3 == 'scholar' && !empty($assessment->type_of_scholar3)) {
+        $rows[] = $assessment->type_of_scholar3;
+    } 
 
-            @if($assessment->qualification3 !== 'N/A')
-            {{$assessment->type_of_scholar3}}<br>
-            @endif
+    if (isset($assessment->training_status3) && ($assessment->training_status3 == 'non_scholar' || $assessment->training_status3 == 'non-scholar') && !empty($assessment->type_of_non_scholar3)) {
+        $rows[] = $assessment->type_of_non_scholar3;
+    }
+}
 
-            @if($assessment->qualification4 !== 'N/A')
-            {{$assessment->type_of_scholar4}}
-            @endif
-            </td>
+if (!empty($assessment->mix_no4) && !empty($assessment->type_of_scholar4) && !empty($assessment->type_of_non_scholar4)&& $assessment->qualification4 !== 'N/A') {
+    $rows[] = "{$assessment->mix_no4} - {$assessment->type_of_scholar4} / " . (10 - $assessment->mix_no4) . " - {$assessment->type_of_non_scholar4}";
+} else {
+    if (isset($assessment->training_status4) && $assessment->training_status4 == 'scholar' && !empty($assessment->type_of_scholar4)) {
+        $rows[] = $assessment->type_of_scholar4;
+    } 
+
+    if (isset($assessment->training_status4) && ($assessment->training_status4 == 'non_scholar' || $assessment->training_status4 == 'non-scholar') && !empty($assessment->type_of_non_scholar4)) {
+        $rows[] = $assessment->type_of_non_scholar4;
+    }
+}
+
+    @endphp
+
+    {!! implode('<br>', array_filter($rows)) !!}
+</td>
         </tr>
         @endforeach
     </table>

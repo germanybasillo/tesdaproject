@@ -5,770 +5,800 @@
     @csrf
     @method('PUT')
 
-<div id="Editstep1">
+				<div id="step1">
 
-<h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-<i class="fas fa-calendar-alt mr-2"></i>
-{{ __('Apply Assessment Schedule') }}
-</h2><br>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        {{ __('Apply Assessment Schedule') }}
+    </h2><br>
 
-<div>
-<label for="assessment_date" class="block text-sm font-medium mb-2">
-Desired Date of Assessment:    </label>
-<input class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black"
-type="date" 
-id="assessment_date" 
-name="assessment_date"
- value="{{  $assessment->assessment_date }}"
-placeholder="Select Date"
->
+   <div>
+    <label for="assessment_date" class="block text-sm font-medium mb-2">
+        Desired Date of Assessment:    </label>
+    <input class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black"
+        type="date" 
+        id="assessment_date" 
+        name="assessment_date"
+        value="{{ old('assessment_date', $assessment->assessment_date) }}"
+        required 
+    >
 </div>
 
+@if(!empty($assessment->qualification))
 
-                              <div>
-        <label for="qualification" class="block text-sm font-medium mb-2">
-            Qualification:
-        </label>
-        <select id="qualification" name="qualification"
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-<option value="FBS NC II" {{ $assessment->qualification == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
-        <option value="CSS NC II" {{ $assessment->qualification == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
-        <option value="Cook NC II" {{ $assessment->qualification == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
-        <option value="Driving NC II" {{ $assessment->qualification == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
-        </select>
-    </div>
+                         <!-- Qualification Input -->
+        <div>
+            <label for="qualification" class="block text-sm font-medium mb-2">
+                Qualification:
+            </label>
+            <select id="qualification" name="qualification"
+                class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled>Select your qualification</option>
+                <option value="FBS NC II" {{ $assessment->qualification == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+                <option value="CSS NC II" {{ $assessment->qualification == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+                <option value="Cook NC II" {{ $assessment->qualification == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+                <option value="Driving NC II" {{ $assessment->qualification == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
+            </select>
+        </div>
 
-    <div>
-        <label for="no_of_pax" class="block text-sm font-medium mb-2">
-            Number of Pax:
-        </label>
-        <select id="no_of_pax" name="no_of_pax"
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-            @for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}" {{ $assessment->no_of_pax == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                        @endfor
-        </select>
-    </div>
+                               <!-- Number of Pax -->
+        <div>
+            <label for="no_of_pax" class="block text-sm font-medium mb-2">
+                Number of Pax:
+            </label>
+            <select id="no_of_pax" name="no_of_pax"
+                class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled>Select your number of pax</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}" {{ $assessment->no_of_pax == $i ? 'selected' : '' }}>{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
 
-    <div>
-<label for="training_status" class="block text-sm font-medium mb-2">
-Training Status:
-</label>
-<select id="training_status" name="training_status"
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="scholar" {{ $assessment->training_status == 'scholar' ? 'selected' : '' }}>Scholar</option>
+        <div>
+    <label for="training_status" class="block text-sm font-medium mb-2">
+        Training Status:
+    </label>
+    <select id="training_status" name="training_status"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your training status</option>
+        <option value="scholar" {{ $assessment->training_status == 'scholar' ? 'selected' : '' }}>Scholar</option>
         <option value="non-scholar" {{ $assessment->training_status == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
         <option value="mix" {{ $assessment->training_status == 'mix' ? 'selected' : '' }}>Mix</option>
-</select>
+    </select>
 </div>
-
 
 <script>
+    // Auto-show the sections based on selected training_status on page load
     document.addEventListener('DOMContentLoaded', function () {
-        const noOfPaxSelect = document.getElementById('no_of_pax');
-        const mixNoSelect = document.getElementById('mix_no');
-        const selectedMixNo = "{{ $assessment->mix_no ?? '' }}"; // Retrieve previously selected mix_no
-
-        // Function to populate mix_no options
-        function populateMixNoOptions(selectedValue) {
-
-            if (selectedValue > 1) {
-                for (let i = selectedValue - 1; i >= 1; i--) {
-                    let option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = i;
-
-                    // Mark previously selected value as selected
-                    if (selectedMixNo == i) {
-                        option.selected = true;
-                    }
-
-                    mixNoSelect.appendChild(option);
-                }
-            }
-        }
-
-        // Populate mix_no on page load if no_of_pax has a selected value
-        if (noOfPaxSelect.value) {
-            populateMixNoOptions(parseInt(noOfPaxSelect.value));
-        }
-
-        // Handle change event for no_of_pax dropdown
-        noOfPaxSelect.addEventListener('change', function () {
-            let selectedValue = parseInt(this.value);
-            populateMixNoOptions(selectedValue);
-        });
+        updateTrainingStatus(); // Call function on page load
     });
+
+    document.getElementById('training_status').addEventListener('change', function () {
+        updateTrainingStatus(); // Call function on change
+    });
+
+    function updateTrainingStatus() {
+        var trainingStatus = document.getElementById('training_status').value;
+        var scholarshipDiv = document.getElementById('scholarship_div');
+        var nonScholarshipDiv = document.getElementById('non_scholarship_div');
+        var mix_no_container = document.getElementById('mix_no_container');
+
+        if (trainingStatus === 'scholar') {
+            scholarshipDiv.style.display = 'block';
+            nonScholarshipDiv.style.display = 'none';
+            mix_no_container.style.display = 'none';
+        } else if (trainingStatus === 'non-scholar') {
+            scholarshipDiv.style.display = 'none';
+            nonScholarshipDiv.style.display = 'block';
+            mix_no_container.style.display = 'none';
+        } else if (trainingStatus === 'mix') {
+            scholarshipDiv.style.display = 'block';
+            nonScholarshipDiv.style.display = 'block';
+            mix_no_container.style.display = 'block';
+        } else {
+            // Hide all if no selection
+            scholarshipDiv.style.display = 'none';
+            nonScholarshipDiv.style.display = 'none';
+            mix_no_container.style.display = 'none';
+        }
+    }
 </script>
 
-@if(!empty($assessment->training_status === 'mix'))
-<div id="mix_no_container">
-<label for="mix_no" class="block text-sm font-medium mb-2">
-Number of Scholar:
-</label>
-<select id="mix_no" name="mix_no" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-</select>
+<!-- Mix Number Container (For Scholar Mix) -->
+<div id="mix_no_container" style="display: {{ $assessment->training_status == 'mix' ? 'block' : 'none' }};">
+    <label for="mix_no" class="block text-sm font-medium mb-2">
+        Number of Scholar:
+    </label>
+    <select id="mix_no" name="mix_no"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your number of Scholar</option>
+        @for ($i = 1; $i <= $assessment->no_of_pax - 1; $i++)
+            <option value="{{ $i }}" {{ $assessment->mix_no == $i ? 'selected' : '' }}>{{ $i }}</option>
+        @endfor
+    </select>
 </div>
-@endif
 
-@if($assessment->training_status === 'mix' || $assessment->training_status === 'scholar')
 <!-- Scholar Section -->
-<div id="scholarship_div">
-<label for="scholarship" class="block text-sm font-medium mb-2">
-Scholarship Type:
-</label>
-<select id="scholarship" name="type_of_scholar" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="ttsp"  {{ $assessment->type_of_scholar == 'ttsp' ? 'selected' : '' }}>TTSP</option>
-        <option value="cfsp"  {{ $assessment->type_of_scholar == 'cfsp' ? 'selected' : '' }}>CFSP</option>
-        <option value="uaqtea"  {{ $assessment->type_of_scholar == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
-        <option value="twsp"  {{ $assessment->type_of_scholar == 'twsp' ? 'selected' : '' }}>TWSP</option>
-</select>
+<div id="scholarship_div" style="display: {{ $assessment->training_status == 'scholar' || $assessment->training_status == 'mix' ? 'block' : 'none' }};">
+    <label for="scholarship" class="block text-sm font-medium mb-2">
+        Scholarship Type:
+    </label>
+    <select id="scholarship" name="type_of_scholar"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your scholarship type</option>
+        <option value="ttsp" {{ $assessment->type_of_scholar == 'ttsp' ? 'selected' : '' }}>TTSP</option>
+        <option value="cfsp" {{ $assessment->type_of_scholar == 'cfsp' ? 'selected' : '' }}>CFSP</option>
+        <option value="uaqtea" {{ $assessment->type_of_scholar == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
+        <option value="twsp" {{ $assessment->type_of_scholar == 'twsp' ? 'selected' : '' }}>TWSP</option>
+    </select>
 </div>
-@endif
 
-@if($assessment->training_status === 'mix' || $assessment->training_status === 'non_scholar')
 <!-- Non-Scholar Section -->
-<div id="non_scholarship_div">
-<label for="non_scholarship" class="block text-sm font-medium mb-2">
-Non-Scholarship Type:
-</label>
-<select id="non_scholarship" name="type_of_non_scholar" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+<div id="non_scholarship_div" style="display: {{ $assessment->training_status == 'non-scholar' || $assessment->training_status == 'mix' ? 'block' : 'none' }};">
+    <label for="non_scholarship" class="block text-sm font-medium mb-2">
+        Non-Scholarship Type:
+    </label>
+    <select id="non_scholarship" name="type_of_non_scholar"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your non-scholarship type</option>
         <option value="Walk-In" {{ $assessment->type_of_non_scholar == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
         <option value="CAWS" {{ $assessment->type_of_non_scholar == 'CAWS' ? 'selected' : '' }}>CAWS</option>
         <option value="Three" {{ $assessment->type_of_non_scholar == 'Three' ? 'selected' : '' }}>Three</option>
         <option value="Four" {{ $assessment->type_of_non_scholar == 'Four' ? 'selected' : '' }}>Four</option>
-</select>
+    </select>
 </div>
+
 @endif
-
-
+               
 
 @if(!empty($assessment->qualification2))
-<div>
-<label for="qualification2" class="block text-sm font-medium mb-2">
-Qualification:
-</label>
-<select id="qualification2" name="qualification2" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-<option value="FBS NC II" {{ $assessment->qualification2 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
-        <option value="CSS NC II" {{ $assessment->qualification2 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
-        <option value="Cook NC II" {{ $assessment->qualification2 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
-        <option value="Driving NC II" {{ $assessment->qualification2 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
-</select>
-</div>
 
-<div>
-<label for="no_of_pax2" class="block text-sm font-medium mb-2">
-Number of Pax:
-</label>
-<select id="no_of_pax2" name="no_of_pax2" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-@for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}" {{ $assessment->no_of_pax2 == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                        @endfor
-</select>
-</div>
+        <div>
+            <label for="qualification2" class="block text-sm font-medium mb-2">
+                Qualification:
+            </label>
+            <select id="qualification2" name="qualification2" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                    <option value="" disabled>Select your qualification</option>
+                <option value="FBS NC II" {{ $assessment->qualification2 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+                <option value="CSS NC II" {{ $assessment->qualification2 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+                <option value="Cook NC II" {{ $assessment->qualification2 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+                <option value="Driving NC II" {{ $assessment->qualification2 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
+            </select>
+        </div>
 
-<div>
-<label for="training_status2" class="block text-sm font-medium mb-2">
-Training Status:
-</label>
-<select id="training_status2" name="training_status2" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="scholar" {{ $assessment->training_status2 == 'scholar' ? 'selected' : '' }}>Scholar</option>
-        <option value="non-scholar" {{ $assessment->training_status2 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
-        <option value="mix" {{ $assessment->training_status2 == 'mix' ? 'selected' : '' }}>Mix</option>
-</select>
-</div>
+        <div>
+            <label for="no_of_pax2" class="block text-sm font-medium mb-2">
+                Number of Pax:
+            </label>
+            <select id="no_of_pax2" name="no_of_pax2"
+                class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled>Select your number of pax</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}" {{ $assessment->no_of_pax2 == $i ? 'selected' : '' }}>{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
 
-
-<script>
+        <div>
+            <label for="training_status2" class="block text-sm font-medium mb-2">
+                Training Status:
+            </label>
+            <select id="training_status2" name="training_status2"
+    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+    <option value="" disabled>Select your training status</option>
+    <option value="scholar" {{ $assessment->training_status2 == 'scholar' ? 'selected' : '' }}>Scholar</option>
+    <option value="non-scholar" {{ $assessment->training_status2 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
+    <option value="mix" {{ $assessment->training_status2 == 'mix' ? 'selected' : '' }}>Mix</option>
+    </select>
+        </div>
+        
+        <script>
+    // Auto-show the sections based on selected training_status on page load
     document.addEventListener('DOMContentLoaded', function () {
-        const noOfPaxSelect = document.getElementById('no_of_pax2');
-        const mixNoSelect = document.getElementById('mix_no2');
-        const selectedMixNo = "{{ $assessment->mix_no2 ?? '' }}"; // Retrieve previously selected mix_no
-
-        // Function to populate mix_no options
-        function populateMixNoOptions(selectedValue) {
-
-            if (selectedValue > 1) {
-                for (let i = selectedValue - 1; i >= 1; i--) {
-                    let option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = i;
-
-                    // Mark previously selected value as selected
-                    if (selectedMixNo == i) {
-                        option.selected = true;
-                    }
-
-                    mixNoSelect.appendChild(option);
-                }
-            }
-        }
-
-        // Populate mix_no on page load if no_of_pax has a selected value
-        if (noOfPaxSelect.value) {
-            populateMixNoOptions(parseInt(noOfPaxSelect.value));
-        }
-
-        // Handle change event for no_of_pax dropdown
-        noOfPaxSelect.addEventListener('change', function () {
-            let selectedValue = parseInt(this.value);
-            populateMixNoOptions(selectedValue);
-        });
+        updateTrainingStatus2(); // Call function on page load
     });
+
+    document.getElementById('training_status2').addEventListener('change', function () {
+        updateTrainingStatus2(); // Call function on change
+    });
+
+    function updateTrainingStatus2() {
+        var trainingStatus2 = document.getElementById('training_status2').value;
+        var scholarshipDiv2 = document.getElementById('scholarship_div2');
+        var nonScholarshipDiv2 = document.getElementById('non_scholarship_div2');
+        var mix_no_container2 = document.getElementById('mix_no_container2');
+
+        if (trainingStatus2 === 'scholar') {
+            scholarshipDiv2.style.display = 'block';
+            nonScholarshipDiv2.style.display = 'none';
+            mix_no_container2.style.display = 'none';
+        } else if (trainingStatus2 === 'non-scholar') {
+            scholarshipDiv2.style.display = 'none';
+            nonScholarshipDiv2.style.display = 'block';
+            mix_no_container2.style.display = 'none';
+        } else if (trainingStatus2 === 'mix') {
+            scholarshipDiv2.style.display = 'block';
+            nonScholarshipDiv2.style.display = 'block';
+            mix_no_container2.style.display = 'block';
+        } else {
+            // Hide all if no selection
+            scholarshipDiv2.style.display = 'none';
+            nonScholarshipDiv2.style.display = 'none';
+            mix_no_container2.style.display = 'none';
+        }
+    }
 </script>
 
-@if(!empty($assessment->training_status2 === 'mix'))
-<div id="mix_no_container2">
-<label for="mix_no2" class="block text-sm font-medium mb-2">
-Number of Scholar:
-</label>
-<select id="mix_no2" name="mix_no2" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
 
-</select>
+<!-- Mix Number Container (For Scholar Mix) -->
+<div id="mix_no_container2" style="display: {{ $assessment->training_status2 == 'mix' ? 'block' : 'none' }};">
+    <label for="mix_no2" class="block text-sm font-medium mb-2">
+        Number of Scholar:
+    </label>
+    <select id="mix_no2" name="mix_no2"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your number of Scholar</option>
+        @for ($i = 1; $i <= $assessment->no_of_pax2 - 1; $i++)
+            <option value="{{ $i }}" {{ $assessment->mix_no2 == $i ? 'selected' : '' }}>{{ $i }}</option>
+        @endfor
+    </select>
 </div>
-@endif
 
 
 
-
-@if($assessment->training_status2 === 'mix' || $assessment->training_status2 === 'scholar')
-<div id="scholarship_div2">
-<label for="scholarship2" class="block text-sm font-medium mb-2">
-Scholarship Type:
-</label>
-<select id="scholarship2" name="type_of_scholar2" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="ttsp"  {{ $assessment->type_of_scholar2 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
-        <option value="cfsp"  {{ $assessment->type_of_scholar2 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
-        <option value="uaqtea"  {{ $assessment->type_of_scholar2 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
-        <option value="twsp"  {{ $assessment->type_of_scholar2 == 'twsp' ? 'selected' : '' }}>TWSP</option>
-</select>
+      <!-- Scholar Section -->
+<div id="scholarship_div2" style="display: {{ $assessment->training_status2 == 'scholar' || $assessment->training_status2 == 'mix' ? 'block' : 'none' }};">
+    <label for="scholarship2" class="block text-sm font-medium mb-2">
+        Scholarship Type:
+    </label>
+    <select id="scholarship2" name="type_of_scholar2"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your scholarship type</option>
+        <option value="ttsp" {{ $assessment->type_of_scholar2 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
+        <option value="cfsp" {{ $assessment->type_of_scholar2 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
+        <option value="uaqtea" {{ $assessment->type_of_scholar2 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
+        <option value="twsp" {{ $assessment->type_of_scholar2 == 'twsp' ? 'selected' : '' }}>TWSP</option>
+    </select>
 </div>
-@endif
 
-@if($assessment->training_status2 === 'mix' || $assessment->training_status2 === 'non_scholar')
-<div id="non_scholarship_div2">
-<label for="non_scholarship2" class="block text-sm font-medium mb-2">
-Non Scholarship Type:
-</label>
-<select id="non_scholarship2" name="type_of_non_scholar2" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="Walk-In" {{ $assessment->type_of_non_scholar2 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+
+<!-- Non-Scholar Section -->
+<div id="non_scholarship_div2" style="display: {{ $assessment->training_status2 == 'non-scholar' || $assessment->training_status2 == 'mix' ? 'block' : 'none' }};">
+    <label for="non_scholarship2" class="block text-sm font-medium mb-2">
+        Non-Scholarship Type:
+    </label>
+    <select id="non_scholarship2" name="type_of_non_scholar2"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your non-scholarship type</option>
+        <option value="Walk-In" {{ $assessment->type_of_non_scholar2 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
         <option value="CAWS" {{ $assessment->type_of_non_scholar2 == 'CAWS' ? 'selected' : '' }}>CAWS</option>
         <option value="Three" {{ $assessment->type_of_non_scholar2 == 'Three' ? 'selected' : '' }}>Three</option>
         <option value="Four" {{ $assessment->type_of_non_scholar2 == 'Four' ? 'selected' : '' }}>Four</option>
-</select>
+    </select>
 </div>
-</div>
-@endif
 
 @endif
 
 @if(!empty($assessment->qualification3))
 
-<div>
-<label for="qualification3" class="block text-sm font-medium mb-2">
-Qualification:
-</label>
-<select id="qualification3" name="qualification3" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-<option value="FBS NC II" {{ $assessment->qualification2 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
-        <option value="CSS NC II" {{ $assessment->qualification2 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
-        <option value="Cook NC II" {{ $assessment->qualification2 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
-        <option value="Driving NC II" {{ $assessment->qualification2 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
-</select>
-</div>
+        <div>
+            <label for="qualification3" class="block text-sm font-medium mb-2">
+                Qualification:
+            </label>
+            <select id="qualification3" name="qualification3" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                    <option value="" disabled>Select your qualification</option>
+                <option value="FBS NC II" {{ $assessment->qualification3 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+                <option value="CSS NC II" {{ $assessment->qualification3 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+                <option value="Cook NC II" {{ $assessment->qualification3 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+                <option value="Driving NC II" {{ $assessment->qualification3 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
+            </select>
+        </div>
 
-<div>
-<label for="no_of_pax3" class="block text-sm font-medium mb-2">
-Number of Pax:
-</label>
-<select id="no_of_pax3" name="no_of_pax3" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-@for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}" {{ $assessment->no_of_pax3 == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                        @endfor
-</select>
-</div>
+        <div>
+            <label for="no_of_pax3" class="block text-sm font-medium mb-2">
+                Number of Pax:
+            </label>
+            <select id="no_of_pax3" name="no_of_pax3"
+                class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled>Select your number of pax</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}" {{ $assessment->no_of_pax3 == $i ? 'selected' : '' }}>{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
 
-<div>
-<label for="training_status3" class="block text-sm font-medium mb-2">
-Training Status:
-</label>
-<select id="training_status3" name="training_status3" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="scholar" {{ $assessment->training_status3 == 'scholar' ? 'selected' : '' }}>Scholar</option>
-        <option value="non-scholar" {{ $assessment->training_status3 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
-        <option value="mix" {{ $assessment->training_status3 == 'mix' ? 'selected' : '' }}>Mix</option>
-</select>
-</div>
-
-
-<script>
+        <div>
+            <label for="training_status3" class="block text-sm font-medium mb-2">
+                Training Status:
+            </label>
+            <select id="training_status3" name="training_status3"
+    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+    <option value="" disabled>Select your training status</option>
+    <option value="scholar" {{ $assessment->training_status3 == 'scholar' ? 'selected' : '' }}>Scholar</option>
+    <option value="non-scholar" {{ $assessment->training_status3 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
+    <option value="mix" {{ $assessment->training_status3 == 'mix' ? 'selected' : '' }}>Mix</option>
+    </select>
+        </div>
+        
+        <script>
+    // Auto-show the sections based on selected training_status on page load
     document.addEventListener('DOMContentLoaded', function () {
-        const noOfPaxSelect = document.getElementById('no_of_pax3');
-        const mixNoSelect = document.getElementById('mix_no3');
-        const selectedMixNo = "{{ $assessment->mix_no3 ?? '' }}"; // Retrieve previously selected mix_no
-
-        // Function to populate mix_no options
-        function populateMixNoOptions(selectedValue) {
-
-            if (selectedValue > 1) {
-                for (let i = selectedValue - 1; i >= 1; i--) {
-                    let option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = i;
-
-                    // Mark previously selected value as selected
-                    if (selectedMixNo == i) {
-                        option.selected = true;
-                    }
-
-                    mixNoSelect.appendChild(option);
-                }
-            }
-        }
-
-        // Populate mix_no on page load if no_of_pax has a selected value
-        if (noOfPaxSelect.value) {
-            populateMixNoOptions(parseInt(noOfPaxSelect.value));
-        }
-
-        // Handle change event for no_of_pax dropdown
-        noOfPaxSelect.addEventListener('change', function () {
-            let selectedValue = parseInt(this.value);
-            populateMixNoOptions(selectedValue);
-        });
+        updateTrainingStatus3(); // Call function on page load
     });
+
+    document.getElementById('training_status3').addEventListener('change', function () {
+        updateTrainingStatus3(); // Call function on change
+    });
+
+    function updateTrainingStatus3() {
+        var trainingStatus3 = document.getElementById('training_status3').value;
+        var scholarshipDiv3 = document.getElementById('scholarship_div3');
+        var nonScholarshipDiv3 = document.getElementById('non_scholarship_div3');
+        var mix_no_container3 = document.getElementById('mix_no_container3');
+
+        if (trainingStatus3 === 'scholar') {
+            scholarshipDiv3.style.display = 'block';
+            nonScholarshipDiv3.style.display = 'none';
+            mix_no_container3.style.display = 'none';
+        } else if (trainingStatus3 === 'non-scholar') {
+            scholarshipDiv3.style.display = 'none';
+            nonScholarshipDiv3.style.display = 'block';
+            mix_no_container=3.style.display = 'none';
+        } else if (trainingStatus3 === 'mix') {
+            scholarshipDiv3.style.display = 'block';
+            nonScholarshipDiv3.style.display = 'block';
+            mix_no_container3.style.display = 'block';
+        } else {
+            // Hide all if no selection
+            scholarshipDiv3.style.display = 'none';
+            nonScholarshipDiv3.style.display = 'none';
+            mix_no_container3.style.display = 'none';
+        }
+    }
 </script>
 
-@if(!empty($assessment->training_status3 === 'mix'))
 
-<div id="mix_no_container2">
-<label for="mix_no3" class="block text-sm font-medium mb-2">
-Number of Scholar:
-</label>
-<select id="mix_no3" name="mix_no3" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-</select>
+
+<!-- Mix Number Container (For Scholar Mix) -->
+<div id="mix_no_container3" style="display: {{ $assessment->training_status3 == 'mix' ? 'block' : 'none' }};">
+    <label for="mix_no3" class="block text-sm font-medium mb-2">
+        Number of Scholar:
+    </label>
+    <select id="mix_no3" name="mix_no3"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your number of Scholar</option>
+        @for ($i = 1; $i <= $assessment->no_of_pax3 - 1; $i++)
+            <option value="{{ $i }}" {{ $assessment->mix_no3 == $i ? 'selected' : '' }}>{{ $i }}</option>
+        @endfor
+    </select>
 </div>
-@endif
 
-@if($assessment->training_status3 === 'mix' || $assessment->training_status3 === 'scholar')
-<div id="scholarship_div3">
-<label for="scholarship3" class="block text-sm font-medium mb-2">
-Scholarship Type:
-</label>
-<select id="scholarship3" name="type_of_scholar3" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="ttsp"  {{ $assessment->type_of_scholar3 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
-        <option value="cfsp"  {{ $assessment->type_of_scholar3 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
-        <option value="uaqtea"  {{ $assessment->type_of_scholar3 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
-        <option value="twsp"  {{ $assessment->type_of_scholar3 == 'twsp' ? 'selected' : '' }}>TWSP</option>
-</select>
+
+
+      <!-- Scholar Section -->
+<div id="scholarship_div3" style="display: {{ $assessment->training_status3 == 'scholar' || $assessment->training_status3 == 'mix' ? 'block' : 'none' }};">
+    <label for="scholarship3" class="block text-sm font-medium mb-2">
+        Scholarship Type:
+    </label>
+    <select id="scholarship3" name="type_of_scholar3"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your scholarship type</option>
+        <option value="ttsp" {{ $assessment->type_of_scholar3 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
+        <option value="cfsp" {{ $assessment->type_of_scholar3 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
+        <option value="uaqtea" {{ $assessment->type_of_scholar3 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
+        <option value="twsp" {{ $assessment->type_of_scholar3 == 'twsp' ? 'selected' : '' }}>TWSP</option>
+    </select>
 </div>
-@endif
 
-@if($assessment->training_status3 === 'mix' || $assessment->training_status3 === 'non_scholar')
-<div id="non_scholarship_div3">
-<label for="non_scholarship3" class="block text-sm font-medium mb-2">
-Non Scholarship Type:
-</label>
-<select id="non_scholarship3" name="type_of_non_scholar3" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="Walk-In" {{ $assessment->type_of_non_scholar3 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+
+<!-- Non-Scholar Section -->
+<div id="non_scholarship_div3" style="display: {{ $assessment->training_status3 == 'non-scholar' || $assessment->training_status3 == 'mix' ? 'block' : 'none' }};">
+    <label for="non_scholarship3" class="block text-sm font-medium mb-2">
+        Non-Scholarship Type:
+    </label>
+    <select id="non_scholarship3" name="type_of_non_scholar3"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your non-scholarship type</option>
+        <option value="Walk-In" {{ $assessment->type_of_non_scholar3 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
         <option value="CAWS" {{ $assessment->type_of_non_scholar3 == 'CAWS' ? 'selected' : '' }}>CAWS</option>
         <option value="Three" {{ $assessment->type_of_non_scholar3 == 'Three' ? 'selected' : '' }}>Three</option>
         <option value="Four" {{ $assessment->type_of_non_scholar3 == 'Four' ? 'selected' : '' }}>Four</option>
-</select>
+    </select>
 </div>
-@endif
-
+    
 @endif
 
 @if(!empty($assessment->qualification4))
-<div>
-<label for="qualification4" class="block text-sm font-medium mb-2">
-Qualification:
-</label>
-<select id="qualification4" name="qualification4" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
-<option value="FBS NC II" {{ $assessment->qualification4 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
-        <option value="CSS NC II" {{ $assessment->qualification4 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
-        <option value="Cook NC II" {{ $assessment->qualification4 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
-        <option value="Driving NC II" {{ $assessment->qualification4 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
-</select>
-</div>
+              
+        <div>
+            <label for="qualification4" class="block text-sm font-medium mb-2">
+                Qualification:
+            </label>
+            <select id="qualification4" name="qualification4" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-white-600 dark:text-black">
+                    <option value="" disabled>Select your qualification</option>
+                <option value="FBS NC II" {{ $assessment->qualification4 == 'FBS NC II' ? 'selected' : '' }}>FBS NC II</option>
+                <option value="CSS NC II" {{ $assessment->qualification4 == 'CSS NC II' ? 'selected' : '' }}>CSS NC II</option>
+                <option value="Cook NC II" {{ $assessment->qualification4 == 'Cook NC II' ? 'selected' : '' }}>Cook NC II</option>
+                <option value="Driving NC II" {{ $assessment->qualification4 == 'Driving NC II' ? 'selected' : '' }}>Driving NC II</option>
+            </select>
+        </div>
 
-<div>
-<label for="no_of_pax4" class="block text-sm font-medium mb-2">
-Number of Pax:
-</label>
-<select id="no_of_pax4" name="no_of_pax4" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-@for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}" {{ $assessment->no_of_pax4 == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                        @endfor
-</select>
-</div>
+        <div>
+            <label for="no_of_pax4" class="block text-sm font-medium mb-2">
+                Number of Pax:
+            </label>
+            <select id="no_of_pax4" name="no_of_pax4"
+                class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                <option value="" disabled>Select your number of pax</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}" {{ $assessment->no_of_pax4 == $i ? 'selected' : '' }}>{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
 
-<div>
-<label for="training_status4" class="block text-sm font-medium mb-2">
-Training Status:
-</label>
-<select id="training_status4" name="training_status4" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="scholar" {{ $assessment->training_status4 == 'scholar' ? 'selected' : '' }}>Scholar</option>
-        <option value="non-scholar" {{ $assessment->training_status4 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
-        <option value="mix" {{ $assessment->training_status4 == 'mix' ? 'selected' : '' }}>Mix</option>
-
-</select>
-</div>
-
-<script>
+        <div>
+            <label for="training_status4" class="block text-sm font-medium mb-2">
+                Training Status:
+            </label>
+            <select id="training_status4" name="training_status4" 
+                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+                    <option value="" disabled>Select your training status</option>
+    <option value="scholar" {{ $assessment->training_status4 == 'scholar' ? 'selected' : '' }}>Scholar</option>
+    <option value="non-scholar" {{ $assessment->training_status4 == 'non-scholar' ? 'selected' : '' }}>Non-Scholar</option>
+    <option value="mix" {{ $assessment->training_status4 == 'mix' ? 'selected' : '' }}>Mix</option>
+    </select>
+        </div>
+        
+        <script>
+    // Auto-show the sections based on selected training_status on page load
     document.addEventListener('DOMContentLoaded', function () {
-        const noOfPaxSelect = document.getElementById('no_of_pax4');
-        const mixNoSelect = document.getElementById('mix_no4');
-        const selectedMixNo = "{{ $assessment->mix_no4 ?? '' }}"; // Retrieve previously selected mix_no
-
-        // Function to populate mix_no options
-        function populateMixNoOptions(selectedValue) {
-
-            if (selectedValue > 1) {
-                for (let i = selectedValue - 1; i >= 1; i--) {
-                    let option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = i;
-
-                    // Mark previously selected value as selected
-                    if (selectedMixNo == i) {
-                        option.selected = true;
-                    }
-
-                    mixNoSelect.appendChild(option);
-                }
-            }
-        }
-
-        // Populate mix_no on page load if no_of_pax has a selected value
-        if (noOfPaxSelect.value) {
-            populateMixNoOptions(parseInt(noOfPaxSelect.value));
-        }
-
-        // Handle change event for no_of_pax dropdown
-        noOfPaxSelect.addEventListener('change', function () {
-            let selectedValue = parseInt(this.value);
-            populateMixNoOptions(selectedValue);
-        });
+        updateTrainingStatus4(); // Call function on page load
     });
+
+    document.getElementById('training_status4').addEventListener('change', function () {
+        updateTrainingStatus4(); // Call function on change
+    });
+
+    function updateTrainingStatus4() {
+        var trainingStatus4 = document.getElementById('training_status4').value;
+        var scholarshipDiv4 = document.getElementById('scholarship_div4');
+        var nonScholarshipDiv4 = document.getElementById('non_scholarship_div4');
+        var mix_no_container4 = document.getElementById('mix_no_container4');
+
+        if (trainingStatus4 === 'scholar') {
+            scholarshipDiv4.style.display = 'block';
+            nonScholarshipDiv4.style.display = 'none';
+            mix_no_container4.style.display = 'none';
+        } else if (trainingStatus4 === 'non-scholar') {
+            scholarshipDiv4.style.display = 'none';
+            nonScholarshipDiv4.style.display = 'block';
+            mix_no_container4.style.display = 'none';
+        } else if (trainingStatus4 === 'mix') {
+            scholarshipDiv4.style.display = 'block';
+            nonScholarshipDiv4.style.display = 'block';
+            mix_no_container4.style.display = 'block';
+        } else {
+            // Hide all if no selection
+            scholarshipDiv4.style.display = 'none';
+            nonScholarshipDiv4.style.display = 'none';
+            mix_no_container4.style.display = 'none';
+        }
+    }
 </script>
 
-@if(!empty($assessment->training_status4 === 'mix'))
-<div id="mix_no_container2">
-<label for="mix_no4" class="block text-sm font-medium mb-2">
-Number of Scholar:
-</label>
-<select id="mix_no4" name="mix_no4" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-</select>
+<!-- Mix Number Container (For Scholar Mix) -->
+<div id="mix_no_container4" style="display: {{ $assessment->training_status4 == 'mix' ? 'block' : 'none' }};">
+    <label for="mix_no4" class="block text-sm font-medium mb-2">
+        Number of Scholar:
+    </label>
+    <select id="mix_no4" name="mix_no4"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your number of Scholar</option>
+        @for ($i = 1; $i <= $assessment->no_of_pax4 - 1; $i++)
+            <option value="{{ $i }}" {{ $assessment->mix_no4 == $i ? 'selected' : '' }}>{{ $i }}</option>
+        @endfor
+    </select>
 </div>
-@endif
 
-@if($assessment->training_status4 === 'mix' || $assessment->training_status4 === 'scholar')
-<div id="scholarship_div4">
-<label for="scholarship4" class="block text-sm font-medium mb-2">
-Scholarship Type:
-</label>
-<select id="non_scholarship4" name="type_of_scholar4" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="ttsp"  {{ $assessment->type_of_scholar4 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
-        <option value="cfsp"  {{ $assessment->type_of_scholar4 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
-        <option value="uaqtea"  {{ $assessment->type_of_scholar4 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
-        <option value="twsp"  {{ $assessment->type_of_scholar4 == 'twsp' ? 'selected' : '' }}>TWSP</option>
-</select>
+
+
+      <!-- Scholar Section -->
+<div id="scholarship_div4" style="display: {{ $assessment->training_status4 == 'scholar' || $assessment->training_status4 == 'mix' ? 'block' : 'none' }};">
+    <label for="scholarship4" class="block text-sm font-medium mb-2">
+        Scholarship Type:
+    </label>
+    <select id="scholarship4" name="type_of_scholar4"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your scholarship type</option>
+        <option value="ttsp" {{ $assessment->type_of_scholar4 == 'ttsp' ? 'selected' : '' }}>TTSP</option>
+        <option value="cfsp" {{ $assessment->type_of_scholar4 == 'cfsp' ? 'selected' : '' }}>CFSP</option>
+        <option value="uaqtea" {{ $assessment->type_of_scholar4 == 'uaqtea' ? 'selected' : '' }}>UAQTEA</option>
+        <option value="twsp" {{ $assessment->type_of_scholar4 == 'twsp' ? 'selected' : '' }}>TWSP</option>
+    </select>
 </div>
-@endif
 
-@if($assessment->training_status4 === 'mix' || $assessment->training_status4 === 'non_scholar')
-<div id="non_scholarship_div4">
-<label for="non_scholarship4" class="block text-sm font-medium mb-2">
-Non Scholarship Type:
-</label>
-<select id="non_scholarship4" name="type_of_non_scholar4" 
-class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
-<option value="Walk-In" {{ $assessment->type_of_non_scholar4 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
+
+<!-- Non-Scholar Section -->
+<div id="non_scholarship_div4" style="display: {{ $assessment->training_status4 == 'non-scholar' || $assessment->training_status4 == 'mix' ? 'block' : 'none' }};">
+    <label for="non_scholarship4" class="block text-sm font-medium mb-2">
+        Non-Scholarship Type:
+    </label>
+    <select id="non_scholarship4" name="type_of_non_scholar4"
+        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 bg-white dark:border-gray-600 dark:text-black">
+        <option value="" disabled>Select your non-scholarship type</option>
+        <option value="Walk-In" {{ $assessment->type_of_non_scholar4 == 'Walk-In' ? 'selected' : '' }}>Walk-In</option>
         <option value="CAWS" {{ $assessment->type_of_non_scholar4 == 'CAWS' ? 'selected' : '' }}>CAWS</option>
         <option value="Three" {{ $assessment->type_of_non_scholar4 == 'Three' ? 'selected' : '' }}>Three</option>
         <option value="Four" {{ $assessment->type_of_non_scholar4 == 'Four' ? 'selected' : '' }}>Four</option>
-</select>
+    </select>
 </div>
-@endif
 
 @endif
-
-<!-- Back Button (Hidden by Default) -->
-
-
 
 <div>
-<label for="agreementEdit" class="flex items-center space-x-2">
-<input type="checkbox" id="agreementEdit" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-<span>I agree to the terms and conditions.</span>
-</label>
+    <label for="agreement" class="flex items-center space-x-2">
+        <input type="checkbox" id="agreement" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+        <span>I agree to the terms and conditions.</span>
+    </label>
 </div>
 
 <script>
-document.getElementById('agreementEdit').addEventListener('change', function () {
-const nextButton = document.getElementById('next_button_edit');
-nextButton.disabled = !this.checked; // Enable if checked, disable otherwise
-});
+    document.getElementById('agreement').addEventListener('change', function () {
+        const nextButton = document.getElementById('next_button');
+        nextButton.disabled = !this.checked; // Enable if checked, disable otherwise
+    });
 </script>
-
-
-<button type="button" id="next_button_edit" 
-class="mt-4 px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50" 
-disabled>
-Apply Schedule
+    
+<button type="button" id="next_button" 
+        class="mt-4 px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50" 
+        disabled>
+    Apply Schedule
 </button>
 
+            </div>
+ <!-- Step 2: Document Upload -->
+    <div id="step2" style="display: none;">
+        
+      <!-- Document Title -->
+      <div id="qualificationTitle" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+        <script>
+    // Handle qualification selection and dynamically update Step 2 title
+    document.getElementById('qualification').addEventListener('change', function() {
+        const qualification = this.value;
+        const titleElement = document.getElementById('qualificationTitle');
+
+        // Update title based on selected qualification
+        if (qualification) {
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification}</h3>`;
+        }
+    });
+</script>
+     
+<!-- Endorsement Letter To TESDA -->
+<div class="mt-4">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument" class="block w-full bg-white dark:text-black" type="file" name="eltt" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt') }}" 
+                autocomplete="eltt" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+            <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
+
+            <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp') }}" autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+    <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
+
+    <div style="display: none;" id="orInputContainer">
+    <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns') }}" autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
+    <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
+    </div>
+
+    <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr') }}" autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+    <x-input-error :messages="$errors->get('sopcctvr')" class="mt-2" />
+
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf" style="display: none; flex: 2;">
+            <iframe id="pdfView" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
+    </div>
 </div>
-<!-- Step 2: Document Upload -->
-<div id="Editstep2" style="display: none;">
 
 
-<!-- Document Title -->
-<div id="qualificationTitle2" class="mt-4">
-<h2>Provide PDF for {{$assessment->qualification}}</h2>
-</div>
+   <!-- Document Title -->
+   <div id="qualificationTitle2" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+        <script>
+    // Handle qualification selection and dynamically update Step 2 title
+    document.getElementById('qualification2').addEventListener('change', function() {
+        const qualification2 = this.value;
+        const titleElement = document.getElementById('qualificationTitle2');
+
+        // Update title based on selected qualification
+        if (qualification2) {
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification2}</h3>`;
+        }
+    });
+</script>
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-<div style="display: flex; align-items: center; gap: 20px;">
-<!-- Left Side: File Input -->
-<div style="flex: 1;">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument2" class="block w-full bg-white dark:text-black" type="file" name="eltt2" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt2') }}" 
+                autocomplete="eltt2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+            <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
-<x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-<!-- Hidden File Input -->
-<x-text-input id="EditelttDocument" class="hidden" type="file" name="eltt"
-    onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
-<!-- Read-Only Input to Show File Name -->
-<x-text-input id="EditelttFileName" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt }}" readonly onclick="document.getElementById('EditelttDocument').click()" />
-<x-input-error :messages="$errors->get('eltt')" class="mt-2" />
+            <x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp2') }}" autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
+    <div style="display: none;" id="orInputContainer2">
+    <x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns2') }}" autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+    </div>
 
-<x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument" class="hidden" type="file" name="rfftp" 
-onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
-<x-text-input id="EditrfftpDocument" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp }}" readonly onclick="document.getElementById('EditrfftpDocument').click()" />
-<x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
+    <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr2') }}" autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    <x-input-error :messages="$errors->get('sopcctvr2')" class="mt-2" />
 
-@if($assessment->training_status === 'mix' || $assessment->training_status === 'non_scholar')
-<x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument" class="hidden" type="file" name="oropfafns" 
-onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')" />
-<x-text-input id="EditoropfafnsDocument" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns }}" readonly onclick="document.getElementById('EditoropfafnsDocument').click()" />
-<x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
-@endif
-
-
-<x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument" class="hidden" type="file" name="sopcctvr" 
-onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
-<x-text-input id="EditsopcctvrDocument" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->sopcctvr }}" readonly onclick="document.getElementById('EditsopcctvrDocument').click()" />
-<x-input-error :messages="$errors->get('sopcctvr')" class="mt-2" />
-
-
-</div>
-<!-- Right Side: PDF Preview -->
-<div id="Editpdf" style="flex: 2;">
-    <iframe id="EditpdfView"  src="{{ $assessment->eltt }}"   style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
-</div>
-</div>
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf2" style="display: none; flex: 2;">
+            <iframe id="pdfView2" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc; background-color:blue"></iframe>
+        </div>
+    </div>
 </div>
 
 
+   <!-- Document Title -->
+   <div id="qualificationTitle3" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
 
+        <script>
+    // Handle qualification selection and dynamically update Step 2 title
+    document.getElementById('qualification3').addEventListener('change', function() {
+        const qualification3 = this.value;
+        const titleElement = document.getElementById('qualificationTitle3');
 
-@if(!empty($assessment->qualification2))
-<!-- Document Title -->
-<div id="qualificationTitle2" class="mt-4">
-<h2>Provide PDF for {{$assessment->qualification2}}</h2>
-</div>
-
+        // Update title based on selected qualification
+        if (qualification3) {
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification3}</h3>`;
+        }
+    });
+</script>
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-<div style="display: flex; align-items: center; gap: 20px;">
-<!-- Left Side: File Input -->
-<div style="flex: 1;">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument3" class="block w-full bg-white dark:text-black" type="file" name="eltt3" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt3') }}" 
+                autocomplete="eltt3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+            <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
-<x-input-label class="text-white" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
-<x-text-input id="EditelttDocument2" class="hidden" type="file" name="eltt2" 
-autocomplete="eltt2" onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfView2')"/>
-<x-text-input id="EditelttDocument2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt2 }}" readonly onclick="document.getElementById('EditelttDocument2').click()" />
-<x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
+            <x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp3') }}" autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+    <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
-<x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument2" class="hidden" type="file" name="rfftp2"/>
-<x-text-input id="EditrfftpDocument2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp2 }}" readonly onclick="document.getElementById('EditrfftpDocument2').click()" />
-<x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
+    <div style="display: none;" id="orInputContainer3">
+    <x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns3') }}" autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+    </div>
 
-@if($assessment->training_status2 === 'mix' || $assessment->training_status2 === 'non_scholar')
-<x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument2" class="hidden" type="file" name="oropfafns2"/>
-<x-text-input id="EditoropfafnsDocument2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns2 }}" readonly onclick="document.getElementById('EditoropfafnsDocument2').click()" />
-<x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
-@endif
+    <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr3') }}" autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+    <x-input-error :messages="$errors->get('sopcctvr3')" class="mt-2" />
 
-<x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument2" class="hidden" type="file" name="sopcctvr2"/>
-<x-text-input id="EditsopcctvrDocument2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->sopcctvr2 }}" readonly onclick="document.getElementById('EditsopcctvrDocument2').click()" />
-<x-input-error :messages="$errors->get('sopcctvr2')" class="mt-2" />
-
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf3" style="display: none; flex: 2;">
+            <iframe id="pdfView3" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
+    </div>
 </div>
-<!-- Right Side: PDF Preview -->
-<div id="Editpdf2" style="flex: 2;">
-<iframe id="EditpdfView2" src="{{ $assessment->eltt2 }}" style="width: 300px; height: 300px; border: 1px solid #ccc; background-color:blue"></iframe>
-</div>
-</div>
-</div>
-@endif
 
 
-@if(!empty($assessment->qualification3))
 
-<!-- Document Title -->
-<div id="qualificationTitle3" class="mt-4">
-<h2>Provide PDF for {{$assessment->qualification3}}</h2>
-</div>
+
+   <!-- Document Title -->
+   <div id="qualificationTitle4" class="mt-4">
+            <h2>Please upload your document here (PDF)</h2>
+        </div>
+
+        <script>
+    // Handle qualification selection and dynamically update Step 2 title
+    document.getElementById('qualification4').addEventListener('change', function() {
+        const qualification4 = this.value;
+        const titleElement = document.getElementById('qualificationTitle4');
+
+        // Update title based on selected qualification
+        if (qualification4) {
+            titleElement.innerHTML = `<h3>Provide PDF for ${qualification4}</h3>`;
+        }
+    });
+</script>
 
 <!-- Endorsement Letter To TESDA -->
 <div class="mt-4">
-<div style="display: flex; align-items: center; gap: 20px;">
-<!-- Left Side: File Input -->
-<div style="flex: 1;">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Left Side: File Input -->
+        <div style="flex: 1;">
+    
+        <x-input-label class="text-white" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
+            <x-text-input id="elttDocument4" class="block w-full bg-white dark:text-black" type="file" name="eltt4" 
+                placeholder="Please upload your document here (PDF)" value="{{ old('eltt4') }}" 
+                autocomplete="eltt4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+            <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
-<x-input-label class="text-white" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
-<x-text-input id="EditelttDocument3" class="hidden" type="file" name="eltt3"/>
-<x-text-input id="EditelttDocument3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt3 }}" readonly onclick="document.getElementById('EditelttDocument3').click()" />
-<x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
+            <x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4" placeholder="Please upload your document here (PDF)" value="{{ old('rfftp4') }}" autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
-<x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument3" class="hidden" type="file" name="rfftp3"/>
-<x-text-input id="EditrfftpDocument3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp3 }}" readonly onclick="document.getElementById('EditrfftpDocument3').click()" />
-<x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
+    <div style="display: none;" id="orInputContainer4">
+    <x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
+    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" placeholder="Please upload your document here (PDF)" value="{{ old('oropfafns4') }}" autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+    </div>
 
-@if($assessment->training_status3 === 'mix' || $assessment->training_status3 === 'non_scholar')
-<x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument3" class="hidden" type="file" name="oropfafns3"/>
-<x-text-input id="EditoropfafnsDocument3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns3 }}" readonly onclick="document.getElementById('EditoropfafnsDocument3').click()" />
-<x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
-@endif
+    <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" placeholder="Please upload your document here (PDF)" value="{{ old('sopcctvr4') }}" autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+    <x-input-error :messages="$errors->get('sopcctvr4')" class="mt-2" />
 
-<x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument3" class="hidden" type="file" name="sopcctvr3"/>
-<x-text-input id="EditsopcctvrDocument3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->sopcctvr3 }}" readonly onclick="document.getElementById('EditsopcctvrDocument3').click()" />
-<x-input-error :messages="$errors->get('sopcctvr3')" class="mt-2" />
-
-</div>
-<!-- Right Side: PDF Preview -->
-<div id="Editpdf3" style="flex: 2;">
-<iframe id="EditpdfView3" src="{{ $assessment->eltt3 }}" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
-</div>
-</div>
+        </div>
+        <!-- Right Side: PDF Preview -->
+        <div id="pdf4" style="display: none; flex: 2;">
+            <iframe id="pdfView4" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
+    </div>
 </div>
 
-@endif
 
 
-@if(!empty($assessment->qualification4))
-<!-- Document Title -->
-<div id="qualificationTitle4" class="mt-4">
-<h2>Provide PDF for {{$assessment->qualification4}}</h2>
-</div>
+	<div class="mt-4">
+                                    <button id="submit_button" type="submit" 
+                                            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300" 
+                                     >Submit</button>
 
-<!-- Endorsement Letter To TESDA -->
-<div class="mt-4">
-<div style="display: flex; align-items: center; gap: 20px;">
-<!-- Left Side: File Input -->
-<div style="flex: 1;">
+                                     
 
-<x-input-label class="text-white" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
-<x-text-input id="EditelttDocument4" class="hidden" type="file" name="eltt4"/>
-<x-text-input id="EditelttDocument4" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt4 }}" readonly onclick="document.getElementById('EditelttDocument4').click()" />
-<x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
-
-<x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument4" class="hidden" type="file" name="rfftp4"/>
-<x-text-input id="EditrfftpDocument4" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp4 }}" readonly onclick="document.getElementById('EditrfftpDocument4').click()" />
-<x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
-
-@if($assessment->training_status4 === 'mix' || $assessment->training_status4 === 'non_scholar')
-<x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument4" class="hidden" type="file" name="oropfafns4"/>
-<x-text-input id="EditoropfafnsDocument4" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns4 }}" readonly onclick="document.getElementById('EditoropfafnsDocument4').click()" />
-<x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
-@endif
-
-<x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4"/>
-
-<x-input-error :messages="$errors->get('sopcctvr4')" class="mt-2" />
-
-</div>
-<!-- Right Side: PDF Preview -->
-<div id="Editpdf4" style="display: none; flex: 2;">
-<iframe id="EditpdfView4" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
-</div>
-</div>
-</div>
-
-@endif
-
-                             <!-- Cancel Button to go back -->
-                             <button type="button" id="cancel_button_Editstep2" 
+                                      <!-- Cancel Button to go back -->
+                                      <button type="button" id="cancel_button_step2" 
     class="mt-4 px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400"
-    onclick="goBackToEditStep1();">
+    onclick="goBackToStep1();">
     Back
 </button>
 
 <script>
-    function goBackToEditStep1() {
+    function goBackToStep1() {
         // Hide Step 2 and show Step 1
-        document.getElementById('Editstep2').style.display = 'none';
-        document.getElementById('Editstep1').style.display = 'block';
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step1').style.display = 'block';
     }       
 </script>
-
-<div class="mt-4">
-        <button id="submit_button" type="submit" 
-                class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300" 
-         >Submit</button>
-
-
-</div>
 
 </div>
 </div>
@@ -778,9 +808,8 @@ autocomplete="eltt2" onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfVi
 
 
 
-<!-- JavaScript -->
 <script>
-function previewEditDocument(event, containerId, iframeId) {
+function previewDocument(event, containerId, iframeId) {
     const file = event.target.files[0];
     const previewContainer = document.getElementById(containerId);
     const previewIframe = document.getElementById(iframeId);
@@ -802,11 +831,11 @@ function previewEditDocument(event, containerId, iframeId) {
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-document.getElementById('next_button_edit').addEventListener('click', function () {
-
-// Hide Step 1 and Show Step 2
-document.getElementById('Editstep1').style.display = 'none';
-document.getElementById('Editstep2').style.display = 'block';
+document.getElementById('next_button').addEventListener('click', function () {  
+    // Hide Step 1 and Show Step 2
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
 });
-</script>
+                            </script>
 
+           

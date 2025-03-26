@@ -332,90 +332,76 @@
     {!! implode('<br>', array_filter($statuses)) !!}
 </td>
 
-        
             
             <td>
     @php
         $rows = [];
 
-        if (!empty($assessment->mix_no)) {
-            $rows[] = "{$assessment->mix_no} - {$assessment->type_of_scholar} / " . (10 - $assessment->mix_no) . " - {$assessment->type_of_non_scholar}";
-        } else {
-            $rows[] = $assessment->type_of_scholar;
-            $rows[] = $assessment->type_of_non_scholar;
-        }
+        if (!empty($assessment->mix_no) && !empty($assessment->type_of_scholar) && !empty($assessment->type_of_non_scholar)) {
+    $rows[] = "{$assessment->mix_no} - {$assessment->type_of_scholar} / " . (10 - $assessment->mix_no) . " - {$assessment->type_of_non_scholar}";
+} else {
+    if (isset($assessment->training_status) && $assessment->training_status == 'scholar' && !empty($assessment->type_of_scholar)) {
+        $rows[] = $assessment->type_of_scholar;
+    } 
 
-        if (!empty($assessment->mix_no2) && $assessment->qualification2 !== 'N/A') {
-            $rows[] = "{$assessment->mix_no2} - {$assessment->type_of_scholar2} / " . (10 - $assessment->mix_no2) . " - {$assessment->type_of_non_scholar2}";
-        } else {
-            $rows[] = $assessment->type_of_scholar2;
-            $rows[] = $assessment->type_of_non_scholar2;
-        }
+    if (isset($assessment->training_status) && ($assessment->training_status == 'non_scholar' || $assessment->training_status == 'non-scholar') && !empty($assessment->type_of_non_scholar)) {
+        $rows[] = $assessment->type_of_non_scholar;
+    }
+}
 
-        if (!empty($assessment->mix_no3) && $assessment->qualification3 !== 'N/A') {
-            $rows[] = "{$assessment->mix_no3} - {$assessment->type_of_scholar3} / " . (10 - $assessment->mix_no3) . " - {$assessment->type_of_non_scholar3}";
-        } else {
-            $rows[] = $assessment->type_of_scholar3;
-            $rows[] = $assessment->type_of_non_scholar3;
-        }
 
-        if (!empty($assessment->mix_no4) && $assessment->qualification4 !== 'N/A') {
-            $rows[] = "{$assessment->mix_no4} - {$assessment->type_of_scholar4} / " . (10 - $assessment->mix_no4) . " - {$assessment->type_of_non_scholar4}";
-        } else {
-            $rows[] = $assessment->type_of_scholar4;
-            $rows[] = $assessment->type_of_non_scholar4;
-        }
+if (!empty($assessment->mix_no2) && !empty($assessment->type_of_scholar2) && !empty($assessment->type_of_non_scholar2)&& $assessment->qualification2 !== 'N/A') {
+    $rows[] = "{$assessment->mix_no2} - {$assessment->type_of_scholar2} / " . (10 - $assessment->mix_no2) . " - {$assessment->type_of_non_scholar2}";
+} else {
+    if (isset($assessment->training_status2) && $assessment->training_status2 == 'scholar' && !empty($assessment->type_of_scholar2)) {
+        $rows[] = $assessment->type_of_scholar2;
+    } 
+
+    if (isset($assessment->training_status2) && ($assessment->training_status2 == 'non_scholar' || $assessment->training_status2 == 'non-scholar') && !empty($assessment->type_of_non_scholar2)) {
+        $rows[] = $assessment->type_of_non_scholar2;
+    }
+}
+
+
+if (!empty($assessment->mix_no3) && !empty($assessment->type_of_scholar3) && !empty($assessment->type_of_non_scholar3)&& $assessment->qualification3 !== 'N/A') {
+    $rows[] = "{$assessment->mix_no3} - {$assessment->type_of_scholar3} / " . (10 - $assessment->mix_no3) . " - {$assessment->type_of_non_scholar3}";
+} else {
+    if (isset($assessment->training_status3) && $assessment->training_status3 == 'scholar' && !empty($assessment->type_of_scholar3)) {
+        $rows[] = $assessment->type_of_scholar3;
+    } 
+
+    if (isset($assessment->training_status3) && ($assessment->training_status3 == 'non_scholar' || $assessment->training_status3 == 'non-scholar') && !empty($assessment->type_of_non_scholar3)) {
+        $rows[] = $assessment->type_of_non_scholar3;
+    }
+}
+
+if (!empty($assessment->mix_no4) && !empty($assessment->type_of_scholar4) && !empty($assessment->type_of_non_scholar4)&& $assessment->qualification4 !== 'N/A') {
+    $rows[] = "{$assessment->mix_no4} - {$assessment->type_of_scholar4} / " . (10 - $assessment->mix_no4) . " - {$assessment->type_of_non_scholar4}";
+} else {
+    if (isset($assessment->training_status4) && $assessment->training_status4 == 'scholar' && !empty($assessment->type_of_scholar4)) {
+        $rows[] = $assessment->type_of_scholar4;
+    } 
+
+    if (isset($assessment->training_status4) && ($assessment->training_status4 == 'non_scholar' || $assessment->training_status4 == 'non-scholar') && !empty($assessment->type_of_non_scholar4)) {
+        $rows[] = $assessment->type_of_non_scholar4;
+    }
+}
+
     @endphp
 
     {!! implode('<br>', array_filter($rows)) !!}
 </td>
-
-    
-
-
         <td>
         <a href="{{ url('/view/' . $assessment->id) }}" target="_blank">
             <button class="small-btn">
                 <i class="fa fa-eye"></i>
             </button>
         </a>
-        <a href="#"onclick="openEditModal(event)">
+        <a href="{{ route('qualification.edit', ['assessment' => $assessment->id]) }}">
     <button class="small-btn">
-        <i class="fa-solid fa-edit"></i>
+        <i class="fa fa-solid fa-edit"></i>
     </button>
 </a>
-
-<!-- Modal -->
-<div id="assessmenteditModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-4 rounded-lg shadow-lg max-w-2xl max-h-[90vh] overflow-y-auto relative">
-        <div class="bg-blue-500 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-8 text-gray-900 dark:text-gray-100 relative">
-                <!-- Close Button -->
-                <button onclick="closeEditModal()" class="absolute top-3 right-4 text-white font-bold text-2xl">
-                    &times;
-                </button>
-                    @include('qualification.edit')
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- JavaScript -->
-<script>
-    function openEditModal(event) {
-        event.preventDefault(); // Prevents page from refreshing
-        document.getElementById("assessmenteditModal").classList.remove("hidden");
-    }
-
-    function closeEditModal() {
-        document.getElementById("assessmenteditModal").classList.add("hidden");
-    }
-</script>
-
-
-
     </td>
         </tr>
         @endforeach

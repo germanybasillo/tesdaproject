@@ -126,7 +126,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/assessments/one', [AssessmentController::class, 'one'])->name('assessments.one');
-    Route::put('/assessments/oneUpdate/{id}', [AssessmentController::class, 'oneUpdate'])->name('assessments.oneUpdate');
+    Route::put('/assessments/oneUpdate/{assessment}', [AssessmentController::class, 'oneUpdate'])->name('assessments.oneUpdate');
     Route::put('/assessments/{assessment}', [AssessmentController::class, 'update'])->name('assessments.update');
 });
 
@@ -138,7 +138,10 @@ Route::middleware(['auth', 'admin.restrict'])->group(function () {
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
-Route::get('/qualificationEdit/{id}', function ($id) {
+Route::get('/qualificationEdit/{assessment}', function ($id) {
     $assessment = Assessment::find($id);
+    if (!$assessment) {
+        abort(404);
+    }
     return view('qualification.edit', compact('assessment'));
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified'])->name('qualification.edit');
