@@ -589,7 +589,7 @@ onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
 
 </div>
 <!-- Right Side: PDF Preview -->
-<div id="Editpdf" style="flex: 2;">
+<div id="Editpdf" style="display: none; flex: 2;">
     <iframe id="EditpdfView"  src="{{ $assessment->eltt }}"   style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
 </div>
 </div>
@@ -640,7 +640,7 @@ autocomplete="eltt2" onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfVi
 
 </div>
 <!-- Right Side: PDF Preview -->
-<div id="Editpdf2" style="flex: 2;">
+<div id="Editpdf2" style="display: none; flex: 2;">
 <iframe id="EditpdfView2" src="{{ $assessment->eltt2 }}" style="width: 300px; height: 300px; border: 1px solid #ccc; background-color:blue"></iframe>
 </div>
 </div>
@@ -689,7 +689,7 @@ autocomplete="eltt2" onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfVi
 
 </div>
 <!-- Right Side: PDF Preview -->
-<div id="Editpdf3" style="flex: 2;">
+<div id="Editpdf3" style="display: none; flex: 2;">
 <iframe id="EditpdfView3" src="{{ $assessment->eltt3 }}" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
 </div>
 </div>

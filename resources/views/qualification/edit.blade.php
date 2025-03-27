@@ -574,47 +574,52 @@
 <div class="mt-4">
     <div style="display: flex; align-items: center; gap: 20px;">
         <!-- Left Side: File Input -->
+        <!-- Endorsement Letter To TESDA -->
         <div style="flex: 1;">
     
         <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
-<!-- Hidden File Input -->
-<x-text-input id="EditelttDocument" class="hidden" type="file" name="eltt"
-    onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
-<!-- Read-Only Input to Show File Name -->
-<x-text-input id="EditelttFileName" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt }}" readonly onclick="document.getElementById('EditelttDocument').click()" />
-<x-input-error :messages="$errors->get('eltt')" class="mt-2" />
+            <x-text-input id="elttDocument" class="block w-full bg-white dark:text-black" type="file" name="eltt"
+                autocomplete="eltt" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+                     <!-- Show existing file name if available -->
+            @if(!empty($assessment->eltt))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->eltt) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->eltt) }}</a></p>
+            @endif
+            <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
-<x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument" class="hidden" type="file" name="rfftp" 
-onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
-<x-text-input id="EditrfftpDocument" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp }}" readonly onclick="document.getElementById('EditrfftpDocument').click()" />
-<x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
+            <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp"
+    autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+    @if(!empty($assessment->rfftp))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->rfftp) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->rfftp) }}</a></p>
+            @endif
+    <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
-    @if(!empty($assessment->training_status == 'non_scholar' || $assessment->training_status == 'mix'))
+    @if($assessment->training_status === 'mix' || $assessment->training_status === 'non_scholar')
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument" class="hidden" type="file" name="oropfafns" 
-onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')" />
-<x-text-input id="EditoropfafnsDocument" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns }}" readonly onclick="document.getElementById('EditoropfafnsDocument').click()" />
-<x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
+    <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns"
+    autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
+    @if(!empty($assessment->oropfafns))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns) }}</a></p>
+            @endif
+    <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
     @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument" class="hidden" type="file" name="sopcctvr" 
-onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
-<x-text-input id="EditsopcctvrDocument" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->sopcctvr }}" readonly onclick="document.getElementById('EditsopcctvrDocument').click()" />
-<x-input-error :messages="$errors->get('sopcctvr')" class="mt-2" />
+    <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr"
+    autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
+    @if(!empty($assessment->sopcctvr))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->sopcctvr) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->sopcctvr) }}</a></p>
+            @endif
+    <x-input-error :messages="$errors->get('sopcctvr')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
-        <div id="Editpdf" style="display: none; flex: 2;">
-            <iframe id="EditpdfView" src="#"  style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        <div id="pdf" style="flex: 2;">
+            <iframe id="pdfView" src="{{ asset('/' . $assessment->eltt) }}" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
         </div>
     </div>
 </div>
+
 
 @if(!empty($assessment->qualification2))
 
@@ -630,41 +635,43 @@ onchange="previewEditDocument(event, 'Editpdf', 'EditpdfView')"  />
         <div style="flex: 1;">
     
         <x-input-label class="text-white" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
-<!-- Hidden File Input -->
-<x-text-input id="EditelttDocument2" class="hidden" type="file" name="eltt2"
-    onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfView2')"  />
-<!-- Read-Only Input to Show File Name -->
-<x-text-input id="EditelttFileName2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt2 }}" readonly onclick="document.getElementById('EditelttDocument2').click()" />
-<x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
+            <x-text-input id="elttDocument2" class="block w-full bg-white dark:text-black" type="file" name="eltt2" 
+                autocomplete="eltt2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+                @if(!empty($assessment->eltt2))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->eltt2) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->eltt2) }}</a></p>
+            @endif
+            <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
-<x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument2" class="hidden" type="file" name="rfftp2" 
-onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfView2')"  />
-<x-text-input id="EditrfftpDocument2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp2 }}" readonly onclick="document.getElementById('EditrfftpDocument2').click()" />
-<x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
+            <x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" 
+    autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    @if(!empty($assessment->rfftp2))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->rfftp2) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->rfftp2) }}</a></p>
+            @endif
+    <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
-    @if(!empty($assessment->training_status2 == 'non_scholar' || $assessment->training_status2 == 'mix'))
+    @if($assessment->training_status2 === 'mix' || $assessment->training_status2 === 'non_scholar')
     <x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument2" class="hidden" type="file" name="oropfafns2" 
-onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfView2')" />
-<x-text-input id="EditoropfafnsDocument2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns2 }}" readonly onclick="document.getElementById('EditoropfafnsDocument2').click()" />
-<x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" 
+     autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+        @if(!empty($assessment->oropfafns2))
+                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns2) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns2) }}</a></p>
+                @endif
+    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
     @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument2" class="hidden" type="file" name="sopcctvr2" 
-onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfView2')"  />
-<x-text-input id="EditsopcctvrDocument2" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->sopcctvr2 }}" readonly onclick="document.getElementById('EditsopcctvrDocument').click()" />
-<x-input-error :messages="$errors->get('sopcctvr2')" class="mt-2" />
+    <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" 
+    autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
+    @if(!empty($assessment->sopcctvr2))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->sopcctvr2) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->sopcctvr2) }}</a></p>
+            @endif
+    <x-input-error :messages="$errors->get('sopcctvr2')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
-        <div id="Editpdf2" style="display: none; flex: 2;">
-            <iframe id="EditpdfView2" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc; background-color:blue"></iframe>
+        <div id="pdf2" style="flex: 2;">
+            <iframe id="pdfView2" src="{{ asset('/' . $assessment->eltt2) }}" style="width: 300px; height: 300px; border: 1px solid #ccc; background-color:blue"></iframe>
         </div>
     </div>
 </div>
@@ -686,41 +693,43 @@ onchange="previewEditDocument(event, 'Editpdf2', 'EditpdfView2')"  />
         <div style="flex: 1;">
     
         <x-input-label class="text-white" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
-<!-- Hidden File Input -->
-<x-text-input id="EditelttDocument3" class="hidden" type="file" name="eltt3"
-    onchange="previewEditDocument(event, 'Editpdf3', 'EditpdfView3')"  />
-<!-- Read-Only Input to Show File Name -->
-<x-text-input id="EditelttFileName3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt3 }}" readonly onclick="document.getElementById('EditelttDocument3').click()" />
-<x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
+            <x-text-input id="elttDocument3" class="block w-full bg-white dark:text-black" type="file" name="eltt3" 
+                autocomplete="eltt3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+                @if(!empty($assessment->eltt3))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->eltt3) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->eltt3) }}</a></p>
+            @endif
+            <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
-<x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument3" class="hidden" type="file" name="rfftp3" 
-onchange="previewEditDocument(event, 'Editpdf3', 'EditpdfView3')"  />
-<x-text-input id="EditrfftpDocument3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp3 }}" readonly onclick="document.getElementById('EditrfftpDocument3').click()" />
-<x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
+            <x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" 
+     autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+        @if(!empty($assessment->rfftp3))
+                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->rfftp3) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->rfftp3) }}</a></p>
+                @endif
+    <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
-    @if(!empty($assessment->training_status3 == 'non_scholar' || $assessment->training_status3 == 'mix'))
+    @if($assessment->training_status3 === 'mix' || $assessment->training_status3 === 'non_scholar')
     <x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument3" class="hidden" type="file" name="oropfafns3" 
-onchange="previewEditDocument(event, 'Editpdf3', 'EditpdfView3')" />
-<x-text-input id="EditoropfafnsDocument3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns3 }}" readonly onclick="document.getElementById('EditoropfafnsDocument3').click()" />
-<x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" 
+     autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+        @if(!empty($assessment->oropfafns3))
+                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns3) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns3) }}</a></p>
+                @endif
+    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
     @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument3" class="hidden" type="file" name="sopcctvr3" 
-onchange="previewEditDocument(event, 'Editpdf3', 'EditpdfView3')"  />
-<x-text-input id="EditsopcctvrDocument3" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->sopcctvr3 }}" readonly onclick="document.getElementById('EditsopcctvrDocument3').click()" />
-<x-input-error :messages="$errors->get('sopcctvr2')" class="mt-2" />
+    <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3"
+     autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
+        @if(!empty($assessment->sopcctvr3))
+                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->sopcctvr3) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->sopcctvr3) }}</a></p>
+                @endif
+    <x-input-error :messages="$errors->get('sopcctvr3')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
-        <div id="Editpdf3" style="display: none; flex: 2;">
-            <iframe id="EditpdfView3" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        <div id="pdf3" style="flex: 2;">
+            <iframe id="pdfView3" src="{{ asset('/' . $assessment->eltt3) }}" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
         </div>
     </div>
 </div>
@@ -742,44 +751,47 @@ onchange="previewEditDocument(event, 'Editpdf3', 'EditpdfView3')"  />
         <div style="flex: 1;">
     
         <x-input-label class="text-white" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
-<!-- Hidden File Input -->
-<x-text-input id="EditelttDocument4" class="hidden" type="file" name="eltt3"
-    onchange="previewEditDocument(event, 'Editpdf4', 'EditpdfView4')"  />
-<!-- Read-Only Input to Show File Name -->
-<x-text-input id="EditelttFileName4" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->eltt4 }}" readonly onclick="document.getElementById('EditelttDocument4').click()" />
-<x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
+            <x-text-input id="elttDocument4" class="block w-full bg-white dark:text-black" type="file" name="eltt4" 
+                autocomplete="eltt4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+                @if(!empty($assessment->eltt4))
+                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->eltt4) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->eltt4) }}</a></p>
+            @endif
+            <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
-<x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
-<x-text-input id="EditrfftpDocument4" class="hidden" type="file" name="rfftp4" 
-onchange="previewEditDocument(event, 'Editpdf4', 'EditpdfView4')"  />
-<x-text-input id="EditrfftpDocument4" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->rfftp4 }}" readonly onclick="document.getElementById('EditrfftpDocument4').click()" />
-<x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
+            <x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
+    <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4"
+     autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+        @if(!empty($assessment->rfftp4))
+                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->rfftp4) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->rfftp4) }}</a></p>
+                @endif
+    <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
-    @if(!empty($assessment->training_status4 == 'non_scholar' || $assessment->training_status4 == 'mix'))
+    @if($assessment->training_status4 === 'mix' || $assessment->training_status4 === 'non_scholar')
     <x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-<x-text-input id="EditoropfafnsDocument4" class="hidden" type="file" name="oropfafns4" 
-onchange="previewEditDocument(event, 'Editpdf4', 'EditpdfView4')" />
-<x-text-input id="EditoropfafnsDocument4" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->oropfafns4 }}" readonly onclick="document.getElementById('EditoropfafnsDocument4').click()" />
-<x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" 
+    autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+        @if(!empty($assessment->oropfafns4))
+                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns4) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns4) }}</a></p>
+                @endif
+    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
     @endif
 
     <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
-<x-text-input id="EditsopcctvrDocument4" class="hidden" type="file" name="sopcctvr4" 
-onchange="previewEditDocument(event, 'Editpdf4', 'EditpdfView4')"  />
-<x-text-input id="EditsopcctvrDocument4" class="block w-full bg-white dark:text-black cursor-pointer" type="text"
-    value="{{ $assessment->sopcctvr4 }}" readonly onclick="document.getElementById('EditsopcctvrDocument4').click()" />
-<x-input-error :messages="$errors->get('sopcctvr4')" class="mt-2" />
+    <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" 
+    autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
+        @if(!empty($assessment->sopcctvr4))
+                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->sopcctvr4) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->sopcctvr4) }}</a></p>
+                @endif
+    <x-input-error :messages="$errors->get('sopcctvr4')" class="mt-2" />
 
         </div>
         <!-- Right Side: PDF Preview -->
-        <div id="pdf4" style="display: none; flex: 2;">
-            <iframe id="pdfView4" src="#" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
+        <div id="pdf4" style="flex: 2;">
+            <iframe id="pdfView4" src="{{ asset('/' . $assessment->eltt4) }}" style="width: 300px; height: 300px; border: 1px solid #ccc;"></iframe>
         </div>
     </div>
 </div>
+
 
 @endif
 
