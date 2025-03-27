@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Qualification;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 
 /*
@@ -139,9 +140,27 @@ Route::middleware(['auth', 'admin.restrict'])->group(function () {
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/qualificationEdit/{assessment}', function ($id) {
+    // Check if the current day is Friday and the time is between 12:00 AM and 3:00 PM
+    $currentDay = Carbon::now()->format('l'); // Get current day name
+    $currentTime = Carbon::now()->format('H:i'); // Get current time in 24-hour format
+
+    // Restrict access outside of Friday 12:00 AM - 3:00 PM
+    if ($currentDay !== 'Friday' || ($currentTime < '00:00' || $currentTime > '15:00')) {
+        // Set error message and redirect back
+        return redirect()->back()->with('error', 'This page is only accessible on Fridays between 12:00 AM and 3:00 PM.');
+    }
+
+    // Find the assessment
     $assessment = Assessment::find($id);
     if (!$assessment) {
-        abort(404);
+        abort(404); // Return 404 if assessment not found
     }
+
+    // Check if the assessment status is 'approved' - block editing
+    if ($assessment->status === 'approved') {
+        return redirect()->back()->with('error', 'This assessment has already been approved and cannot be edited.');
+    }
+
+    // Return the view if conditions pass
     return view('qualification.edit', compact('assessment'));
 })->middleware(['auth', 'verified'])->name('qualification.edit');

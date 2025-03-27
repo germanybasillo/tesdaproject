@@ -184,7 +184,16 @@
 
     @if (Auth::user()->role === 'user')
     <label>Add New:
+    @php
+    $currentDay = now()->format('l'); // Get current day, e.g., "Friday"
+    $currentTime = now()->format('H:i'); // Get current time in 24-hour format, e.g., "14:30"
+@endphp
+
+@if($currentDay === 'Friday' && $currentTime >= '00:00' && $currentTime <= '15:00')
     <a href="#" class="primary button-style" onclick="openModal(event)">Request Assessment</a>
+@else
+    <span style="color: red;">You can only add new assessment on Fridays from 12:00 AM to 3:00 PM.</span>
+@endif
 </label>
 @endif
 </form>
@@ -397,11 +406,17 @@ if (!empty($assessment->training_status4 == 'mix') && !empty($assessment->type_o
                 <i class="fa fa-eye"></i>
             </button>
         </a>
-        <a href="{{ route('qualification.edit', ['assessment' => $assessment->id]) }}">
-    <button class="small-btn">
-        <i class="fa fa-solid fa-edit"></i>
-    </button>
-</a>
+        @php
+    $currentDay = now()->format('l'); // Get current day, e.g., "Friday"
+    $currentTime = now()->format('H:i'); // Get current time in 24-hour format, e.g., "14:30"
+@endphp
+@if($currentDay === 'Friday' && $currentTime >= '00:00' && $currentTime <= '15:00' && $assessment->status !== 'approved')
+    <a href="{{ route('qualification.edit', ['assessment' => $assessment->id]) }}">
+        <button class="small-btn">
+            <i class="fa fa-solid fa-edit"></i>
+        </button>
+    </a>
+@endif
     </td>
         </tr>
         @endforeach
