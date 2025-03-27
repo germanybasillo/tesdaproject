@@ -675,15 +675,52 @@
             @endif
     <x-input-error :messages="$errors->get('rfftp2')" class="mt-2" />
 
-    @if($assessment->training_status2 === 'mix' || $assessment->training_status2 === 'non_scholar')
+    <div id="oropfafnsContainer2" style="display: none;">
     <x-input-label for="oropfafnsDocument2" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2" 
-     autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
-        @if(!empty($assessment->oropfafns2))
-                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns2) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns2) }}</a></p>
-                @endif
-    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+    <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2"
+        autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" />
+    
+    @if (!empty($assessment->oropfafns2))
+        <p class="text-sm text-gray-500 mt-1">
+            Current File: 
+            <a href="{{ asset('/' . $assessment->oropfafns2) }}" target="_blank" class="text-blue-500 underline">
+                {{ basename($assessment->oropfafns2) }}
+            </a>
+        </p>
     @endif
+    <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
+</div>
+
+<!-- Corrected JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const trainingStatus2 = document.getElementById('training_status2');
+        const oropfafnsContainer2 = document.getElementById('oropfafnsContainer2');
+        const oropfafnsInput2 = document.getElementById('oropfafnsDocument2');
+
+        function toggleOropfafns2() {
+            if (trainingStatus2.value === 'mix' || trainingStatus2.value === 'non-scholar') {
+                oropfafnsContainer2.style.display = 'block';
+            } else {
+                oropfafnsContainer2.style.display = 'none';
+                // Clear file input if "scholar" is selected
+                if (trainingStatus2.value === 'scholar') {
+                    oropfafnsInput2.value = ''; // Clear the file input
+                }
+            }
+        }
+
+        // Trigger on page load
+        toggleOropfafns2();
+
+        // Add event listener for dropdown change
+        trainingStatus2.addEventListener('change', toggleOropfafns2);
+    });
+</script>
+
+
+
+
 
     <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" 
@@ -733,15 +770,49 @@
                 @endif
     <x-input-error :messages="$errors->get('rfftp3')" class="mt-2" />
 
-    @if($assessment->training_status3 === 'mix' || $assessment->training_status3 === 'non_scholar')
+    <div id="oropfafnsContainer3" style="display: none;">
     <x-input-label for="oropfafnsDocument3" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3" 
-     autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
-        @if(!empty($assessment->oropfafns3))
-                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns3) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns3) }}</a></p>
-                @endif
-    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+    <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3"
+        autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" />
+    
+    @if (!empty($assessment->oropfafns3))
+        <p class="text-sm text-gray-500 mt-1">
+            Current File: 
+            <a href="{{ asset('/' . $assessment->oropfafns3) }}" target="_blank" class="text-blue-500 underline">
+                {{ basename($assessment->oropfafns3) }}
+            </a>
+        </p>
     @endif
+    <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
+</div>
+
+<!-- Corrected JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const trainingStatus3 = document.getElementById('training_status3');
+        const oropfafnsContainer3 = document.getElementById('oropfafnsContainer3');
+        const oropfafnsInput3 = document.getElementById('oropfafnsDocument3');
+
+        function toggleOropfafns3() {
+            if (trainingStatus3.value === 'mix' || trainingStatus3.value === 'non-scholar') {
+                oropfafnsContainer3.style.display = 'block';
+            } else {
+                oropfafnsContainer3.style.display = 'none';
+                // Clear file input if "scholar" is selected
+                if (trainingStatus3.value === 'scholar') {
+                    oropfafnsInput3.value = ''; // Clear the file input
+                }
+            }
+        }
+
+        // Trigger on page load
+        toggleOropfafns3();
+
+        // Add event listener for dropdown change
+        trainingStatus3.addEventListener('change', toggleOropfafns3);
+    });
+</script>
+
 
     <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3"
@@ -791,15 +862,48 @@
                 @endif
     <x-input-error :messages="$errors->get('rfftp4')" class="mt-2" />
 
-    @if($assessment->training_status4 === 'mix' || $assessment->training_status4 === 'non_scholar')
+    <div id="oropfafnsContainer4" style="display: none;">
     <x-input-label for="oropfafnsDocument4" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
-    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4" 
-    autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
-        @if(!empty($assessment->oropfafns4))
-                    <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns4) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns4) }}</a></p>
-                @endif
-    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+    <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4"
+        autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" />
+    
+    @if (!empty($assessment->oropfafns4))
+        <p class="text-sm text-gray-500 mt-1">
+            Current File: 
+            <a href="{{ asset('/' . $assessment->oropfafns4) }}" target="_blank" class="text-blue-500 underline">
+                {{ basename($assessment->oropfafns4) }}
+            </a>
+        </p>
     @endif
+    <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
+</div>
+
+<!-- Corrected JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const trainingStatus4 = document.getElementById('training_status4');
+        const oropfafnsContainer4 = document.getElementById('oropfafnsContainer4');
+        const oropfafnsInput4 = document.getElementById('oropfafnsDocument4');
+
+        function toggleOropfafns4() {
+            if (trainingStatus4.value === 'mix' || trainingStatus4.value === 'non-scholar') {
+                oropfafnsContainer4.style.display = 'block';
+            } else {
+                oropfafnsContainer4.style.display = 'none';
+                // Clear file input if "scholar" is selected
+                if (trainingStatus4.value === 'scholar') {
+                    oropfafnsInput4.value = ''; // Clear the file input
+                }
+            }
+        }
+
+        // Trigger on page load
+        toggleOropfafns4();
+
+        // Add event listener for dropdown change
+        trainingStatus4.addEventListener('change', toggleOropfafns4);
+    });
+</script>
 
     <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" 

@@ -337,7 +337,7 @@
     @php
         $rows = [];
 
-        if (!empty($assessment->mix_no) && !empty($assessment->type_of_scholar) && !empty($assessment->type_of_non_scholar)) {
+        if (!empty($assessment->training_status == 'mix') && !empty($assessment->type_of_scholar) && !empty($assessment->type_of_non_scholar)) {
     $rows[] = "{$assessment->mix_no} - {$assessment->type_of_scholar} / " . (10 - $assessment->mix_no) . " - {$assessment->type_of_non_scholar}";
 } else {
     if (isset($assessment->training_status) && $assessment->training_status == 'scholar' && !empty($assessment->type_of_scholar)) {
@@ -350,7 +350,7 @@
 }
 
 
-if (!empty($assessment->mix_no2) && !empty($assessment->type_of_scholar2) && !empty($assessment->type_of_non_scholar2)&& $assessment->qualification2 !== 'N/A') {
+if (!empty($assessment->training_status2 == 'mix') && !empty($assessment->type_of_scholar2) && !empty($assessment->type_of_non_scholar2)&& $assessment->qualification2 !== 'N/A') {
     $rows[] = "{$assessment->mix_no2} - {$assessment->type_of_scholar2} / " . (10 - $assessment->mix_no2) . " - {$assessment->type_of_non_scholar2}";
 } else {
     if (isset($assessment->training_status2) && $assessment->training_status2 == 'scholar' && !empty($assessment->type_of_scholar2)) {
@@ -363,7 +363,7 @@ if (!empty($assessment->mix_no2) && !empty($assessment->type_of_scholar2) && !em
 }
 
 
-if (!empty($assessment->mix_no3) && !empty($assessment->type_of_scholar3) && !empty($assessment->type_of_non_scholar3)&& $assessment->qualification3 !== 'N/A') {
+if (!empty($assessment->training_status3 == 'mix') && !empty($assessment->type_of_scholar3) && !empty($assessment->type_of_non_scholar3)&& $assessment->qualification3 !== 'N/A') {
     $rows[] = "{$assessment->mix_no3} - {$assessment->type_of_scholar3} / " . (10 - $assessment->mix_no3) . " - {$assessment->type_of_non_scholar3}";
 } else {
     if (isset($assessment->training_status3) && $assessment->training_status3 == 'scholar' && !empty($assessment->type_of_scholar3)) {
@@ -375,7 +375,7 @@ if (!empty($assessment->mix_no3) && !empty($assessment->type_of_scholar3) && !em
     }
 }
 
-if (!empty($assessment->mix_no4) && !empty($assessment->type_of_scholar4) && !empty($assessment->type_of_non_scholar4)&& $assessment->qualification4 !== 'N/A') {
+if (!empty($assessment->training_status4 == 'mix') && !empty($assessment->type_of_scholar4) && !empty($assessment->type_of_non_scholar4)&& $assessment->qualification4 !== 'N/A') {
     $rows[] = "{$assessment->mix_no4} - {$assessment->type_of_scholar4} / " . (10 - $assessment->mix_no4) . " - {$assessment->type_of_non_scholar4}";
 } else {
     if (isset($assessment->training_status4) && $assessment->training_status4 == 'scholar' && !empty($assessment->type_of_scholar4)) {
