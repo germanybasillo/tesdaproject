@@ -594,15 +594,40 @@
             @endif
     <x-input-error :messages="$errors->get('rfftp')" class="mt-2" />
 
-    @if($assessment->training_status === 'mix' || $assessment->training_status === 'non_scholar')
+    <div id="oropfafnsContainer" style="display: none;">
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
     <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns"
-    autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')"/>
+        autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')" />
+    
     @if(!empty($assessment->oropfafns))
-                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->oropfafns) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns) }}</a></p>
-            @endif
-    <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
+        <p class="text-sm text-gray-500 mt-1">Current File: 
+            <a href="{{ asset('/' . $assessment->oropfafns) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns) }}</a>
+        </p>
     @endif
+    <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
+</div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const trainingStatus = document.getElementById('training_status');
+        const oropfafnsContainer = document.getElementById('oropfafnsContainer');
+
+        function toggleOropfafns() {
+            if (trainingStatus.value === 'mix' || trainingStatus.value === 'non-scholar') {
+                oropfafnsContainer.style.display = 'block';
+            } else {
+                oropfafnsContainer.style.display = 'none';
+            }
+        }
+
+        // Trigger on page load
+        toggleOropfafns();
+
+        // Add event listener for dropdown change
+        trainingStatus.addEventListener('change', toggleOropfafns);
+    });
+</script>
 
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr"

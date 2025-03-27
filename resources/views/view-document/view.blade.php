@@ -163,8 +163,8 @@
  
         @endif
 
-        @if (!empty($assessment->oropfafns) && file_exists(public_path($assessment->oropfafns)))
-            <a href="{{ asset($assessment->oropfafns) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar</a><br>
+        @if (!empty($assessment->oropfafns) && file_exists(public_path($assessment->oropfafns)) && $assessment->training_status !== 'scholar')
+        <a href="{{ asset($assessment->oropfafns) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar</a><br>
         @else
   
         @endif
@@ -188,7 +188,7 @@
         @endif
         
 
-        @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)))
+        @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)) && $assessment->training_status2 !== 'scholar')
             <a href="{{ asset($assessment->oropfafns2) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar 2</a><br>
         @else
 
@@ -212,7 +212,7 @@
 
         @endif
 
-        @if (!empty($assessment->oropfafns3) && file_exists(public_path($assessment->oropfafns3)))
+        @if (!empty($assessment->oropfafns3) && file_exists(public_path($assessment->oropfafns3)) && $assessment->training_status3 !== 'scholar')
             <a href="{{ asset($assessment->oropfafns3) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar 3</a><br>
         @else
 
@@ -237,7 +237,7 @@
 
         @endif
 
-        @if (!empty($assessment->oropfafns4) && file_exists(public_path($assessment->oropfafns4)))
+        @if (!empty($assessment->oropfafns4) && file_exists(public_path($assessment->oropfafns4)) && $assessment->training_status4 !== 'scholar')
             <a href="{{ asset($assessment->oropfafns4) }}" target="_blank" class="view-file">Official Receipt of Payment for Assessment for Non-Scholar 4</a><br>
         @else
 
