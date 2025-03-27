@@ -598,12 +598,18 @@
     <x-input-label for="oropfafnsDocument" :value="__('Official Receipt of Payment for Assessment for Non-Scholar')" />
     <x-text-input id="oropfafnsDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns"
         autocomplete="oropfafns" onchange="previewDocument(event, 'pdf', 'pdfView')" />
-    
-    @if(!empty($assessment->oropfafns))
-        <p class="text-sm text-gray-500 mt-1">Current File: 
-            <a href="{{ asset('/' . $assessment->oropfafns) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->oropfafns) }}</a>
-        </p>
-    @endif
+
+     
+    <p class="text-sm text-gray-500 mt-1">
+        Current File: 
+        @if (!empty($assessment->oropfafns) && file_exists(public_path($assessment->oropfafns)) && $assessment->training_status !== 'scholar')
+        <a href="{{ asset('/' . $assessment->oropfafns) }}" target="_blank" class="text-blue-500 underline">
+            {{ basename($assessment->oropfafns) }}
+        </a>
+        @endif
+    </p>
+
+
     <x-input-error :messages="$errors->get('oropfafns')" class="mt-2" />
 </div>
 
@@ -632,9 +638,14 @@
     <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr"
     autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
-    @if(!empty($assessment->sopcctvr))
-                <p class="text-sm text-gray-500 mt-1">Current File: <a href="{{ asset('/' . $assessment->sopcctvr) }}" target="_blank" class="text-blue-500 underline">{{ basename($assessment->sopcctvr) }}</a></p>
-            @endif
+   @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)) && $assessment->training_status2 !== 'scholar')
+    <p class="text-sm text-gray-500 mt-1">
+        Current File: 
+        <a href="{{ asset('/' . $assessment->oropfafns2) }}" target="_blank" class="text-blue-500 underline">
+            {{ basename($assessment->oropfafns2) }}
+        </a>
+    </p>
+@endif
     <x-input-error :messages="$errors->get('sopcctvr')" class="mt-2" />
 
         </div>
@@ -680,14 +691,16 @@
     <x-text-input id="oropfafnsDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns2"
         autocomplete="oropfafns2" onchange="previewDocument(event, 'pdf2', 'pdfView2')" />
     
-    @if (!empty($assessment->oropfafns2))
-        <p class="text-sm text-gray-500 mt-1">
-            Current File: 
-            <a href="{{ asset('/' . $assessment->oropfafns2) }}" target="_blank" class="text-blue-500 underline">
-                {{ basename($assessment->oropfafns2) }}
-            </a>
-        </p>
-    @endif
+      
+    <p class="text-sm text-gray-500 mt-1">
+        Current File: 
+        @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)) && $assessment->training_status2 !== 'scholar')
+        <a href="{{ asset('/' . $assessment->oropfafns2) }}" target="_blank" class="text-blue-500 underline">
+            {{ basename($assessment->oropfafns2) }}
+        </a>
+        @endif
+    </p>
+
     <x-input-error :messages="$errors->get('oropfafns2')" class="mt-2" />
 </div>
 
@@ -775,14 +788,16 @@
     <x-text-input id="oropfafnsDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns3"
         autocomplete="oropfafns3" onchange="previewDocument(event, 'pdf3', 'pdfView3')" />
     
-    @if (!empty($assessment->oropfafns3))
-        <p class="text-sm text-gray-500 mt-1">
-            Current File: 
-            <a href="{{ asset('/' . $assessment->oropfafns3) }}" target="_blank" class="text-blue-500 underline">
-                {{ basename($assessment->oropfafns3) }}
-            </a>
-        </p>
-    @endif
+   
+    <p class="text-sm text-gray-500 mt-1">
+        Current File: 
+        @if (!empty($assessment->oropfafns3) && file_exists(public_path($assessment->oropfafns3)) && $assessment->training_status3 !== 'scholar')
+        <a href="{{ asset('/' . $assessment->oropfafns3) }}" target="_blank" class="text-blue-500 underline">
+            {{ basename($assessment->oropfafns3) }}
+        </a>
+        @endif
+    </p>
+
     <x-input-error :messages="$errors->get('oropfafns3')" class="mt-2" />
 </div>
 
@@ -867,14 +882,16 @@
     <x-text-input id="oropfafnsDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="oropfafns4"
         autocomplete="oropfafns4" onchange="previewDocument(event, 'pdf4', 'pdfView4')" />
     
-    @if (!empty($assessment->oropfafns4))
-        <p class="text-sm text-gray-500 mt-1">
-            Current File: 
-            <a href="{{ asset('/' . $assessment->oropfafns4) }}" target="_blank" class="text-blue-500 underline">
-                {{ basename($assessment->oropfafns4) }}
-            </a>
-        </p>
-    @endif
+       
+    <p class="text-sm text-gray-500 mt-1">
+        Current File: 
+        @if (!empty($assessment->oropfafns4) && file_exists(public_path($assessment->oropfafns4)) && $assessment->training_status4 !== 'scholar')
+        <a href="{{ asset('/' . $assessment->oropfafns4) }}" target="_blank" class="text-blue-500 underline">
+            {{ basename($assessment->oropfafns4) }}
+        </a>
+        @endif
+    </p>
+
     <x-input-error :messages="$errors->get('oropfafns4')" class="mt-2" />
 </div>
 
