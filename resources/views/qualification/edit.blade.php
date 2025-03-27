@@ -577,7 +577,7 @@
         <!-- Endorsement Letter To TESDA -->
         <div style="flex: 1;">
     
-        <x-input-label class="text-white" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
+        <x-input-label class="text-black" for="elttDocument" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument" class="block w-full bg-white dark:text-black" type="file" name="eltt"
                 autocomplete="eltt" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
                      <!-- Show existing file name if available -->
@@ -586,7 +586,7 @@
             @endif
             <x-input-error :messages="$errors->get('eltt')" class="mt-2" />
 
-            <x-input-label class="text-white" for="rfftpDocument" :value="__('Request Form For Test Package')" />
+            <x-input-label class="text-black" for="rfftpDocument" :value="__('Request Form For Test Package')" />
     <x-text-input id="rfftpDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp"
     autocomplete="rfftp" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
     @if(!empty($assessment->rfftp))
@@ -635,7 +635,7 @@
     });
 </script>
 
-    <x-input-label class="text-white" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-input-label class="text-black" for="sopcctvrDocument" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr"
     autocomplete="sopcctvr" onchange="previewDocument(event, 'pdf', 'pdfView')" required/>
    @if (!empty($assessment->oropfafns2) && file_exists(public_path($assessment->oropfafns2)) && $assessment->training_status2 !== 'scholar')
@@ -670,7 +670,7 @@
         <!-- Left Side: File Input -->
         <div style="flex: 1;">
     
-        <x-input-label class="text-white" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
+        <x-input-label class="text-black" for="elttDocument2" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument2" class="block w-full bg-white dark:text-black" type="file" name="eltt2" 
                 autocomplete="eltt2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
                 @if(!empty($assessment->eltt2))
@@ -678,7 +678,7 @@
             @endif
             <x-input-error :messages="$errors->get('eltt2')" class="mt-2" />
 
-            <x-input-label class="text-white" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
+            <x-input-label class="text-black" for="rfftpDocument2" :value="__('Request Form For Test Package')" />
     <x-text-input id="rfftpDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp2" 
     autocomplete="rfftp2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     @if(!empty($assessment->rfftp2))
@@ -735,7 +735,7 @@
 
 
 
-    <x-input-label class="text-white" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-input-label class="text-black" for="sopcctvrDocument2" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument2" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr2" 
     autocomplete="sopcctvr2" onchange="previewDocument(event, 'pdf2', 'pdfView2')"/>
     @if(!empty($assessment->sopcctvr2))
@@ -767,7 +767,7 @@
         <!-- Left Side: File Input -->
         <div style="flex: 1;">
     
-        <x-input-label class="text-white" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
+        <x-input-label class="text-black" for="elttDocument3" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument3" class="block w-full bg-white dark:text-black" type="file" name="eltt3" 
                 autocomplete="eltt3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
                 @if(!empty($assessment->eltt3))
@@ -775,7 +775,7 @@
             @endif
             <x-input-error :messages="$errors->get('eltt3')" class="mt-2" />
 
-            <x-input-label class="text-white" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
+            <x-input-label class="text-black" for="rfftpDocument3" :value="__('Request Form For Test Package')" />
     <x-text-input id="rfftpDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp3" 
      autocomplete="rfftp3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
         @if(!empty($assessment->rfftp3))
@@ -829,7 +829,7 @@
 </script>
 
 
-    <x-input-label class="text-white" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-input-label class="text-black" for="sopcctvrDocument3" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument3" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr3"
      autocomplete="sopcctvr3" onchange="previewDocument(event, 'pdf3', 'pdfView3')"/>
         @if(!empty($assessment->sopcctvr3))
@@ -861,7 +861,7 @@
         <!-- Left Side: File Input -->
         <div style="flex: 1;">
     
-        <x-input-label class="text-white" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
+        <x-input-label class="text-black" for="elttDocument4" :value="__('Endorsement Letter To TESDA')" />
             <x-text-input id="elttDocument4" class="block w-full bg-white dark:text-black" type="file" name="eltt4" 
                 autocomplete="eltt4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
                 @if(!empty($assessment->eltt4))
@@ -869,7 +869,7 @@
             @endif
             <x-input-error :messages="$errors->get('eltt4')" class="mt-2" />
 
-            <x-input-label class="text-white" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
+            <x-input-label class="text-black" for="rfftpDocument4" :value="__('Request Form For Test Package')" />
     <x-text-input id="rfftpDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="rfftp4"
      autocomplete="rfftp4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
         @if(!empty($assessment->rfftp4))
@@ -922,7 +922,7 @@
     });
 </script>
 
-    <x-input-label class="text-white" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
+    <x-input-label class="text-black" for="sopcctvrDocument4" :value="__('Submission of Previous CCTV Recordings')" />
     <x-text-input id="sopcctvrDocument4" class="block mt-1 w-full bg-white dark:text-black" type="file" name="sopcctvr4" 
     autocomplete="sopcctvr4" onchange="previewDocument(event, 'pdf4', 'pdfView4')"/>
         @if(!empty($assessment->sopcctvr4))
