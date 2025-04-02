@@ -185,11 +185,11 @@
     @if (Auth::user()->role === 'user')
     <label>Add New:
     @php
-    $currentDay = now()->format('l'); // Get current day, e.g., "Friday"
+    $currentDay = now()->format('l'); // Get current day, e.g., "Wednesday"
     $currentTime = now()->format('H:i'); // Get current time in 24-hour format, e.g., "14:30"
 @endphp
 
-@if($currentDay === 'Friday' && $currentTime >= '00:00' && $currentTime <= '15:00')
+@if($currentDay === 'Wednesday' && $currentTime >= '00:00' && $currentTime <= '15:00')
     <a href="#" class="primary button-style" onclick="openModal(event)">Request Assessment</a>
 @else
     <span style="color: red;">You can only add new assessment on Fridays from 12:00 AM to 3:00 PM.</span>

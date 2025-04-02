@@ -10,6 +10,7 @@ use App\Http\Controllers\Qualification;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\User;  // Import the User model
 
 
 /*
@@ -88,8 +89,6 @@ Route::get('/dashboard', function (Request $request) {
 
 
 
-
-
 Route::get('/view/{id}', function ($id) {
     // Get the authenticated user
     $user = Auth::user();
@@ -98,24 +97,15 @@ Route::get('/view/{id}', function ($id) {
     if ($user->role === 'admin') {
         // Admin can access any assessment
         $assessment = Assessment::find($id);
-
-        // Fetch only the comments that belong to this assessment
-            $comments = Comment::where('id', $assessment->id)->latest()->get();
-
- 
     } else {
         // Normal users can only access their own assessment
         $assessment = Assessment::where('user_id', $user->id)->where('id', $id)->first();
     }
 
-    if (!$assessment) {
-        abort(403, 'Unauthorized access'); // Prevent unauthorized access
-    }
+    // Fetch only the comments that belong to this assessment
+    $assessment = Assessment::with('comments.user')->findOrFail($id);
 
-            // Fetch only the comments that belong to this assessment
-            $comments = Comment::where('id', $assessment->id)->latest()->get();
-
-    return view('view-document.view', compact('assessment', 'comments'));
+    return view('view-document.view', compact('assessment'));
 })->middleware(['auth', 'verified']);
 
 

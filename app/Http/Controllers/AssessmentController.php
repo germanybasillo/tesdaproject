@@ -474,7 +474,7 @@ if ($request->hasFile('oropfafns4')) {
         $assessment->save();
 
         // Send email notification
-    Mail::to('germanybasillo@gmail.com')->send(new StatusUpdated($assessment));
+    // Mail::to('germanybasillo@gmail.com')->send(new StatusUpdated($assessment));
 
          // Retrieve all assessors
     $assessors = Assessment::all(); 

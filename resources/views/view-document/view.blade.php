@@ -125,21 +125,24 @@
         </tr>
         <tr>
             <th class="title">Comment About His PDF</th>
+            
             <td>
-            @if($comments->isEmpty())
+            @if($assessment->comments->isEmpty())
             @if (Auth::user()->role === 'user')
             <p style="color:gray">No comments yet about this PDF.</p>
             @endif
     @else
-    @foreach($comments as $comment)
+    @foreach($assessment->comments as $comment)
         <p style="color:red">{{ $comment->comment }}</p>
         <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
     @endforeach
     @endif
+    
             @if (Auth::user()->role === 'admin')
             <form action="{{ route('comments.store') }}" method="POST">
             @csrf
             <div style="display: flex; width: 100%; align-items: center;">
+            <input type="hidden" name="assessment_id" value="{{ $assessment->id }}">
     <input name="comment" style="flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;" placeholder="Write a comment about his PDF..." required>
     <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">Submit</button>
     </div>
