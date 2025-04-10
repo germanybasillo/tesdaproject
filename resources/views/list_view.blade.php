@@ -114,7 +114,8 @@
     }
 
     .approved {
-        color: #155724;
+        /* color: #155724; */
+        color: #004085; /* Dark blue text */
         font-weight: bold;
         padding: 8px 16px;
         border-radius: 4px;

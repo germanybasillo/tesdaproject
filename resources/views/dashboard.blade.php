@@ -114,7 +114,7 @@
     }
 
     .approved {
-        color: #155724;
+        color: #004085; /* Dark blue text */
         font-weight: bold;
         padding: 8px 16px;
         border-radius: 4px;
@@ -407,15 +407,17 @@ if (!empty($assessment->training_status4 == 'mix') && !empty($assessment->type_o
             </button>
         </a>
         @php
-    $currentDay = now()->format('l'); // Get current day, e.g., "Friday"
+    $currentDay = now()->format('l'); // Get current day, e.g., "Wednesday"
     $currentTime = now()->format('H:i'); // Get current time in 24-hour format, e.g., "14:30"
 @endphp
-@if($currentDay === 'Friday' && $currentTime >= '00:00' && $currentTime <= '15:00' && $assessment->status !== 'approved')
+@if (Auth::user()->role === 'user')
+@if($currentDay === 'Wednesday' && $currentTime >= '00:00' && $currentTime <= '15:00' && $assessment->status !== 'approved')
     <a href="{{ route('qualification.edit', ['assessment' => $assessment->id]) }}">
         <button class="small-btn">
             <i class="fa fa-solid fa-edit"></i>
         </button>
     </a>
+@endif
 @endif
     </td>
         </tr>

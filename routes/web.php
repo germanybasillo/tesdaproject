@@ -135,7 +135,7 @@ Route::get('/qualificationEdit/{assessment}', function ($id) {
     $currentTime = Carbon::now()->format('H:i'); // Get current time in 24-hour format
 
     // Restrict access outside of Friday 12:00 AM - 3:00 PM
-    if ($currentDay !== 'Friday' || ($currentTime < '00:00' || $currentTime > '15:00')) {
+    if ($currentDay !== 'Wednesday' || ($currentTime < '00:00' || $currentTime > '15:00')) {
         // Set error message and redirect back
         return redirect()->back()->with('error', 'This page is only accessible on Fridays between 12:00 AM and 3:00 PM.');
     }
@@ -147,7 +147,7 @@ Route::get('/qualificationEdit/{assessment}', function ($id) {
     }
 
     // Check if the assessment status is 'approved' - block editing
-    if ($assessment->status === 'approved') {
+    if ( $assessment->id && $assessment->status === 'approved') {
         return redirect()->back()->with('error', 'This assessment has already been approved and cannot be edited.');
     }
 
